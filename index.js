@@ -1,0 +1,29 @@
+import express from "express";
+import dotenv from "dotenv";
+
+//traer variables de entorno
+dotenv.config()
+
+//crear instancia
+const app = express()
+
+//configurar puerto
+const port = process.env.PORT
+
+//para poder leer json
+app.use(express.json());
+
+//levantar el servidor (siempre antes que las rutas y los html)
+app.listen(port, ()=>{
+    console.log(`Servidor levantado en puerto ${port}`)
+})
+
+// para levantar el front-end
+//app.use(express.static('./Client'))
+
+//rutas de usuarios end-point
+//app.use("/account", usersRouter)
+//app.use("/products", productsRouter)
+//app.use("/coupon", couponsRouter )
+//app.use("/orders", ordersRouter)
+//app.use("/category", categoryRouter);
