@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../styles/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+</head>
+
+<body>
+    <div class="layout">
+
+
+
+
+        <main class="content">
+            <div class="project-page-header d-flex justify-content-between align-items-center mb-4">
+            
+                <!-- Izquierda: título del proyecto -->
+                <h1 class="projects-title">Proyecto Campaña Publicitaria</h1>
+            
+                <!-- Derecha: botones -->
+                <div class="d-flex gap-2">
+            
+                    <!-- Botón Editar -->
+                    <button class="btn project-edit-btn">
+                        Editar
+                    </button>
+            
+                    <!-- Botón Agregar Tarea -->
+                    <button class="btn project-add-task-btn">
+                        Agregar Tarea
+                    </button>
+            
+                    <!-- Botón eliminar con tacho -->
+                    <button class="btn project-delete-btn">
+                        <i class="bi bi-trash3"></i>
+                    </button>
+            
+                </div>
+            </div>
+
+            <!-- DESCRIPCIÓN DEL PROYECTO -->
+            <div class="project-info-container" id="projectInfo"></div>
+
+            <div id="kanbanContainer"></div>
+
+
+              
+
+
+
+        </main>
+
+    </div>
+
+
+    <script type="module" src="proyecto.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+        </script>
+
+</body>
+
+</html>
