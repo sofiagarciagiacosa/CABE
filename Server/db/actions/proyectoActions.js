@@ -1,5 +1,7 @@
 import { connectDB } from "../connection.js";
 import Proyecto from "../schemas/proyecto.schema.js";
+import ProyectoUsuario from "../schemas/proyectoUsuario.schema.js";
+
 
 export const createProy = async ({
   nombre,
@@ -29,14 +31,13 @@ export const createProy = async ({
 export const findAll = async () => {
   try {
     await connectDB();
-    const res = await Proyecto.find().populate({ path: "cliente" });
+    const res = await Proyecto.find(); // 👈 sin populate
     return res;
   } catch (error) {
     throw new Error("Error al buscar proyectos: " + error.message);
   }
-  
 };
-
+  
 
 export const findById = async (id) => {
   try {
@@ -47,6 +48,28 @@ export const findById = async (id) => {
     throw new Error("Error al buscar proyecto: " + error.message);
   }
 };
+
+export const findAllWithDetails = async () => {
+  await connectDB();
+
+  const proyectos = await Proyecto.find().populate("cliente");
+
+  const proyectosConResponsables = await Promise.all(
+    proyectos.map(async (proy) => {
+      const responsables = await ProyectoUsuario.find({
+        proyecto: proy._id,
+      }).populate("usuario");
+
+      return {
+        ...proy.toObject(),
+        responsables: responsables.map((r) => r.usuario),
+      };
+    })
+  );
+
+  return proyectosConResponsables;
+};
+
   
 /*
 

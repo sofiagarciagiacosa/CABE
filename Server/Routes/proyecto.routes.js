@@ -3,6 +3,7 @@ import {
   createProy,
   findAll,
   findById,
+  findAllWithDetails,
 } from "../db/actions/proyectoActions.js";
 
 const router = Router();
@@ -52,9 +53,24 @@ router.get("/byId/:id", async (req, res) => {
 
   try {
     const result = await findById(id);
+
+    if (!result) {
+      return res.status(404).json({ error: "Proyecto no encontrado" });
+    }
+
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json();
+    console.error("ERROR REAL:", error);
+    res.status(400).json({ error: error.message });
+  }
+});
+  
+router.get("/all/details", async (req, res) => {
+  try {
+    const result = await findAllWithDetails();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 

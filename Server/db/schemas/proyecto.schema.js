@@ -9,7 +9,7 @@ const proyectoSchema = new Schema(
     presupuesto: { type: Number, required: true },
     fechaInicio: { type: Date },
     fechaLimite: { type: Date },
-    cliente: { type: Schema.Types.ObjectId, required: true, ref: "cliente" },
+    cliente: { type: Schema.Types.ObjectId, required: true, ref: "Cliente" },
   },
   {
     timestamps: true,

@@ -9,12 +9,13 @@ export function renderNavbar(activePage) {
                 <li class="nav-item">
                     <a class="nav-link ${
                       activePage === "inicio" ? "active" : ""
-                    }" href="../main.html">Inicio</a>
+                    }" href="../../index.html">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link ${
                       activePage === "proyectos" ? "active" : ""
-                    }" href="proyectos.html">Proyectos</a>
+                    }" href="http://localhost:3000/pages/proyectos/proyectos.html">Proyectos</a>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link ${

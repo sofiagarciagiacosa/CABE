@@ -3,6 +3,7 @@ import {
   createTarea,
   findAllTareas,
   findTareaById,
+  updateTarea,
 } from "../db/actions/tareaActions.js";
 
 const router = Router();
@@ -38,5 +39,18 @@ router.get("/byId/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+// Editar tarea
+router.put("/update/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await updateTarea(id, req.body);
+    res.status(200).json({ message: "Tarea actualizada", result });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 
 export default router;

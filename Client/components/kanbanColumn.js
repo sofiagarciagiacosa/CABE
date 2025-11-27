@@ -2,7 +2,7 @@ import { renderTask } from "./kanbanTask.js";
 
 export function renderColumn(column) {
   return `
-    <div class="kanban-column">
+    <div class="kanban-column" data-estado="${column.title}">
       <div class="kanban-header">
         <h2>${column.title}</h2>
         <span class="kanban-count">${column.tasks.length}</span>
@@ -18,3 +18,4 @@ export function renderColumn(column) {
     </div>
   `;
 }
+

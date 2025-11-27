@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    
     <div class="layout">
 
 
@@ -52,6 +53,32 @@
             <div id="kanbanContainer"></div>
 
 
+            <div id="taskModal" class="modal hidden">
+                <div class="modal-content">
+                    <h3 id="taskModalTitle">Nueva tarea</h3>
+
+              
+                  <input id="taskDesc" placeholder="Descripción" />
+              
+                  <select id="taskUser">
+                    <option value="">Sin responsable</option>
+                  </select>
+              
+                  <select id="taskUrgencia">
+                    <option value="">Sin urgencia</option>
+                  </select>
+              
+                  <input type="date" id="taskFechaInicio" />
+                  <input type="date" id="taskFechaLimite" />
+              
+                  <select id="taskEstado"></select>
+              
+                  <div class="modal-actions">
+                    <button id="cancelTask">Cancelar</button>
+                    <button id="saveTask">Guardar tarea</button>
+                  </div>
+                </div>
+              </div>
               
 
 
