@@ -1,6 +1,7 @@
 import { connectDB } from "../connection.js";
 import Proyecto from "../schemas/proyecto.schema.js";
 import ProyectoUsuario from "../schemas/proyectoUsuario.schema.js";
+import Tarea from "../schemas/tarea.schema.js";
 
 
 export const createProy = async ({
@@ -69,6 +70,34 @@ export const findAllWithDetails = async () => {
 
   return proyectosConResponsables;
 };
+export const updateProy = async (id, data) => {
+  try {
+    await connectDB();
+    const res = await Proyecto.findByIdAndUpdate(id, data, { new: true });
+    return res;
+  } catch (error) {
+    throw new Error("Error al actualizar el proyecto: " + error.message);
+  }
+};
+
+export const deleteProy = async (id) => {
+  try {
+    await connectDB();
+
+    // 1. Borrar relaciones con usuarios
+    await ProyectoUsuario.deleteMany({ proyecto: id });
+
+    // 2. Borrar tareas relacionadas
+    await Tarea.deleteMany({ idProyecto: id });
+
+    // 3. Finalmente borrar el proyecto
+    const res = await Proyecto.findByIdAndDelete(id);
+    return res;
+  } catch (error) {
+    throw new Error("Error al eliminar proyecto: " + error.message);
+  }
+};
+
 
   
 /*

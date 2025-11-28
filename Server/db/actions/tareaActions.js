@@ -49,3 +49,12 @@ export const updateTarea = async (id, data) => {
     throw new Error("Error al actualizar la tarea: " + error.message);
   }
 };
+export const deleteTareasByProyecto = async (proyectoId) => {
+  try {
+    await connectDB();
+    const res = await Tarea.deleteMany({ idProyecto: proyectoId });
+    return res;
+  } catch (error) {
+    throw new Error("Error al eliminar tareas del proyecto: " + error.message);
+  }
+};

@@ -3,11 +3,18 @@ import {
   createProjectCard,
   createAddCardButton,
 } from "../../components/projectsCard.js";
+import { renderProjectModal } from "../../components/modalProject.js";
+
 
 // --- Insertar NAVBAR ---
 document
   .querySelector(".layout")
   .insertAdjacentHTML("afterbegin", renderNavbar("proyectos"));
+
+document
+  .querySelector("main.content")
+  .insertAdjacentHTML("beforeend", renderProjectModal());
+
 
 // --- Contenedor del grid ---
 const grid = document.querySelector(".row");
@@ -75,10 +82,12 @@ form.addEventListener("submit", async (e) => {
     nombre: document.getElementById("nombre").value,
     descripcion: document.getElementById("descripcion").value,
     presupuesto: Number(document.getElementById("presupuesto").value),
+    fechaInicio: document.getElementById("fechaInicio").value, // nuevo
     fechaLimite: document.getElementById("fechaLimite").value,
     cliente: document.getElementById("clienteSelect").value,
     responsables: responsables,
   };
+  
 
 
   try {
@@ -91,11 +100,29 @@ form.addEventListener("submit", async (e) => {
     });
 
     const result = await res.json();
-    console.log("Proyecto creado:", result);
+    const proyectoId = result.result._id;
 
+    // Guardar relaciones proyecto-usuario
+    for (const usuarioId of responsables) {
+      await fetch("http://localhost:3000/proyecto-usuario/assign", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          proyecto: proyectoId,
+          usuario: usuarioId,
+        }),
+      });
+    }
+
+    console.log("Proyecto creado y responsables asignados");
+
+    // Cerrar modal y recargar
     modal.classList.add("d-none");
-    loadProjects(); // 👈 recarga la grilla
-    window.location.href = `http://localhost:3000/pages/proyecto/proyecto.html?id=${result.result._id}`;
+    loadProjects();
+    window.location.href = `http://localhost:3000/pages/proyecto/proyecto.html?id=${proyectoId}`;
+
   } catch (error) {
     console.error("Error creando proyecto:", error);
   }
@@ -121,15 +148,18 @@ async function loadUsuarios() {
     container.innerHTML = users
       .map(
         (u) => `
-        <div>
-          <label>
-            <input type="checkbox" value="${u._id}" class="responsable-checkbox">
-            ${u.nombre}
-          </label>
-        </div>
-      `
+    <label class="responsable-item">
+      <input 
+        type="checkbox" 
+        value="${u._id}" 
+        class="responsable-checkbox"
+      />
+      ${u.nombre}
+    </label>
+  `
       )
       .join("");
+
   } catch (error) {
     console.error("Error cargando usuarios", error);
   }

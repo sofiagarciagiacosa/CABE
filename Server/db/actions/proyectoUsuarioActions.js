@@ -46,3 +46,26 @@ export const findUsersByProject = async (proyectoId) => {
     throw new Error("Error al buscar responsables: " + error.message);
   }
 };
+export const deleteByProject = async (projectId) => {
+  try {
+    await connectDB();
+    await ProyectoUsuario.deleteMany({ proyecto: projectId });
+  } catch (error) {
+    throw new Error("Error al borrar relaciones: " + error.message);
+  }
+};
+
+export const createMany = async (projectId, usuarios) => {
+  try {
+    await connectDB();
+
+    const data = usuarios.map((u) => ({
+      proyecto: projectId,
+      usuario: u,
+    }));
+
+    await ProyectoUsuario.insertMany(data);
+  } catch (error) {
+    throw new Error("Error al crear relaciones: " + error.message);
+  }
+};

@@ -4,6 +4,7 @@ import {
   findAllTareas,
   findTareaById,
   updateTarea,
+  deleteTareasByProyecto,
 } from "../db/actions/tareaActions.js";
 
 const router = Router();
@@ -47,6 +48,19 @@ router.put("/update/:id", async (req, res) => {
   try {
     const result = await updateTarea(id, req.body);
     res.status(200).json({ message: "Tarea actualizada", result });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+router.delete("/deleteByProject/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await deleteTareasByProyecto(id);
+    res.status(200).json({
+      message: "Tareas eliminadas correctamente",
+      deletedCount: result.deletedCount,
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -4,6 +4,8 @@ import {
   findAll,
   findById,
   findAllWithDetails,
+  updateProy,
+  deleteProy,
 } from "../db/actions/proyectoActions.js";
 
 const router = Router();
@@ -69,6 +71,25 @@ router.get("/all/details", async (req, res) => {
   try {
     const result = await findAllWithDetails();
     res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+// UPDATE
+router.put("/update/:id", async (req, res) => {
+  try {
+    const result = await updateProy(req.params.id, req.body);
+    res.status(200).json({ message: "Proyecto actualizado", result });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+// DELETE
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    await deleteProy(req.params.id);
+    res.status(200).json({ message: "Proyecto eliminado" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

@@ -1,11 +1,16 @@
 import { renderNavbar } from "../../components/navbar.js";
 import { renderProjectDescription } from "../../components/projectDescription.js";
 import { renderKanban } from "../../components/kanban.js";
+import { renderProjectModal } from "../../components/modalProject.js";
 
 // NAVBAR
 document
   .querySelector(".layout")
   .insertAdjacentHTML("afterbegin", renderNavbar("proyectos"));
+
+document
+  .querySelector(".layout")
+  .insertAdjacentHTML("beforeend", renderProjectModal());
 
 // Obtener ID desde la URL
 const params = new URLSearchParams(window.location.search);
@@ -26,19 +31,21 @@ async function loadProject() {
     );
     const users = await resUsers.json();
 
-    const nombresResponsables = users.map((u) => u.nombre).join(", ");
+    const nombresResponsables = users.map((u) => u.usuario.nombre).join(", ");
+
 
     // Setear título
     document.querySelector(".projects-title").textContent = project.nombre;
 
     // Fechas
     const fechaInicio = project.fechaInicio
-      ? new Date(project.fechaInicio).toLocaleDateString()
+      ? project.fechaInicio.split("T")[0].split("-").reverse().join("/")
       : "Sin fecha";
 
-    const fechaLimite = project.fechaLimite
-      ? new Date(project.fechaLimite).toLocaleDateString()
-      : "Sin fecha";
+      const fechaLimite = project.fechaLimite
+        ? project.fechaLimite.split("T")[0].split("-").reverse().join("/")
+        : "Sin fecha";
+    
 
     const responsables = await loadResponsables();
     // Render info
@@ -80,6 +87,59 @@ async function loadResponsables() {
     return "Sin responsables";
   }
 }
+async function loadClientes(selectedId = null) {
+  const res = await fetch("http://localhost:3000/cliente");
+  const clientes = await res.json();
+
+  const select = document.querySelector("#clienteSelect");
+  select.innerHTML = `<option value="">Seleccionar cliente</option>`;
+
+  clientes.forEach((c) => {
+    const option = document.createElement("option");
+    option.value = c._id;
+    option.textContent = c.nombre;
+
+    if (selectedId && selectedId === c._id) {
+      option.selected = true;
+    }
+
+    select.appendChild(option);
+  });
+}
+async function loadResponsablesEditar(projectId) {
+  const resAll = await fetch("http://localhost:3000/usuario/all");
+  const usuarios = await resAll.json();
+
+  const resRel = await fetch(
+    `http://localhost:3000/proyecto-usuario/byProject/${projectId}`
+  );
+  const relaciones = await resRel.json();
+
+  const seleccionados = relaciones.map((r) => r.usuario._id);
+
+  const container = document.querySelector("#responsablesContainer");
+  container.innerHTML = "";
+
+  usuarios.forEach((u) => {
+    const label = document.createElement("label");
+    label.classList.add("d-flex", "gap-2");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = u._id;
+    checkbox.name = "responsables";
+
+    if (seleccionados.includes(u._id)) {
+      checkbox.checked = true;
+    }
+
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(u.nombre));
+
+    container.appendChild(label);
+  });
+}
+
 
 async function loadKanban() {
   try {
@@ -352,6 +412,135 @@ document.addEventListener("drop", async (e) => {
 
   tareaArrastradaId = null;
   loadKanban();
+});
+document
+  .querySelector(".project-delete-btn")
+  .addEventListener("click", async () => {
+    const seguro = confirm(
+      "¿Estás segura de que querés eliminar este proyecto?"
+    );
+    if (!seguro) return;
+
+    try {
+      // 1. Borrar tareas primero (opcional)
+      await fetch(`http://localhost:3000/tarea/deleteByProject/${id}`, {
+        method: "DELETE",
+      });
+
+      // 2. Borrar proyecto
+      const res = await fetch(`http://localhost:3000/proyecto/delete/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText);
+      }
+
+      alert("Proyecto eliminado correctamente");
+      window.location.href =
+        "http://localhost:3000/pages/proyectos/proyectos.html";
+    } catch (error) {
+      console.error("Error real al eliminar:", error);
+      alert("No se pudo eliminar el proyecto");
+    }
+  });
+
+  document
+    .querySelector(".project-edit-btn")
+    .addEventListener("click", async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/proyecto/byId/${id}`);
+        const proyecto = await res.json();
+
+        // Cargar datos básicos
+        document.querySelector("#nombre").value = proyecto.nombre;
+        document.querySelector("#descripcion").value = proyecto.descripcion;
+        document.querySelector("#presupuesto").value = proyecto.presupuesto;
+        document.querySelector("#fechaLimite").value =
+          proyecto.fechaLimite?.split("T")[0] || "";
+        document.querySelector("#fechaInicio").value =
+            proyecto.fechaInicio?.split("T")[0] || "";
+        
+
+        // ahora sí carga bien
+        await loadClientes(proyecto.cliente?._id);
+        await loadResponsablesEditar(id);
+
+        document.querySelector(".modal-title").textContent = "Editar proyecto";
+
+        window.proyectoEditando = id;
+
+        document.querySelector("#projectModal").classList.remove("d-none");
+      } catch (error) {
+        console.error("Error cargando datos para editar:", error);
+      }
+    });
+
+
+const form = document.querySelector("#projectForm");
+
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const data = {
+      nombre: document.querySelector("#nombre").value,
+      descripcion: document.querySelector("#descripcion").value,
+      presupuesto: document.querySelector("#presupuesto").value,
+      fechaInicio: document.querySelector("#fechaInicio")?.value,
+      fechaLimite: document.querySelector("#fechaLimite").value,
+      cliente: document.querySelector("#clienteSelect").value,
+    };
+    const responsablesSeleccionados = Array.from(
+      document.querySelectorAll('input[name="responsables"]:checked')
+    ).map((cb) => cb.value);
+    
+
+    try {
+      if (window.proyectoEditando) {
+        await fetch(
+          `http://localhost:3000/proyecto/update/${window.proyectoEditando}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          }
+        );
+        await fetch(
+          `http://localhost:3000/proyecto-usuario/updateByProject/${window.proyectoEditando}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              usuarios: responsablesSeleccionados,
+            }),
+          }
+        );
+        
+
+        alert("Proyecto actualizado");
+        loadProject();
+      } else {
+        await fetch("http://localhost:3000/proyecto/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        alert("Proyecto creado");
+      }
+
+      window.location.reload();
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Hubo un error");
+    }
+  });
+}
+document.querySelector("#cancelBtn")?.addEventListener("click", () => {
+  document.querySelector("#projectModal").classList.add("d-none");
+  window.proyectoEditando = null;
 });
 
 
