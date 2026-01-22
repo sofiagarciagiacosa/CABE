@@ -1,0 +1,138 @@
+/* Colores base */
+:root {
+    --red: #c4161c;
+    --cream: #f0ece3;
+    --black: #191516;
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.navbar-logo {
+    height: 40px;
+}
+
+/* Hamburger */
+.hamburger {
+    width: 32px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.hamburger span {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: var(--black);
+    transition: 0.4s;
+}
+
+.hamburger span:first-child {
+    top: 6px;
+}
+
+.hamburger span:last-child {
+    bottom: 6px;
+}
+
+/* Cruz */
+.hamburger.open span:first-child {
+    transform: rotate(45deg);
+    top: 11px;
+}
+
+.hamburger.open span:last-child {
+    transform: rotate(-45deg);
+    bottom: 11px;
+}
+
+/* Overlay */
+.menu-overlay {
+    position: fixed;
+    inset: 20px;
+    background-color: var(--red);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+    z-index: 9;
+}
+
+.menu-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Contenido */
+.menu-content {
+    padding: 40px;
+    color: white;
+}
+
+.menu-logo {
+    height: 30px;
+}
+
+.divider {
+    width: 0;
+    height: 1px;
+    background: white;
+    margin: 20px 0;
+    animation: expand 0.8s forwards;
+}
+
+@keyframes expand {
+    to {
+        width: 100%;
+    }
+}
+
+.menu-links {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-links li {
+    font-size: 32px;
+    margin: 15px 0;
+    opacity: 0;
+    animation: fadeIn 0.6s forwards;
+}
+
+.menu-links li:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.menu-links li:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.menu-links li:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.menu-links li:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.menu-links li:nth-child(5) {
+    animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

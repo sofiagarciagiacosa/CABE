@@ -1,0 +1,12 @@
+.hero {
+    height: 75vh;
+    /* 3/4 pantalla */
+    background-color: #f0ece3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero img {
+    max-width: 60%;
+}
