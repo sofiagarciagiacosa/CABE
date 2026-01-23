@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Navbar.css";
-import logo from "../../assets/L.ROJO.png"; 
+import logo from "../../assets/LOGO NEGRO CON ESP. DE RESP..png"; 
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("menu-open");
+    } else {
+      document.body.classList.remove("menu-open");
+    }
+  }, [isOpen]);
 
   return (
     <>
       <nav className="navbar">
-        <img src={logo} alt="Logo" className="navbar-logo" />
 
         <button
           className={`hamburger ${isOpen ? "open" : ""}`}
@@ -25,11 +31,29 @@ function Navbar() {
           <div className="divider"></div>
 
           <ul className="menu-links">
-            <li>Home</li>
-            <li>Qué hacemos</li>
-            <li>Portfolio</li>
-            <li>Sobre nosotros</li>
-            <li>Contacto</li>
+            <li className="active">
+              <span className="link-title">Home</span>
+            </li>
+
+            <li>
+              <span className="link-title">Qué hacemos</span>
+              <span className="link-desc">Estrategia, diseño y creatividad en acción</span>
+            </li>
+
+            <li>
+              <span className="link-title">Portfolio</span>
+              <span className="link-desc">Proyectos que hablan por nosotros</span>
+            </li>
+
+            <li>
+              <span className="link-title">Nosotros</span>
+              <span className="link-desc">Las mentes detrás de las marcas</span>
+            </li>
+
+            <li>
+              <span className="link-title">Contacto</span>
+              <span className="link-desc">Creemos algo increíble juntos</span>
+            </li>
           </ul>
         </div>
       </div>
