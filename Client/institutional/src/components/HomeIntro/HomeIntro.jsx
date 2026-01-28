@@ -1,0 +1,47 @@
+import { useEffect, useRef } from "react";
+import "./HomeIntro.css";
+
+function HomeIntro() {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const elements = sectionRef.current.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="home-intro" ref={sectionRef}>
+      <div className="intro-left reveal">
+        <h1>HOLA, SOMOS <strong>CABE</strong>.</h1>
+      </div>
+
+      <div className="intro-right">
+        <p className="intro-main reveal">
+          Nuestra misión es crear comunicación con sentido, acompañando a marcas y personas desde la estrategia, la sensibilidad y el criterio.
+        </p>
+
+        <div className="intro-line reveal"></div>
+
+        <p className="intro-sub reveal">
+          Diseñamos procesos a medida, construimos marcas con identidad y desarrollamos contenido que conecta de forma auténtica.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+export default HomeIntro;

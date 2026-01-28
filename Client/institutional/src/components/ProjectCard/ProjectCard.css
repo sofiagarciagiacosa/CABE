@@ -1,0 +1,37 @@
+.project-card {
+    cursor: pointer;
+}
+
+/* Imagen menos larga */
+.project-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #ddd;
+    margin-bottom: 18px;
+    transition: transform 0.6s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.03);
+}
+
+/* Info abajo */
+.project-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.project-info h3 {
+    font-family: 'Alexandria', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #191516;
+}
+
+.project-info p {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 14px;
+    color: #8a8686;
+}

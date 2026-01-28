@@ -1,0 +1,74 @@
+.portfolio-preview {
+    position: relative;
+}
+
+/*  BLOQUE ROJO  */
+.portfolio-hero {
+    background-color: #FF3231;
+    color: white;
+    padding: 110px 10% 140px 10%;
+}
+
+.portfolio-manifesto {
+    font-family: 'Alexandria', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: justify;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+/* TÍTULO + BOTÓN */
+.portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.portfolio-title {
+    font-family: 'Alexandria', sans-serif;
+    font-weight: 700;
+    font-size: 52px;
+    color: white;
+}
+
+/* BOTÓN */
+.portfolio-btn {
+    font-family: 'Alexandria', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    padding: 12px 22px;
+    border-radius: 30px;
+    border: 1px solid white;
+    background: #FF3231;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.portfolio-btn:hover {
+    background: white;
+    color: #FF3231;
+}
+
+/*  BLOQUE BLANCO */
+.portfolio-content {
+    background: #FFFBFB;
+    padding: 0 10% 120px 10%;
+    position: relative;
+}
+
+/* GRID */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 70px 50px;
+}
+
+/* SUPERPOSICIÓN */
+.projects-grid> :nth-child(-n+2) {
+    margin-top: -100px;
+}

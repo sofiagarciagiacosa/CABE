@@ -1,7 +1,7 @@
 /* Colores base */
 :root {
     --red: #c4161c;
-    --cream: #f0ece3;
+    --cream: #F7FAF2;
     --black: #191516;
 }
 
@@ -68,7 +68,7 @@
 .menu-overlay {
     position: fixed;
     inset: 20px;
-    background-color: #FFFBFB;
+    background-color: #F7FAF2;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.5s ease;

@@ -3,10 +3,23 @@
     width: 100%;
     height: 85vh;
     overflow: hidden;
-    /* 👈 CLAVE */
-    background: #000;
+    background: #F0ECE3;
+
+    opacity: 0;
+    transform: translateY(120px);
+    animation: videoReveal 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 1.2s;
 }
 
+/* Fondo mientras carga */
+.video-placeholder {
+    position: absolute;
+    inset: 0;
+    background: #F0ECE3;
+    z-index: 0;
+}
+
+/* Wrapper del video */
 .video-wrapper {
     position: absolute;
     top: 50%;
@@ -15,17 +28,32 @@
     height: 120vh;
     transform: translate(-50%, -50%);
     pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    z-index: 1;
+}
+
+.video-wrapper.visible {
+    opacity: 1;
 }
 
 .video-wrapper iframe {
     width: 100%;
     height: 100%;
+    display: block;
 }
+
 .video-section::after {
     content: "";
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.35);
-    /* oscurece un poco */
-    z-index: 1;
+    z-index: 2;
+}
+
+@keyframes videoReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -1,0 +1,101 @@
+.services {
+    background: #FFFBFB;
+    padding: 180px 6%;
+    position: relative;
+}
+
+/* LINEAS */
+.services-line {
+    height: 1px;
+    background: #d9d9d9;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.services-line.top {
+    margin-bottom: 120px;
+}
+
+.services-line.bottom {
+    margin-top: 120px;
+}
+
+/* CONTENEDOR */
+.services-container {
+    display: flex;
+    gap: 120px;
+    align-items: center;
+}
+
+/* IZQUIERDA */
+.services-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+.services-left-inner {
+    max-width: 420px;
+    width: 100%;
+}
+.services-left h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    letter-spacing: -0.06em;
+    color: #CBBB2A;
+    margin-bottom: 35px;
+}
+
+.services-left p {
+    font-family: 'Alexandria', sans-serif;
+    font-weight: 300;
+    color: #6f6f6f;
+    line-height: 35px;
+    letter-spacing: -0.01em;
+    font-size: 15px;
+}
+
+/* DERECHA */
+.services-right {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.service-item {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #191516;
+    text-transform: uppercase;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+}
+
+.service-item span {
+    font-weight: 700;
+    color: #8a8a8a;
+    min-width: 35px;
+}
+@media (max-width: 900px) {
+    .services {
+        padding: 120px 8%;
+    }
+
+    .services-container {
+        flex-direction: column;
+        gap: 70px;
+    }
+
+    .services-left p {
+        max-width: 100%;
+    }
+
+    .services-line {
+        width: 88%;
+    }
+}
