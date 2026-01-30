@@ -1,0 +1,100 @@
+.values {
+    background: #FFFBFB;
+    padding: 0px 8% 100px 8%;
+    text-align: center;
+}
+
+
+/* TÍTULO */
+.values-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: -0.04em;
+    margin-bottom: 80px;
+}
+
+.values-title span {
+    color: #FF3231;
+}
+
+/* LISTA */
+.values-list {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    text-align: left;
+}
+
+.value-item {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 30px 0;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.value-inner {
+    position: relative;
+    height: 40px;
+    transition: height 0.35s ease;
+}
+
+.value-name,
+.value-desc {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    transition: transform 0.35s ease, opacity 0.3s ease;
+}
+
+/* Nombre visible */
+.value-name {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    color: #191516;
+}
+
+/* Descripción oculta abajo */
+.value-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    color: #FF3231;
+    transform: translateY(100%);
+    opacity: 0;
+}
+.value-number {
+    display: inline-block;
+    width: 50px;
+    color: #b5b5b5;
+    font-weight: 600;
+}
+
+/* HOVER ANIMACIÓN */
+.value-item:hover .value-inner {
+    height: 90px;
+}
+
+.value-item:hover .value-name {
+    transform: translateY(-120%);
+    opacity: 0;
+}
+
+.value-item:hover .value-desc {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

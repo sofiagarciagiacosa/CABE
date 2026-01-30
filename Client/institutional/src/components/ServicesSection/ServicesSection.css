@@ -1,6 +1,6 @@
 .services {
     background: #FFFBFB;
-    padding: 180px 6%;
+    padding: 100px 6%;
     position: relative;
 }
 
@@ -34,10 +34,12 @@
     flex-direction: column;
     justify-content: center;
     padding: 20px;
+    align-items: center;
 }
 .services-left-inner {
     max-width: 420px;
     width: 100%;
+    align-items: center;
 }
 .services-left h2 {
     font-family: 'DM Sans', sans-serif;
@@ -45,16 +47,16 @@
     font-size: 60px;
     letter-spacing: -0.06em;
     color: #CBBB2A;
-    margin-bottom: 35px;
 }
 
 .services-left p {
-    font-family: 'Alexandria', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     color: #6f6f6f;
-    line-height: 35px;
+    line-height: 25px;
     letter-spacing: -0.01em;
-    font-size: 15px;
+    font-size: 20px;
+    padding-right: 15px;
 }
 
 /* DERECHA */
@@ -72,15 +74,80 @@
     color: #191516;
     text-transform: uppercase;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 20px;
+    transition: transform 0.15s ease-out, color 0.15s ease-out;
+    cursor: pointer;
+    position: relative;
 }
+
 
 .service-item span {
     font-weight: 700;
     color: #8a8a8a;
     min-width: 35px;
+    transition: color 0.18s ease-out;
 }
+
+.service-item::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 55px;
+    /* espacio después del número */
+    top: 0;
+    color: #CBBB2A;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+    pointer-events: none;
+}
+
+.service-arrow {
+    margin-left: auto;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+    display: flex;
+    align-items: center;
+}
+
+.arrow-icon {
+    width: 30px;
+    height: 30px;
+}
+.service-item:hover .service-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: #CBBB2A;
+}
+.service-item:hover {
+    transform: translateY(-4px);
+    color: #CBBB2A;
+    text-shadow: 0 0 0.01px #CBBB2A;
+    font-weight: 700;
+}
+
+.service-item:hover span {
+    color: #5c5c5c;
+    font-weight: 700;
+}
+
+.service-item:hover .service-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @media (max-width: 900px) {
     .services {
         padding: 120px 8%;
