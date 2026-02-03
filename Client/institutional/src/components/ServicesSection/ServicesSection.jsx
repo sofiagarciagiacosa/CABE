@@ -30,7 +30,7 @@ function ServicesSection() {
         {/* IZQUIERDA */}
         <div className="services-left reveal">
           <div className="services-left-inner">
-            <h2>QUE HACEMOS</h2>
+            <h2>QUE  HACEMOS</h2>
             <p>
               Trabajamos desde la estrategia, el concepto y la creatividad,
               acompañando a marcas, emprendimientos y profesionales en la
@@ -50,12 +50,7 @@ function ServicesSection() {
             "Producción + Dirección Creativa",
             "Creación de Contenido"
           ].map((service, i) => (
-            <div
-              className="service-item reveal"
-              style={{ transitionDelay: `${i * 0.12}s` }}
-              key={i}
-            >
-              <span>{String(i + 1).padStart(2, "0")}</span>
+            <div className="service-item reveal" key={i}>
               {service}
               <div className="service-arrow">
                 <svg viewBox="0 0 24 24" fill="none" className="arrow-icon">
@@ -68,11 +63,10 @@ function ServicesSection() {
                   />
                 </svg>
               </div>
-
-
             </div>
           ))}
         </div>
+
       </div>
 
       <div className="services-line bottom"></div>

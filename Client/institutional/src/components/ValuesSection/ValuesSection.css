@@ -1,5 +1,5 @@
 .values {
-    background: #FFFBFB;
+    /*background: #F7FAF2; */
     padding: 0px 8% 100px 8%;
     text-align: center;
 }
@@ -7,16 +7,14 @@
 
 /* TÍTULO */
 .values-title {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
+    font-family: var(--font-accent);
+    font-weight: 800;
     font-size: 56px;
     letter-spacing: -0.04em;
     margin-bottom: 80px;
 }
 
-.values-title span {
-    color: #FF3231;
-}
+
 
 /* LISTA */
 .values-list {
@@ -27,7 +25,7 @@
 }
 
 .value-item {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 2px solid #242424;
     padding: 30px 0;
     cursor: pointer;
     overflow: hidden;
@@ -53,7 +51,7 @@
     font-weight: 700;
     font-size: 30px;
     letter-spacing: -0.02em;
-    color: #191516;
+    color: #242424;
 }
 
 /* Descripción oculta abajo */
@@ -69,7 +67,7 @@
 .value-number {
     display: inline-block;
     width: 50px;
-    color: #b5b5b5;
+    color: #242424;
     font-weight: 600;
 }
 

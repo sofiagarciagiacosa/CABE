@@ -2,6 +2,8 @@
     --red: #c4161c;
     --cream: #f0ece3;
     --black: #191516;
+    --font-accent: 'Fraunces', serif;
+    --font-accent2: "Space Grotesk", sans-serif;
 }
 * {
     margin: 0;

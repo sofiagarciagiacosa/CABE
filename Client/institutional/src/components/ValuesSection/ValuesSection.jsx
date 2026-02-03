@@ -65,7 +65,7 @@ function ValuesSection() {
       
 
       <h2 className="values-title reveal">
-        NUESTROS <span>VALORES</span>
+        NUESTROS <span> VALORES.</span>
       </h2>
 
       <div className="values-list">
