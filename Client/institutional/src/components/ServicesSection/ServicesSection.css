@@ -42,20 +42,21 @@
     align-items: center;
 }
 .services-left h2 {
-    font-family: var(--font-accent);
-    font-weight: 700;
-    font-size: 55px;
-    letter-spacing: -0.04em;
+    font-family: 'Gloock', serif;
+    font-weight: 400;
+    font-size: clamp(60px, 7vw, 84px);
+    letter-spacing: -0.02em;
     color: #CBBB2A;
-}
 
+    text-shadow: -0.8px 0 rgba(255, 50, 49, 0.4);
+}
 .services-left p {
     font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    color: #242424;
-    line-height: 30px;
+    color: #6b6767;
+    line-height: 1.6;
     letter-spacing: -0.01em;
-    font-size: 20px;
+    font-size: 19px;
+    margin-left: 1px;
 }
 
 /* DERECHA */

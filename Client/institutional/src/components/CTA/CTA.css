@@ -1,0 +1,35 @@
+.connect__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    color: #191516;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1.5px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, text-decoration 0.3s ease;
+}
+
+.connect__arrow {
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s ease;
+}
+
+.arrow-icon {
+    width: 26px;
+    height: 26px;
+}
+
+.connect__cta:hover {
+    transform: scale(1.08);
+    text-decoration: none;
+}
+
+.connect__cta:hover .connect__arrow {
+    transform: translateX(6px);
+}

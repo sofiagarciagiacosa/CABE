@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import CTA from "../CTA/CTA";
 import "./HomeIntro.css";
 
 function HomeIntro() {
@@ -19,26 +20,38 @@ function HomeIntro() {
     );
 
     elements.forEach((el) => observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
 
   return (
     <section className="home-intro" ref={sectionRef}>
-      <div className="intro-left reveal">
-        <h1>HOLA, SOMOS <strong>CABE</strong>.</h1>
+      
+      {/* IZQUIERDA */}
+      <div className="intro-left">
+        <h1 className="reveal">
+          Hola, somos <strong>CABE</strong>.
+        </h1>
       </div>
 
+      {/* DERECHA */}
       <div className="intro-right">
+
         <p className="intro-main reveal">
-          Nuestra misión es crear comunicación con sentido, acompañando a marcas y personas desde la estrategia, la sensibilidad y el criterio.
+          Nuestra misión es crear comunicación con sentido, acompañando a marcas
+          y personas desde la estrategia, la sensibilidad y el criterio.
         </p>
 
         <div className="intro-line reveal"></div>
 
-        <p className="intro-sub reveal">
-          Diseñamos procesos a medida, construimos marcas con identidad y desarrollamos contenido que conecta de forma auténtica.
-        </p>
+        <div className="intro-bottom reveal">
+          <p className="intro-sub">
+            Diseñamos procesos a medida, construimos marcas con identidad y
+            desarrollamos contenido que conecta de forma auténtica.
+          </p>
+
+          <CTA to="/nosotros">NOSOTROS</CTA>
+        </div>
+
       </div>
     </section>
   );

@@ -30,7 +30,7 @@ function ServicesSection() {
         {/* IZQUIERDA */}
         <div className="services-left reveal">
           <div className="services-left-inner">
-            <h2>QUE  HACEMOS</h2>
+            <h2>Que  Hacemos</h2>
             <p>
               Trabajamos desde la estrategia, el concepto y la creatividad,
               acompañando a marcas, emprendimientos y profesionales en la

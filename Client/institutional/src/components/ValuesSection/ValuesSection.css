@@ -7,13 +7,11 @@
 
 /* TÍTULO */
 .values-title {
-    font-family: var(--font-accent);
-    font-weight: 800;
-    font-size: 56px;
-    letter-spacing: -0.04em;
-    margin-bottom: 80px;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(48px, 6vw, 72px);
+    margin-bottom: 90px;
+    text-align: center;
 }
-
 
 
 /* LISTA */

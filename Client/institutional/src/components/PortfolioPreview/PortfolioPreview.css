@@ -5,17 +5,24 @@
 /*  BLOQUE ROJO  */
 .portfolio-hero {
     background-color: #FF3231;
-    color: white;
-    padding: 110px 10% 140px 10%;
+    padding: 140px 0 180px 0;
+    color: #F4EFEA;
 }
-
+.portfolio-hero-inner {
+    width: 78%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
 .portfolio-manifesto {
     font-family: 'Alexandria', sans-serif;
     font-size: 18px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     text-align: justify;
-    line-height: 1.6;
+    line-height: 1.7;
+    max-width: 720px;
     margin-bottom: 50px;
 }
 
@@ -23,15 +30,19 @@
 .portfolio-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     gap: 20px;
 }
 
 .portfolio-title {
-    font-family: 'Alexandria', sans-serif;
-    font-weight: 700;
-    font-size: 52px;
-    color: white;
+    font-family: "Anton", sans-serif;
+    font-size: clamp(60px, 8vw, 110px);
+    letter-spacing: 1.5px;
+    color: #F4EFEA;
+
+    text-shadow:
+        0 0 1px rgba(244, 239, 234, 0.4),
+        0 0 6px rgba(244, 239, 234, 0.15);
 }
 
 /* BOTÓN */
@@ -42,22 +53,22 @@
     letter-spacing: 0.05em;
     padding: 12px 22px;
     border-radius: 30px;
-    border: 1px solid white;
+    border: 1px solid #F7FAF2;
     background: #FF3231;
-    color: white;
+    color: #F7FAF2;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .portfolio-btn:hover {
-    background: white;
+    background: #F7FAF2;
     color: #FF3231;
 }
 
 /*  BLOQUE BLANCO */
 .portfolio-content {
-    background: #FFFBFB;
-    padding: 0 10% 120px 10%;
+    background: #F7FAF2;
+    padding: 0 10% 140px 10%;
     position: relative;
 }
 
@@ -65,10 +76,49 @@
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 70px 50px;
+    gap: 90px 60px;
 }
 
 /* SUPERPOSICIÓN */
 .projects-grid> :nth-child(-n+2) {
-    margin-top: -100px;
+    margin-top: -140px;
+}
+/* CTA dentro del bloque rojo */
+.portfolio-hero .connect__cta {
+    color: #F7FAF2;
+    text-decoration-color: #F7FAF2;
+}
+
+.portfolio-hero .connect__cta:hover {
+    color: #ffffff;
+}
+
+.portfolio-hero .connect__cta .arrow-icon {
+    stroke: #F7FAF2;
+}
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .portfolio-hero-inner {
+        width: 84%;
+        margin-left: 8%;
+        gap: 50px;
+    }
+
+    .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+
+    .portfolio-title {
+        font-size: 44px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-grid> :nth-child(-n+2) {
+        margin-top: 0;
+    }
 }

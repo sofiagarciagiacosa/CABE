@@ -1,35 +1,40 @@
 .home-intro {
-    min-height: 75vh;
+    min-height: 90vh;
     background-color: #F7FAF2;
     color: #191516;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 150px 100px 150px 100px;
-    box-sizing: border-box;
+    justify-content: space-between;
+    padding: 180px 8%;
     gap: 80px;
 }
 
 /* IZQUIERDA */
 .intro-left {
     flex: 1;
+    display: flex;
+    align-items: flex-start;
+    /* lo sube */
 }
 
 .intro-left h1 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(40px, 5vw, 50px);
-    font-weight: 400;
-    line-height: 1.1;
+    font-family: var(--font-accent);
+    /* Fraunces */
+    font-style: italic;
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 500;
+    line-height: 1.05;
+    margin-top: 20px;
 }
 
 .intro-left strong {
     font-weight: 700;
 }
-
 /* DERECHA */
 .intro-right {
-    flex: 2;
-    max-width: 700px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .intro-main {
@@ -38,13 +43,22 @@
     font-size: 22px;
     line-height: 1.6;
     margin-bottom: 30px;
+    max-width: 520px;
 }
 
 .intro-line {
-    width: 60px;
+    width: 140px;
+    /* antes 60 */
     height: 2px;
     background-color: #191516;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+.intro-bottom {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 10px;
 }
 
 .intro-sub {
@@ -52,18 +66,17 @@
     font-size: 16px;
     line-height: 1.6;
     color: #6b6767;
-    /* gris suave */
-}
-@media (max-width: 900px) {
+    max-width: 360px;
+}@media (max-width: 900px) {
     .home-intro {
         flex-direction: column;
-        text-align: left;
-        gap: 40px;
-        padding: 60px 30px;
+        padding: 120px 8%;
+        gap: 50px;
     }
 
-    .intro-right {
-        max-width: 100%;
+    .intro-bottom {
+        flex-direction: column;
+        gap: 20px;
     }
 }
 /* ESTADO INICIAL (oculto y abajo) */
