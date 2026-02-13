@@ -28,9 +28,11 @@ function HomeIntro() {
       
       {/* IZQUIERDA */}
       <div className="intro-left">
-        <h1 className="reveal">
-          Hola, somos <strong>CABE</strong>.
+        <h1>
+          <span className="intro-small">Hola, somos</span>
+          <span className="intro-big">CABE</span>
         </h1>
+
       </div>
 
       {/* DERECHA */}

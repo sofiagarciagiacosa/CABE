@@ -2,14 +2,14 @@
 :root {
     --red: #c4161c;
     --cream: #F7FAF2;
-    --black: #191516;
+    --black: #242424;
 }
 
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 30px 40px 0 0;
+    padding: 30px 30px 0 0;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -23,45 +23,40 @@
 
 /* Hamburger */
 .hamburger {
-    width: 32px;
-    height: 24px;
+    width: 42px;
+    height: 28px;
     background: none;
     border: none;
     cursor: pointer;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     z-index: 11;
-    /* MÁS que el overlay */
-    
 }
 
 .hamburger span {
     position: absolute;
-    width: 100%;
+    left: 0;
+    width: 90%;
     height: 2px;
     background-color: var(--black);
-    transition: 0.4s;
+    transition: transform 0.4s ease, opacity 0.3s ease;
 }
 
+/* Posición base */
 .hamburger span:first-child {
-    top: 6px;
+    top: 8px;
 }
 
 .hamburger span:last-child {
-    bottom: 6px;
+    top: 17px;
 }
 
-/* Cruz */
+/* Cruz perfecta */
 .hamburger.open span:first-child {
-    transform: rotate(45deg);
-    top: 11px;
+    transform: translateY(4.5px) rotate(45deg);
 }
 
 .hamburger.open span:last-child {
-    transform: rotate(-45deg);
-    bottom: 11px;
+    transform: translateY(-4.5px) rotate(-45deg);
 }
 
 /* Overlay */
@@ -73,7 +68,6 @@
     pointer-events: none;
     transition: opacity 0.5s ease;
     z-index: 15;
-    border-radius: 12px;
 }
 
 body.menu-open::before {
@@ -93,7 +87,7 @@ body.menu-open::before {
 /* Contenido */
 .menu-content {
     padding: 40px;
-    color: white;
+    color: #F7FAF2;
 }
 
 .menu-logo {
@@ -102,7 +96,7 @@ body.menu-open::before {
 .divider {
     width: 0;
     height: 1px;
-    background: #191516;
+    background: #242424;
     margin: 5px 0 10px 0;
 }
 
@@ -162,7 +156,7 @@ body.menu-open::before {
     margin: 18px 0;
     opacity: 0;
     transform: translateY(10px);
-    color: #191516;
+    color: #242424;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), font-weight 0.2s ease;
     cursor: pointer;
     display: flex;

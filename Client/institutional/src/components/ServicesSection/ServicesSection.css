@@ -1,6 +1,6 @@
 .services {
-    background: #FFFBFB;
-    padding: 100px 6%;
+    background: #F7FAF2;
+    padding: 30px 6% 100px 6%;
     position: relative;
 }
 
@@ -13,11 +13,11 @@
 }
 
 .services-line.top {
-    margin-bottom: 120px;
+    margin-bottom: 150px;
 }
 
 .services-line.bottom {
-    margin-top: 120px;
+    margin-top: 150px;
 }
 
 /* CONTENEDOR */

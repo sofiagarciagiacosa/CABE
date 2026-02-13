@@ -1,31 +1,41 @@
 .hero {
-    height: 75vh;
-    background-color: #f0ece3;
+    height: 95vh;
+    /* un poco más alto */
+    background-color: #F0ECE3;
     position: relative;
-    /* clave para posicionar el logo */
     overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    /* arranca abajo */
+    justify-content: center;
 }
 
-/* LOGO */
-.hero img {
-    position: absolute;
-    top: -10%;
-    /* un poco más arriba para compensar el tamaño */
-    left: 50%;
-    transform: translate(-50%, 60px);
+/* IMAGEN FULL WIDTH */
+.hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 
-    max-height: 72vh;
-    /* ⬅️ MÁS GRANDE (antes 38vh) */
-    width: auto;
-
+    transform: translateY(120px) scale(1.02);
     opacity: 0;
-    animation: heroReveal 1.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    animation: heroSlideUp 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: 0.3s;
 }
 
-@keyframes heroReveal {
+@keyframes heroSlideUp {
     to {
+        transform: translateY(0) scale(1);
         opacity: 1;
-        transform: translate(-50%, 0);
+    }
+}
+@media (max-width: 768px) {
+    .hero {
+        height: 85vh;
+    }
+
+    .hero-image {
+        width: 130%;
+        /* un poco más amplia en mobile */
     }
 }

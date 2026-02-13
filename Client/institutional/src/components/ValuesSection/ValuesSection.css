@@ -1,6 +1,6 @@
 .values {
-    /*background: #F7FAF2; */
-    padding: 0px 8% 100px 8%;
+    background: #F7FAF2;
+    padding: 30px 8% 100px 8%;
     text-align: center;
 }
 
@@ -8,9 +8,10 @@
 /* TÍTULO */
 .values-title {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(48px, 6vw, 72px);
+    font-size: clamp(50px, 7vw, 80px);
     margin-bottom: 90px;
     text-align: center;
+    letter-spacing: 1.5px;
 }
 
 

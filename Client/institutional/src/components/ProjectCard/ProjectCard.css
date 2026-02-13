@@ -25,8 +25,9 @@
 
 .project-info h3 {
     font-family: 'Alexandria', sans-serif;
+    letter-spacing: 0.05em;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 25px;
     color: #191516;
 }
 
