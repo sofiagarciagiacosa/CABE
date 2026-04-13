@@ -1,0 +1,26 @@
+:root {
+    --red: #c4161c;
+    --cream: #f0ece3;
+    --black: #191516;
+    --font-accent: 'Fraunces', serif;
+    --font-accent2: "Space Grotesk", sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

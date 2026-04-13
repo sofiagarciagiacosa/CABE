@@ -1,0 +1,119 @@
+.home-intro {
+    min-height: 90vh;
+    background-color: #F7FAF2;
+    color: #191516;
+    display: flex;
+    justify-content: space-between;
+    padding: 180px 8%;
+    gap: 80px;
+}
+
+/* IZQUIERDA */
+.intro-left {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    /* lo sube */
+}
+
+.intro-left h1 {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.95;
+    margin-top: 20px;
+}
+
+/* Hola, somos */
+.intro-small {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.5vw, 32px);
+    letter-spacing: -0.01em;
+}
+
+/* CABE */
+.intro-big {
+    font-family: 'Playfair Display', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: clamp(72px, 9vw, 120px);
+    letter-spacing: -0.04em;
+}
+/* DERECHA */
+.intro-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.intro-main {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 520px;
+}
+
+.intro-line {
+    width: 140px;
+    /* antes 60 */
+    height: 2px;
+    background-color: #191516;
+    margin-bottom: 30px;
+}
+
+.intro-bottom {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+.intro-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #6b6767;
+    max-width: 360px;
+}@media (max-width: 900px) {
+    .home-intro {
+        flex-direction: column;
+        padding: 120px 8%;
+        gap: 50px;
+    }
+
+    .intro-bottom {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+/* ESTADO INICIAL (oculto y abajo) */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* CUANDO ENTRA EN PANTALLA */
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.intro-left {
+    transition-delay: 0.1s;
+}
+
+.intro-main {
+    transition-delay: 0.2s;
+}
+
+.intro-line {
+    transition-delay: 0.3s;
+}
+
+.intro-sub {
+    transition-delay: 0.4s;
+}

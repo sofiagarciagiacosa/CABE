@@ -1,5 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
+
+import cors from "cors"; // por react
+
 import proyectoRouter from "./Server/Routes/proyecto.routes.js";
 import usuarioRouter from "./Server/Routes/usuario.routes.js";
 import rolRouter from "./Server/Routes/rol.routes.js";
@@ -9,23 +12,24 @@ import estadoRouter from "./Server/Routes/estado.routes.js";
 import urgenciaRouter from "./Server/Routes/urgencia.routes.js";
 import tareaRouter from "./Server/Routes/tarea.routes.js";
 
-
 import { connectDB } from "./Server/db/connection.js";
-
-
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middlewares
+// MIDDLEWARES
+app.use(cors({
+  origin: "http://localhost:5173", // React (Vite)
+}));
 app.use(express.json());
 
 // Conectar a la base
 connectDB();
 
-app.use(express.static("./Client"));
+//solo para html vainilla
+//app.use(express.static("./Client"));
 
 // Rutas
 app.use("/proyecto", proyectoRouter);
@@ -40,6 +44,12 @@ app.use("/tarea", tareaRouter);
 
 
 // Levantar servidor (siempre al final)
+/*
 app.listen(port, () => {
   console.log(`Servidor levantado en puerto ${port}`);
+});
+*/
+
+app.listen(port, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
 });

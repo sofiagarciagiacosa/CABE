@@ -1,0 +1,41 @@
+.hero {
+    height: 95vh;
+    /* un poco más alto */
+    background-color: #F0ECE3;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    /* arranca abajo */
+    justify-content: center;
+}
+
+/* IMAGEN FULL WIDTH */
+.hero-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+
+    transform: translateY(120px) scale(1.02);
+    opacity: 0;
+
+    animation: heroSlideUp 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes heroSlideUp {
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+@media (max-width: 768px) {
+    .hero {
+        height: 85vh;
+    }
+
+    .hero-image {
+        width: 130%;
+        /* un poco más amplia en mobile */
+    }
+}

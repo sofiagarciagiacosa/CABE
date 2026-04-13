@@ -1,0 +1,916 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background-color: #f5f5f5;
+}
+
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+    align-items: stretch; /* fuerza que sidebar y main tengan misma altura */
+    position: relative;
+}
+
+/* ==== SIDEBAR ==== */
+.sidebar {
+    flex: 0 0 230px; /* <== ancho fijo */
+    width: 225px;
+    max-width: 225px;
+    min-width: 225px;
+    background-color: #F2F2F2;
+    box-sizing: border-box;
+    padding: 20px 0;
+    z-index: 1;
+}
+
+/* Links generales */
+.sidebar .nav-link {
+    color: #555;
+    padding: 14px 20px;
+    margin: 0;
+    border: none;
+    transition: all 0.2s ease;
+
+    /* Bordes redondeados SOLO del lado izquierdo */
+    border-radius: 12px 0 0 12px;
+}
+.sidebar .bi-person-circle{
+    font-size: 40px;
+    color: #555;
+}
+/* Hover */
+.sidebar .nav-link:hover {
+    background-color: #e7e7e7;
+}
+
+/* ==== ACTIVE → efecto de fusión + redondeado inverso ==== */
+.sidebar .nav-link.active {
+    background-color: #ffffff;
+    color: #000;
+    font-weight: 600;
+
+    /* Bordes */
+    border-right: 1px solid #ffffff;
+    /* invisible pero evita quiebre */
+
+    /* "Mordida" invertida para fusionar con el main */
+    position: relative;
+}
+
+.sidebar .nav-link.active::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: 0;
+    width: 12px;
+    height: 100%;
+    background: #ffffff;
+
+    /* Redondeado invertido del lado derecho */
+    border-radius: 0 12px 12px 0;
+}
+/* Asegurar que los elementos internos no cambien el ancho del sidebar */
+.sidebar .user-icon,
+.sidebar .nav {
+    width: 100%;
+    display: block;
+}
+/* ==== MAIN ==== */
+.content {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 30px;
+    min-height: 100vh;
+    flex: 1 1 auto;
+    box-sizing: border-box;
+
+    /* Se superpone 1px para unirse con el active */
+    margin-left: -1px;
+
+    border-radius: 12px 0 0 12px;
+    box-shadow: -6px 0 12px rgba(0, 0, 0, 0.06);
+    z-index: 1;
+}
+/* Evitar que contenido largo del main "empuje" lateralmente */
+.content .container-fluid,
+.content>* {
+    max-width: calc(100% - 0px);
+}
+
+/* ==== PROYECTOS HEADER ==== */
+.projects-header {
+    margin-bottom: 30px;
+}
+
+
+.projects-title {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    /* Semibold */
+    font-size: 30px;
+    letter-spacing: 0.02em;
+    /* 2% */
+    margin: 0;
+    color: #000;
+}
+
+
+.projects-count {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: #000;
+    line-height: 1;
+}
+
+
+.projects-status {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 300;
+    /* Light */
+    color: #7a7a7a;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+
+.create-project-btn {
+    all: unset;
+    display: inline-block;
+    background-color: #FF3231;
+    color: #ffffff;
+    padding: 10px 26px;
+    border-radius: 50px;
+    border: none;
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    /* Semibold */
+    letter-spacing: 0.09em;
+    /* 8% */
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.create-project-btn:hover {
+    background-color: #e12c2b;
+    transform: translateY(-1px);
+}
+
+/* ==== CARDS DE PROYECTOS ==== */
+
+.project-card {
+    background-color: #F5F5F5;
+    border-radius: 18px;
+    padding: 22px 22px 18px 22px;
+    min-height: 180px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: transform 0.18s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-3px);
+}
+
+
+.project-title {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #CBBB2A;
+    text-align: center;
+    letter-spacing: -0.02em;
+
+    /* Subrayado separado del texto */
+    padding-bottom: 4px;
+    border-bottom: 2px solid #CBBB2A;
+    margin-bottom: 10px;
+}
+
+
+.project-brand {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    letter-spacing: 0.01em;
+    margin-bottom: 20px;
+}
+
+
+.project-footer span {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #777;
+    letter-spacing: 0.01em;
+}
+
+
+.add-card-btn {
+    width: 100%;
+    height: 180px;
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+    /* Tamaño del + */
+    color: #000000;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: all 0.18s ease;
+}
+
+.add-card-btn:hover {
+    transform: translateY(-3px);
+    cursor: pointer;
+}
+.add-project-btn {
+    width: 100%;
+    height: 180px;
+    background-color: #F5F5F5;
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+    color: #000;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+
+    border: 1px dashed #ccc;
+
+    transition: all 0.2s ease;
+}
+
+.add-project-btn:hover {
+    transform: translateY(-3px);
+    border-color: #000;
+    cursor: pointer;
+}
+/* ==== MODAL ==== */
+
+.project-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 999;
+}
+
+.project-modal-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 18px;
+    width: 500px;
+    max-width: 90%;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* FORM GRID */
+.project-modal-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* INPUTS */
+.project-modal-card input,
+.project-modal-card select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: "DM Sans", sans-serif;
+}
+
+/* RESPONSABLES */
+.project-modal-card label {
+    font-size: 14px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* BOTONES */
+.project-modal-card button {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.project-modal-card button[type="submit"] {
+    background-color: #FF3231;
+    color: white;
+}
+
+.project-modal-card button[type="button"] {
+    background-color: #ddd;
+}
+/* ==== PÁGINA DE CADA PROYECTO ==== */
+.project-page-header {
+    margin-top: 10px;
+}
+
+/* Botón Editar */
+.project-edit-btn {
+    background: #ffffff;
+    color: #6f6f6f;
+    border: 1px solid #dcdcdc;
+    padding: 10px 26px;
+    border-radius: 50px;
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.09em;
+    transition: all 0.2s ease;
+}
+
+.project-edit-btn:hover {
+    background: #f6f6f6;
+}
+
+
+.project-add-task-btn {
+    background-color: #CBBB2A;
+    color: white;
+    padding: 10px 26px;
+    border: none;
+    border-radius: 50px;
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.09em;
+    transition: all 0.2s ease;
+}
+
+.project-add-task-btn:hover {
+    background-color: #b2a524;
+    transform: translateY(-1px);
+}
+
+
+.project-delete-btn {
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    color: #777;
+    padding: 10px 16px;
+    border-radius: 50px;
+    transition: all 0.2s ease;
+}
+
+.project-delete-btn:hover {
+    background: #f6f6f6;
+    color: #555;
+}
+
+.project-delete-btn i {
+    font-size: 18px;
+}
+
+/* ===== DESCRIPCIÓN DEL PROYECTO ===== */
+
+.project-info-container {
+    display: grid;
+    grid-template-columns: 25% 75%;
+    column-gap: 50px;
+    margin-top: 30px;
+}
+
+
+.project-info-labels {
+    width: 25%;
+    text-align: right;
+}
+
+.project-info-labels span {
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    color: #7b7b7b;
+    /* gris suave */
+    text-transform: uppercase;
+    /* mayúsculas */
+    letter-spacing: 0.03em;
+    margin-bottom: 18px;
+    font-weight: 400;
+    
+    
+}
+
+/* Columna derecha: valores */
+.project-info-values {
+    width: 75%;
+    line-height: 1.5;
+}
+
+.project-info-values span {
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+    /* semibold */
+    letter-spacing: 0.01em;
+    /* como pediste */
+    margin-bottom: 18px;
+    text-transform: none;
+    /* en minúscula */
+    line-height: 1.5;
+}
+
+
+.project-info-values span:nth-child(2) {
+    max-width: 95%;
+}
+/* Contenedor general: grid por filas (cada .field es una fila) */
+.project-info-container {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    /* etiqueta fija, valor flexible */
+    row-gap: 18px;
+    column-gap: 40px;
+    align-items: start;
+    /* importante: valores empiezan en el tope de la fila */
+    margin-top: 30px;
+}
+
+/* cada par usa la grilla: label en la columna 1, value en la 2 */
+.field {
+    display: contents;
+    /* permite que los hijos ocupen las columnas del grid padre */
+}
+
+/* estilos de etiqueta */
+.project-info-container .label {
+    grid-column: 1 / 2;
+    text-align: right;
+    text-transform: uppercase;
+    color: #7b7b7b;
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    font-weight: 400;
+    padding-right: 12px;
+    /* separación entre etiqueta y valor */
+}
+
+/* estilos del valor */
+.project-info-container .value {
+    grid-column: 2 / 3;
+    text-align: left;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 600;
+    color: #555;
+    line-height: 1.5;
+    white-space: normal;
+    /* permite wrap */
+}
+
+/* ============================
+   KANBAN BOARD – ESTILO GENERAL
+============================ */
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1rem 2rem 3rem 2rem;
+    margin-top: 1.5rem;
+}
+
+
+.kanban-column {
+    background: #F7F7F7;
+    /* Gris clarito */
+    border-radius: 18px;
+    padding: 1.5rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 420px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.kanban-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .4rem;
+}
+
+.kanban-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2D2D2D;
+    margin: 0;
+}
+
+.kanban-count {
+    background: #EDEDED;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+}
+
+
+.kanban-underline {
+    width: 100%;
+    height: 3px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+
+
+.kanban-task {
+    background: white;
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    border: 1px solid #E4E4E4;
+}
+
+.task-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: .35rem;
+    color: #2E2E2E;
+}
+
+.task-meta {
+    font-size: 0.85rem;
+    color: #6A6A6A;
+}
+
+/* Los puntitos (•) se ven más sutiles */
+.task-meta span {
+    font-weight: 400;
+}
+
+
+.kanban-add-btn {
+    margin-top: auto;
+    align-self: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: #EDEDED;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.kanban-add-btn:hover {
+    background: #D6D6D6;
+}
+
+
+/* FORMULARIO CREAR PROYECTO   */
+
+.project-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.project-modal-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 700px;
+    max-width: 90%;
+        /* responsive para pantallas chicas */
+}
+
+.modal-title {
+    font-family: 'Alexandria';
+    font-size: 23px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 2rem;
+    color: #000;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form-grid label {
+    text-align: right;
+    font-family: 'DM Sans';
+    font-size: 12px;
+    color: #8c8c8c;
+}
+
+.form-grid input {
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    padding: 8px 12px;
+    outline: none;
+    background-color: #fafafa;
+}
+.form-grid select {
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    padding: 8px 12px;
+    outline: none;
+    background-color: #fafafa;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-save {
+    background: #FF3231;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 25px;
+    border: none;
+    font-weight: 500;
+}
+
+.btn-cancel {
+    background: white;
+    border: 1px solid #585858;
+    color: #585858;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-weight: 500;
+}
+.btn-save:hover {
+    background: #e62b2a;
+}
+
+.btn-cancel:hover {
+    background: #f5f5f5;
+}
+#responsablesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    /* permite que bajen a otra línea */
+    gap: 10px;
+    /* espacio entre responsables */
+}
+
+.responsable-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #fafafa;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #585858;
+}
+
+.responsable-item input[type="checkbox"] {
+    accent-color: #FF3231;
+    cursor: pointer;
+}
+
+/*  Modal para agregar tareas  */
+.custom-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+}
+
+.modal.hidden {
+    display: none;
+}
+.custom-modal-content {
+    background: #ffffff;
+    padding: 32px 28px;
+    border-radius: 20px;
+
+    width: 420px;
+    max-width: 90%;
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+/* Título */
+.custom-modal-content h3 {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* Inputs y selects - mejorar legibilidad */
+.custom-modal-content input,
+.custom-modal-content select {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+
+    border-radius: 12px;
+    background: #f5f5f5;
+    border: none;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+}
+/* Contenedor fechas en dos columnas */
+.date-group {
+    display: flex;
+    gap: 12px;
+}
+
+.date-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.date-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    font-family: "DM Sans", sans-serif;
+}
+/* Contenedor botones */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Botones más compactos */
+.modal-actions button {
+    flex: 1;
+    padding: 8px 0;
+    /* MÁS CHICOS */
+    border-radius: 16px;
+    font-size: 14px;
+
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    /* animación suave */
+}
+/* CANCELAR */
+.modal-actions button:first-child {
+    background: white;
+    border: 1px solid #ccc;
+}
+
+/* GUARDAR */
+.modal-actions button:last-child {
+    background: #ff3231;
+    color: white;
+}
+/* Botón Guardar */
+#saveTask {
+    background: #ff3231;
+    color: white;
+}
+#saveTask:hover {
+    background: #e52928;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(255, 50, 49, 0.3);
+}
+/* Botón Cancelar */
+#cancelTask {
+    background: white;
+    border: 1px solid #8c8888;
+    color: #585858; 
+}
+#cancelTask:hover {
+    background: #f0f0f0;
+    border-color: #888;
+    transform: translateY(-1px);
+}
+
+.kanban-task {
+    cursor: grab;
+}
+
+.kanban-task:active {
+    cursor: grabbing;
+}
+.kanban-task:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: scale(1.01);
+    transition: 0.15s ease;
+}
+.kanban-task.dragging {
+    opacity: 0.5;
+}
+.task-meta-box {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 12px;
+    font-size: 12px;
+    color: #585858;
+    margin-top: 6px;
+}
+
+/* Urgencias tipo "banderitas" */
+.urgencia-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px 6px 20px 6px;
+    /* estilo banderita */
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+/* Colores por nivel */
+.urgencia-alta {
+    background: #ff3231;
+    color: white;
+}
+
+.urgencia-media {
+    background: #4da3ff;
+    /* celestito */
+    color: white;
+}
+
+/* Te recomiendo: verde oliva suave */
+.urgencia-baja {
+    background: #7cbf9e;
+    color: white;
+}
+
+
+
+
+
+@media (max-width: 900px) {
+    .kanban-board {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+/* responsive: en pantallas chicas mostramos en 1 columna (label encima del valor) */
+@media (max-width: 800px) {
+    .project-info-container {
+        grid-template-columns: 1fr;
+    }
+
+    .project-info-container .label {
+        text-align: left;
+        padding-right: 0;
+        margin-bottom: 6px;
+    }
+
+    .project-info-container .value {
+        margin-bottom: 12px;
+    }
+}
