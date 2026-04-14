@@ -1,0 +1,131 @@
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Alexandria', sans-serif;
+}
+.gradient-bg {
+    position: absolute;
+    width: 160%;
+    height: 160%;
+    top: -20%;
+    left: -20%;
+    z-index: 0;
+
+    background:
+        radial-gradient(circle at 20% 30%, rgba(203, 187, 42, 0.7), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(203, 187, 42, 0.5), transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(200, 200, 200, 0.5), transparent 55%),
+        radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.9), transparent 60%);
+
+    filter: blur(55px);
+    transition: transform 0.08s linear;
+    opacity: 0.9;
+}
+
+.login-card {
+    position: relative;
+    z-index: 1;
+    width: 600px;
+    /* 🔥 antes 380 */
+    min-height: 500px;
+    /* 🔥 más aire vertical */
+    background: white;
+    border-radius: 20px;
+    padding: 50px 60px;
+    /* 🔥 más espacio interno */
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+}
+.login-title {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 28px;
+    /* un toque más grande */
+    color: black;
+}
+
+.login-subtitle {
+    color: #585858;
+    font-weight: 300;
+    margin-top: 4px;
+    /* 🔥 antes 8 */
+    margin-bottom: 20px;
+    /* 🔥 menos separación */
+}
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px !important;
+    border: 0.5px solid #585858;
+    outline: none;
+    font-size: 14px;
+    appearance: none;
+}
+
+.input-group input::placeholder {
+    color: #585858;
+}
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+}
+
+.eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.forgot-password {
+    display: block;
+    text-align: left;
+    color: #007bff;
+    font-size: 12px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+.login-button {
+    width: 100%;
+    padding: 10px;
+    /* 🔥 más bajo que inputs */
+    border-radius: 15px;
+    background: #FF3231;
+    color: white;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.login-button:hover {
+    background: #e62b2b;
+}
