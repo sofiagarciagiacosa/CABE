@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function PasswordField({ label }) {
+function PasswordField({ label, value, onChange }) {
   const [show, setShow] = useState(false);
 
   return (
@@ -11,13 +11,15 @@ function PasswordField({ label }) {
         <input
           type={show ? "text" : "password"}
           placeholder="contraseña"
+          value={value}
+          onChange={onChange}
         />
 
         <span
-          className="eye"
-          onClick={() => setShow(!show)}
+            className="eye"
+            onClick={() => setShow(!show)}
         >
-          👁
+            <i className={`bi ${show ? "bi-eye-slash" : "bi-eye"}`}></i>
         </span>
       </div>
     </div>

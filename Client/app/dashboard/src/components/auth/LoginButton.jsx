@@ -1,5 +1,9 @@
-function LoginButton({ text }) {
-  return <button className="login-button">{text}</button>;
+function LoginButton({ text, onClick }) {
+  return (
+    <button className="login-button" onClick={onClick}>
+      {text}
+    </button>
+  );
 }
 
 export default LoginButton;

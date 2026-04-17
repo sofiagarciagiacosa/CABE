@@ -11,6 +11,7 @@ import clienteRoutes from "./Server/Routes/cliente.routes.js";
 import estadoRouter from "./Server/Routes/estado.routes.js";
 import urgenciaRouter from "./Server/Routes/urgencia.routes.js";
 import tareaRouter from "./Server/Routes/tarea.routes.js";
+import authRouter from "./Server/Routes/auth.routes.js";
 
 import { connectDB } from "./Server/db/connection.js";
 
@@ -40,6 +41,7 @@ app.use("/cliente", clienteRoutes);
 app.use("/estado", estadoRouter);
 app.use("/urgencia", urgenciaRouter);
 app.use("/tarea", tareaRouter);
+app.use("/auth", authRouter);
 
 
 

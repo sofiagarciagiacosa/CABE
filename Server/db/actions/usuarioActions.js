@@ -1,15 +1,19 @@
 import { connectDB } from "../connection.js";
 import Usuario from "../schemas/usuario.schema.js";
+import bcrypt from "bcrypt";
 
 // Crear usuario
-export const createUser = async ({ nombre, email, password, rol }) => {
+export const createUser = async ({ nombre, apellido, email, password, rol }) => {
   try {
     await connectDB();
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const res = await Usuario.create({
       nombre,
+      apellido,
       email,
-      password,
+      password: hashedPassword,
       rol,
     });
 
