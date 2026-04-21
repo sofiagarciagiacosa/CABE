@@ -37,7 +37,10 @@ function LoginPage() {
   };
 
   useEffect(() => {
+    
     const handleMouseMove = (e) => {
+
+      
       const bg = bgRef.current;
       const card = cardRef.current;
 

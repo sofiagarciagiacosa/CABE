@@ -9,23 +9,7 @@ import { roleMiddleware } from "../middlewares/role.middleware.js";
 
 const router = Router();
 
-router.post("/seed-admin", async (req, res) => {
-  try {
-    
 
-    const user = await createUser({
-      nombre: "Milagros",
-      apellido: "Carranza",
-      email: "sofiagarciagiac@gmail.com",
-      password: "U4d!U71V8",
-      rol: "6920a0d525d11192dd532477",
-    });
-
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 //  SOLO ADMIN puede crear usuarios
 router.post(

@@ -302,7 +302,7 @@ function ProjectPage() {
   if (!project) return <div>Loading...</div>;
 
   return (
-    <main className="content">
+    <main className="page">
       <div className="project-page-header d-flex justify-content-between align-items-center mb-4">
         <h1 className="projects-title">{project.nombre}</h1>
 

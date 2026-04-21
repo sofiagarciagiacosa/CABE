@@ -28,10 +28,10 @@ function ProjectsPage() {
   }, []);
 
   return (
-    <main className="content">
+    <main className="page">
 
       {/* HEADER */}
-      <div className="projects-header d-flex justify-content-between align-items-center m-4 mt-0">
+      <div className="projects-header d-flex justify-content-between align-items-center">
         <div>
           <h1 className="projects-title">Proyectos</h1>
 
@@ -51,7 +51,7 @@ function ProjectsPage() {
       </div>
 
       {/* GRID */}
-      <div className="container-fluid px-4">
+      <div className="container-fluid px-0">
         <div className="row g-4">
 
           {projects.map((proy) => (

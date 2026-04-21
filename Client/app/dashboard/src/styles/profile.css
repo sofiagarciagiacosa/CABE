@@ -1,0 +1,82 @@
+.profile-page {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* AVATAR GRANDE */
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    background: #2f2f2f;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* INFO */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* NOMBRE */
+.profile-name {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    color: black;
+    margin: 0;
+}
+
+/* ROL */
+.profile-role {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 500;
+    color: #585858;
+    font-size: 16px;
+    margin-top: 4px;
+}
+
+/* EMAIL */
+.profile-email {
+    font-family: "Alexandria", sans-serif;
+    font-weight: 300;
+    color: #585858;
+    font-size: 13px;
+}
+
+/* BOTÓN */
+.edit-profile-btn {
+    margin-top: 15px;
+    padding: 8px 18px;
+    background: white;
+    border: 1px solid #8C8888;
+    border-radius: 10px;
+
+    font-family: "Alexandria", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #585858;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* HOVER BOTÓN */
+.edit-profile-btn:hover {
+    background: #f3f3f3;
+    transform: translateY(-2px);
+}

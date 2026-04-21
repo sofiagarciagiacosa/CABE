@@ -1,16 +1,25 @@
 import Sidebar from "../components/Sidebar.jsx";
-import "../styles/style.css";
+import Topbar from "../components/Topbar.jsx";
 import { Outlet } from "react-router-dom";
 
-function DashboardLayout({ children }) {
+function DashboardLayout() {
   return (
     <div className="layout">
-      <Sidebar />
-      <Outlet />
 
-      <main className="content">
-        {children}
-      </main>
+      <Sidebar />
+
+      <div className="main">
+        <div className="content">
+
+          <Topbar />   {/* dentro */}
+
+          <div className="page">
+            <Outlet />
+          </div>
+
+        </div>
+      </div>
+
     </div>
   );
 }
