@@ -3,6 +3,8 @@ import {
   createUser,
   findAllUsers,
   findUserById,
+  updateUserByAdmin,
+  updateMyProfile,
 } from "../db/actions/usuarioActions.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { roleMiddleware } from "../middlewares/role.middleware.js";
@@ -62,7 +64,29 @@ router.get(
     }
   }
 );
-
+// admin edita usuarios
+router.put(
+  "/admin/:id",
+  authMiddleware,
+  roleMiddleware(["Admin"]),
+  async (req, res) => {
+    try {
+      const user = await updateUserByAdmin(req.params.id, req.body);
+      res.json(user);
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+);
+//usuario edita su perfil
+router.put("/me", authMiddleware, async (req, res) => {
+  try {
+    const user = await updateMyProfile(req.user.id, req.body);
+    res.json(user);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 
 
 export default router;

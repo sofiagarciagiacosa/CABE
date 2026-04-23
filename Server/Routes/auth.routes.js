@@ -13,9 +13,9 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ error: "Faltan datos" });
     }
 
-    const user = await Usuario.findOne({ email: email.toLowerCase() }).populate(
-      "rol",
-    );
+    const user = await Usuario.findOne({ email: email.toLowerCase() })
+      .select("+password") //  IMPORTANTE
+      .populate("rol");
 
     if (!user) {
       return res.status(401).json({ error: "Credenciales inválidas" });
@@ -41,6 +41,7 @@ router.post("/login", async (req, res) => {
 
     res.status(200).json({ token });
   } catch (error) {
+    console.error("LOGIN ERROR:", error); // 👈 agregá esto
     res.status(500).json({ error: error.message });
   }
 });
