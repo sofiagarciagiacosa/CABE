@@ -1,8 +1,9 @@
-
+import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utils/auth";
 
 function ProfileHeader() {
   const user = getUser();
+  const navigate = useNavigate();
 
   const initials = user
     ? `${user?.nombre?.[0] || ""}${user?.apellido?.[0] || ""}`.toUpperCase()
@@ -28,7 +29,7 @@ function ProfileHeader() {
           {user?.email}
         </span>
 
-        <button className="edit-profile-btn">
+        <button className="edit-profile-btn" onClick={() => navigate("/perfil/editar")}>
           Editar Perfil
         </button>
       </div>

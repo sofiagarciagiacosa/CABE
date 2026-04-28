@@ -5,7 +5,7 @@ function UsersHeader({ onAddUser }) {
       <div>
         <h2 className="users-title">Gestión de usuarios</h2>
         <p className="users-subtitle">
-          Administra los miembros de tu equipo y su información
+          Administra a los miembros de tu equipo
         </p>
       </div>
 

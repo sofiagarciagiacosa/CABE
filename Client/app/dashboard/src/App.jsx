@@ -7,6 +7,7 @@ import LoginPage from "./pages/auth/LoginPage.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
 import ProfilePage from "./pages/profile/ProfilePage.jsx";
+import EditProfilePage from "./components/profile/EditProfilePage.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +33,10 @@ function App() {
           <Route path="clientes" element={<div />} />
           <Route path="formularios" element={<div />} />
           <Route path="estadisticas" element={<div />} />
-          <Route path="perfil" element={<ProfilePage />} />
+          <Route path="perfil">
+            <Route index element={<ProfilePage />} />
+            <Route path="editar" element={<EditProfilePage />} />
+          </Route>
         </Route>
 
       </Routes>

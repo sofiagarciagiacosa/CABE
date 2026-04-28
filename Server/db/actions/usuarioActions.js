@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 
 // Crear usuario
 export const createUser = async (data) => {
-  const { nombre, apellido, email, password, rol, bio, avatar, puesto } = data;
+  const { nombre, apellido, email, password, rol, bio, avatar, puesto, activo } = data;
 
   try {
     await connectDB();
@@ -25,6 +25,7 @@ export const createUser = async (data) => {
       bio,
       avatar,
       puesto,
+      activo,
     });
 
     return user;
@@ -72,9 +73,34 @@ export const updateUserByAdmin = async (id, data) => {
   try {
     await connectDB();
 
-    return await Usuario.findByIdAndUpdate(id, data, { new: true }).select(
-      "-password",
-    );
+    const allowedFields = [
+      "nombre",
+      "apellido",
+      "email",
+      "rol",
+      "puesto",
+      "activo",
+      "password",
+    ];
+
+    const updateData = {};
+
+    for (let key of allowedFields) {
+      if (data[key] !== undefined) {
+        updateData[key] = data[key];
+      }
+    }
+
+    // 👉 si viene password → hashear
+    if (data.password) {
+      updateData.password = await bcrypt.hash(data.password, 10);
+    }
+
+    return await Usuario.findByIdAndUpdate(id, updateData, {
+      new: true,
+    })
+      .select("-password")
+      .populate("rol");
   } catch (error) {
     throw new Error(error.message);
   }

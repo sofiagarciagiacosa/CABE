@@ -19,10 +19,10 @@ router.post(
   authMiddleware,
   roleMiddleware(["Admin"]),
   async (req, res) => {
-    const { nombre, apellido, email, password, rol } = req.body;
+    const { nombre, apellido, email, password, puesto, rol, activo } = req.body;
 
     try {
-      const result = await createUser({ nombre, apellido, email, password, rol });
+      const result = await createUser({ nombre, apellido, email, password, puesto, rol, activo });
       res.status(201).json({ message: "Usuario creado correctamente", result });
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -87,6 +87,19 @@ router.put("/me", authMiddleware, async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+router.delete(
+  "/admin/:id",
+  authMiddleware,
+  roleMiddleware(["Admin"]),
+  async (req, res) => {
+    try {
+      await Usuario.findByIdAndDelete(req.params.id);
+      res.json({ message: "Usuario eliminado" });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+  },
+);
 
 
 export default router;

@@ -61,7 +61,7 @@
 .profile-email {
     font-family: "Alexandria", sans-serif;
     font-weight: 300;
-    color: #585858;
+    color: #888;
     font-size: 15px;
 }
 
@@ -71,11 +71,11 @@
     padding: 8px 18px;
     background: white;
     border: 1px solid #8C8888;
-    border-radius: 10px;
+    border-radius: 50px;
 
     font-family: "Alexandria", sans-serif;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.09em;
     color: #585858;
 
     cursor: pointer;
@@ -104,7 +104,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    padding: 10px 5px;
 }
 .users-section{
     padding: 8px;
@@ -113,15 +113,17 @@
     font-family: "Alexandria";
     font-weight: 600;
     letter-spacing: -0.03em;
-    font-size: 23px;
+    font-size: 24px;
     margin-top: 10px;
+    margin-bottom: 3px;
 }
 
 .users-subtitle {
-    color: #585858;
-    font-family: "Alexandria";
-    font-weight: 300;
-    font-size: 15px;
+    color: #888;
+    font-family: "DM Sans";
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.04em;
 }
 
 /* BOTÓN */
@@ -129,12 +131,12 @@
     background: #FF3231;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 50px;
     padding: 12px 24px;
     font-family: "Alexandria";
-    letter-spacing: 0.10em;
+    letter-spacing: 0.09em;
     transition: 0.2s;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -146,35 +148,84 @@
 /* TABLA */
 .users-table {
     margin-top: 20px;
+    width: 100%;
+    overflow-x: auto; /* 👈 evita romper en pantallas chicas */
 }
 
 .table-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     background: #f5f5f5;
-    padding: 14px;
-    border-radius: 12px;
+    padding: 12px 14px;
+    border-radius: 50px;
+    letter-spacing: 0.04em;
 
     font-family: "DM Sans";
     font-weight: 600;
-    color: #585858;
-    font-size: 13px;
+    color: #888;
+    font-size: 12px;
+    grid-template-columns:
+            1.5fr
+            /* Usuario */
+            2fr
+            /* Email */
+            1.2fr
+            /* Rol */
+            1.5fr
+            /* Puesto */
+            1fr
+            /* Estado */
+            1fr
+            /* Acciones */
+            1.2fr;
+        /* Fecha */
 }
 
 .table-row {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    padding: 14px;
+    padding: 12px 12px;
 
     border-bottom: 1px solid #eee;
 
     font-family: "DM Sans";
-    font-size: 14px;
+    font-size: 13px;
     color: #585858;
     transition: 0.2s;
+    grid-template-columns:
+            1.5fr
+            /* Usuario */
+            2fr
+            /* Email */
+            1.2fr
+            /* Rol */
+            1.5fr
+            /* Puesto */
+            1fr
+            /* Estado */
+            1fr
+            /* Acciones */
+            1.2fr;
+        /* Fecha */
+}
+.table-row span,
+.table-header span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 .table-row:hover {
     background: #fafafa;
+    transform: translateY(-0.5px);
+}
+.table-row {
+    align-items: center;
+}
+
+.table-header {
+    align-items: center;
 }
 .status-cell {
     display: flex;
@@ -200,19 +251,94 @@
 .actions-cell {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 6px;
 }
 
-.actions-cell i {
-    color: #585858;
+.action-btn {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
     cursor: pointer;
+
     transition: 0.2s;
+}
+
+/* EDIT */
+.action-btn.edit:hover {
+    background: #f5f5f5;
+}
+
+/* DELETE */
+.action-btn.delete:hover {
+    background: #fff1f1;
+}
+
+/* SAVE */
+.action-btn.save {
+    background: #f3f3f3;
+    font-size: 13px;
+}
+
+.action-btn.save:hover {
+    background: #e5e5e5;
+}
+
+/* CANCEL */
+.action-btn.cancel {
+    background: #f3f3f3;
+}
+
+.action-btn.cancel:hover {
+    background: #e5e5e5;
 }
 
 /* hover suave */
 .actions-cell i:hover {
-    transform: translateY(-2px);
     opacity: 0.7;
+}
+/* tabla usuarios editable */
+.table-row input {
+    height: 36px;
+    padding: 0 10px;
+    gap: 6px;
+
+    border-radius: 10px;
+    border: 1px solid #ddd;
+
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #585858;
+
+    background: white;
+    transition: 0.2s;
+}
+
+.table-row input:hover {
+    background: #fafafa;
+}
+
+.table-row input:focus {
+    outline: none;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+}
+.select-container {
+    position: relative;
+    width: 100%;
+}
+
+/* iconos acciones */
+.actions-cell i.bi-check {
+    color: #22c55e;
+}
+
+.actions-cell i.bi-x {
+    color: #ef4444;
 }
 /* OVERLAY */
 .modal-overlay {
@@ -255,33 +381,43 @@
 .modal-close {
     background: transparent;
     border: none;
-    font-size: 18px;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
     cursor: pointer;
+
     border-radius: 50%;
-    padding: 5px;
+    transition: 0.2s;
 }
 
 .modal-close:hover {
     background: #f2f2f2;
+    transform: translateY(-1px);
 }
 
 /* DIVIDER */
 .modal-divider {
-    height: 0.8px;
-    background: #eaeaea;
-    margin: 12px 0;
+    height: 1px;
+    background: #eeeeee;
+    margin: 16px 0;
 }
 
 /* FORM */
 .user-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
 .form-row {
     display: flex;
-    gap: 20px;
+    gap: 18px;
 }
 
 .form-group {
@@ -294,18 +430,48 @@
     font-family: "DM Sans";
     font-weight: 600;
     margin-bottom: 4px;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.form-group input {
-    padding: 8px 10px;
+/* BASE INPUT (unifica TODO) */
+.form-group input,
+.select-trigger {
+    height: 38px;
+    /* 👈 clave: altura consistente */
+    padding: 0 12px;
+
     border-radius: 10px;
     border: 1px solid #ddd;
-}
 
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #585858;
+
+    background: white;
+    transition: all 0.2s ease;
+}
+.form-group input:hover,
+.select-trigger:hover {
+    background: #fafafa;
+}
+.form-group input:focus,
+.select-trigger:focus-within {
+    outline: none;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+}
+.select-container {
+    position: relative;
+    width: 100%;
+}
 /* PASSWORD */
 .password-wrapper {
     position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 35px;
 }
 
 .password-wrapper i {
@@ -313,9 +479,10 @@
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+    font-size: 14px;
+    color: #888;
     cursor: pointer;
 }
-
 /* SUGERENCIA */
 .suggest-password {
     font-size: 12px;
@@ -325,39 +492,99 @@
 }
 
 /* SELECT */
-.select-wrapper {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 13px;
-}
-.select-input {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    font-family: "DM Sans";
-    color: #585858;
-    cursor: pointer;
+/* CONTENEDOR */
+.form-group {
+    position: relative;
 }
 
+/* TRIGGER */
+.select-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #585858;
+
+    cursor: pointer;
+    background: white;
+    transition: 0.2s;
+}
+
+.select-trigger:hover {
+    background: #fafafa;
+}
+
+/* ICONO ROTACIÓN */
+.select-trigger i {
+    transition: 0.2s;
+}
+
+.select-trigger i.rotate {
+    transform: rotate(180deg);
+}
+
+/* DROPDOWN */
+.select-dropdown {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+    overflow: hidden;
+    z-index: 100;
+}
+
+/* OPCIONES */
+.select-option {
+    padding: 10px;
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #585858;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* 👇 HOVER GRIS/BEIGE */
+.select-option:hover {
+    background: #f5f5f5;
+    /* gris suave */
+    /* o: #f8f6f2 para beige */
+}
 /* STATUS */
 .status-toggle {
+    height: 38px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     cursor: pointer;
     font-size: 15px;
+    transition: 0.2s;
+    padding: 0 12px;
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #585858;
 }
+
 
 .status-toggle i.bi-toggle-on {
     color: #22c55e;
+    font-size: 17px;
 }
 
 .status-toggle i.bi-toggle-off {
     color: #ef4444;
+    font-size: 17px;
 }
 
 /* FOOTER */
@@ -370,10 +597,15 @@
 .cancel-btn {
     border: 1px solid #8C8888;
     background: white;
-    padding: 8px 22px;
-    border-radius: 10px;
-    font-size: 14px;
-    letter-spacing: 0.08em;
+    padding: 0px 20px;
+    border-radius: 50px;
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    height: 36px;
+    font-family: "Alexandria";
+    font-weight: 600;
+    color: #585858;
+    border-color: #585858;
 }
 
 .cancel-btn:hover {
@@ -385,10 +617,13 @@
     background: #FF3231;
     color: white;
     border: none;
-    padding: 8px 22px;
-    border-radius: 10px;
-    font-size: 14px;
-    letter-spacing: 0.08em;
+    padding: 0px 20px;
+    border-radius: 50px;
+    font-size: 12px;
+    letter-spacing: 0.09em;
+    height: 36px;
+    font-family: "Alexandria";
+    font-weight: 600;
 }
 
 .save-btn:hover {
@@ -398,6 +633,102 @@
 .modal-card {
     animation: fadeIn 0.2s ease;
 }
+::placeholder {
+    color: #aaa;
+    font-weight: 300;
+}
+input {
+    caret-color: #555;
+}
+
+/* edit PERFIL */
+.edit-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.profile-avatar.small {
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+}
+
+.profile-avatar.large {
+    width: 110px;
+    height: 110px;
+    font-size: 28px;
+}
+
+/* TITULO */
+.profile-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.divider {
+    color: #ccc;
+}
+
+.edit-text {
+    color: #999;
+}
+
+/* CENTRADO FORM */
+.user-form.centered {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* AVATAR SECTION */
+.avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* BOTONES AVATAR */
+.btn-outline {
+    border: 1px solid #ccc;
+    background: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-outline:hover {
+    background: #f5f5f5;
+}
+
+.btn-grey {
+    background: #e5e5e5;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-grey:hover {
+    background: #d6d6d6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @keyframes fadeIn {
     from {

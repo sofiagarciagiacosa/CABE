@@ -29,7 +29,10 @@ function AddUserModal({ onClose, onCreated }) {
   }, []);
 
   const handleChange = (field, value) => {
-    setForm({ ...form, [field]: value });
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   const handleSave = async () => {
