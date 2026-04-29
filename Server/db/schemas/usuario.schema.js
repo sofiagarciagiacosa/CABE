@@ -28,10 +28,13 @@ const usuarioSchema = new Schema(
       ref: "rol",
     },
 
-    
     bio: {
       type: String,
       maxlength: 300,
+      default: "",
+    },
+    ubicacion: {
+      type: String,
       default: "",
     },
 

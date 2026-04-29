@@ -668,17 +668,17 @@ input {
 }
 
 .divider {
-    color: #ccc;
+    color: #585858;
 }
 
 .edit-text {
-    color: #999;
+    color: #585858;
 }
 
 /* CENTRADO FORM */
 .user-form.centered {
     max-width: 500px;
-    margin: 0 auto;
+    margin: 40px auto;
 }
 
 /* AVATAR SECTION */
@@ -689,34 +689,75 @@ input {
 }
 
 /* BOTONES AVATAR */
-.btn-outline {
-    border: 1px solid #ccc;
+.avatar-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn.btn-grey-outline {
+    border: 1px solid #8C8888;
     background: white;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
+    color: #585858;
+    border-radius: 50px;
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        font-family: "Alexandria";
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+        padding: 0 20px;
+        height: 36px;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
 }
 
-.btn-outline:hover {
-    background: #f5f5f5;
+.btn.btn-grey-outline:hover {
+    background: #f3f3f3;
+    transform: translateY(-2px);
 }
 
-.btn-grey {
+.btn.btn-grey-fill {
     background: #e5e5e5;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
+    color: #2f2f2f;
+    border: 1px solid #8C8888;
+    border-radius: 50px;
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        font-family: "Alexandria";
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+        padding: 0 20px;
+        height: 36px;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
 }
 
-.btn-grey:hover {
+.btn.btn-grey-fill:hover {
     background: #d6d6d6;
+    transform: translateY(-2px);
+}
+.btn-sm {
+    height: 30px;
+    padding: 0 14px;
+    font-size: 11px;
+}
+.btn:active {
+    transform: scale(0.97);
 }
 
-
-
+.profile-avatar img,
+.user-avatar img,
+.dropdown-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
 
 
 

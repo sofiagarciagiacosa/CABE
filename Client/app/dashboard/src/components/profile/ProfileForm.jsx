@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { getToken } from "../../utils/auth";
 
 function ProfileForm({ user }) {
   const [form, setForm] = useState(user);
   const [original] = useState(user);
+
+  const fileInputRef = useRef(null);
 
   const handleChange = (field, value) => {
     setForm((prev) => ({
@@ -12,8 +14,40 @@ function ProfileForm({ user }) {
     }));
   };
 
-  const hasChanges = JSON.stringify(form) !== JSON.stringify(original);
+  //  detectar cambios reales (mejor que JSON.stringify)
+  const hasChanges =
+    form.nombre !== original.nombre ||
+    form.apellido !== original.apellido ||
+    form.bio !== original.bio ||
+    form.ubicacion !== original.ubicacion ||
+    form.puesto !== original.puesto ||
+    form.avatar !== original.avatar ||
+    form.password;
 
+  // seleccionar imagen
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const preview = URL.createObjectURL(file);
+
+    setForm((prev) => ({
+      ...prev,
+      avatar: preview,     // preview
+      avatarFile: file     // archivo real
+    }));
+  };
+
+  //  borrar avatar
+  const handleRemoveAvatar = () => {
+    setForm((prev) => ({
+      ...prev,
+      avatar: "",
+      avatarFile: null
+    }));
+  };
+
+  // guardar
   const handleSave = async () => {
     if (!hasChanges) {
       alert("No hay cambios para guardar");
@@ -23,14 +57,55 @@ function ProfileForm({ user }) {
     const confirm = window.confirm("¿Guardar cambios?");
     if (!confirm) return;
 
-    await fetch("http://localhost:3000/usuario/me", {
-      method: "PUT",
-      headers: {
+    let avatarUrl = form.avatar;
+
+    //  subir imagen si hay nueva
+    if (form.avatarFile) {
+      const data = new FormData();
+      data.append("file", form.avatarFile);
+      data.append("upload_preset", "avatars");
+
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dknuvc4jb/image/upload",
+        {
+          method: "POST",
+          body: data
+        }
+      );
+
+      const result = await res.json();
+      avatarUrl = result.secure_url;
+    }
+
+    const res = await fetch("http://localhost:3000/usuario/me", {
+        method: "PUT",
+        headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${getToken()}`
-      },
-      body: JSON.stringify(form)
+        },
+        body: JSON.stringify({
+            nombre: form.nombre,
+            apellido: form.apellido,
+            bio: form.bio,
+            ubicacion: form.ubicacion,
+            puesto: form.puesto,
+            password: form.password,
+            avatar: avatarUrl
+        })
     });
+
+    const updatedUser = await res.json();
+
+    // actualizar localStorage
+    const normalizedUser = {
+    ...updatedUser,
+    rol: updatedUser.rol?.nombre || updatedUser.rol
+    };
+
+    localStorage.setItem("user", JSON.stringify(normalizedUser));
+
+    //  avisar a toda la app
+    window.dispatchEvent(new Event("userUpdated"));
 
     alert("Perfil actualizado");
   };
@@ -38,15 +113,41 @@ function ProfileForm({ user }) {
   return (
     <div className="user-form centered">
 
+      {/* INPUT FILE OCULTO */}
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleFileChange}
+      />
+
       {/* AVATAR */}
       <div className="avatar-section">
+
         <div className="profile-avatar large">
-          {form.nombre?.[0]}{form.apellido?.[0]}
+          {form.avatar ? (
+            <img src={form.avatar} alt="avatar" />
+          ) : (
+            `${form.nombre?.[0] || ""}${form.apellido?.[0] || ""}`
+          )}
         </div>
 
         <div className="avatar-actions">
-          <button className="btn-outline">Cambiar</button>
-          <button className="btn-grey">Borrar</button>
+          <button
+            className="btn btn-grey-outline btn-sm"
+            onClick={() => fileInputRef.current.click()}
+          >
+            Cambiar
+          </button>
+
+          <button
+            className="btn btn-grey-fill btn-sm"
+            disabled={!form.avatar}
+            onClick={handleRemoveAvatar}
+          >
+            Borrar
+          </button>
         </div>
       </div>
 
@@ -70,7 +171,7 @@ function ProfileForm({ user }) {
         />
       </div>
 
-      {/* EMAIL (NO editable 👈 recomendado) */}
+      {/* EMAIL */}
       <div className="form-group">
         <label>Email</label>
         <input value={form.email} disabled />
@@ -96,7 +197,7 @@ function ProfileForm({ user }) {
         />
       </div>
 
-      {/* ROL (solo visual 👈 importante) */}
+      {/* ROL */}
       <div className="form-group">
         <label>Rol</label>
         <input value={form.rol?.nombre} disabled />

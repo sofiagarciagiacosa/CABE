@@ -1,8 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utils/auth";
+import { useEffect, useState } from "react";
+
 
 function ProfileHeader() {
-  const user = getUser();
+  const [user, setUser] = useState(getUser());
+
+  useEffect(() => {
+    const updateUser = () => {
+      setUser(getUser());
+    };
+
+    window.addEventListener("userUpdated", updateUser);
+
+    return () => window.removeEventListener("userUpdated", updateUser);
+  }, []);
   const navigate = useNavigate();
 
   const initials = user
@@ -13,7 +25,11 @@ function ProfileHeader() {
     <div className="profile-header">
 
       <div className="profile-avatar">
-        {initials}
+        {user?.avatar ? (
+          <img src={user.avatar} alt="avatar" />
+        ) : (
+          initials
+        )}
       </div>
 
       <div className="profile-info">

@@ -30,6 +30,13 @@ function LoginPage() {
       }
 
       localStorage.setItem("token", data.token);
+      const normalizedUser = {
+        ...data.user, //  ESTO es lo correcto
+        id: data.user._id, // opcional pero recomendable
+        rol: data.user.rol?.nombre || data.user.rol
+      };
+      localStorage.setItem("user", JSON.stringify(normalizedUser));
+      
       navigate("/");
     } catch (error) {
       console.error(error);

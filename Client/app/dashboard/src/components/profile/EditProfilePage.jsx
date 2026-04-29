@@ -11,15 +11,22 @@ function EditProfilePage() {
 
   const fetchUser = async () => {
     const res = await fetch(
-      `http://localhost:3000/usuario/byId/${user.id}`,
-      {
+    `http://localhost:3000/usuario/byId/${user.id}`,
+    {
         headers: {
-          Authorization: `Bearer ${getToken()}`
+        Authorization: `Bearer ${getToken()}`
         }
-      }
+    }
     );
 
     const result = await res.json();
+
+    if (!res.ok) {
+    console.error(result.error);
+    setData({}); // evita loading infinito
+    return;
+    }
+
     setData(result);
   };
 
@@ -34,7 +41,11 @@ function EditProfilePage() {
       {/* HEADER */}
       <div className="edit-profile-header">
         <div className="profile-avatar small">
-          {data.nombre?.[0]}{data.apellido?.[0]}
+            {data?.avatar ? (
+                <img src={data.avatar} alt="avatar" />
+            ) : (
+                `${data.nombre?.[0]}${data.apellido?.[0]}`
+            )}
         </div>
 
         <h1 className="profile-name">
@@ -44,7 +55,6 @@ function EditProfilePage() {
         </h1>
       </div>
 
-      <div className="modal-divider" />
 
       <ProfileForm user={data} />
 

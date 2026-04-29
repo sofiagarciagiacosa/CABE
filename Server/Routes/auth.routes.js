@@ -14,7 +14,7 @@ router.post("/login", async (req, res) => {
     }
 
     const user = await Usuario.findOne({ email: email.toLowerCase() })
-      .select("+password") //  IMPORTANTE
+      .select("+password")
       .populate("rol");
 
     if (!user) {
@@ -30,8 +30,6 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign(
       {
         id: user._id,
-        nombre: user.nombre,
-        apellido: user.apellido,
         email: user.email,
         rol: user.rol.nombre,
       },
@@ -39,9 +37,17 @@ router.post("/login", async (req, res) => {
       { expiresIn: "8h" },
     );
 
-    res.status(200).json({ token });
+    //  devolver user completo (sin password)
+    const userData = await Usuario.findById(user._id)
+      .select("-password")
+      .populate("rol");
+
+    res.status(200).json({
+      token,
+      user: userData,
+    });
   } catch (error) {
-    console.error("LOGIN ERROR:", error); // 👈 agregá esto
+    console.error("LOGIN ERROR:", error);
     res.status(500).json({ error: error.message });
   }
 });

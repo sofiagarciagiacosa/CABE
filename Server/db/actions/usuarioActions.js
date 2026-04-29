@@ -111,11 +111,21 @@ export const updateMyProfile = async (id, data) => {
     await connectDB();
 
     // solo ciertos campos
-    const allowedFields = ["nombre", "apellido", "bio", "avatar", "password"];
+    const allowedFields = [
+      "nombre",
+      "apellido",
+      "bio",
+      "avatar",
+      "password",
+      "ubicacion",
+      "puesto",
+    ];
 
     const updateData = {};
     for (let key of allowedFields) {
-      if (data[key]) updateData[key] = data[key];
+      if (data[key] !== undefined) {
+        updateData[key] = data[key];
+      }
     }
 
     // hash si cambia password

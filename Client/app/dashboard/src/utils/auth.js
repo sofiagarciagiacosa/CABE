@@ -4,7 +4,18 @@ export const getToken = () => {
   return localStorage.getItem("token");
 };
 export const getUser = () => {
-  const token = localStorage.getItem("token");
+  const storedUser = localStorage.getItem("user");
+
+  if (storedUser) {
+    const user = JSON.parse(storedUser);
+
+    return {
+      ...user,
+      rol: user.rol?.nombre || user.rol,
+    };
+  }
+
+  const token = getToken();
   if (!token) return null;
 
   try {
@@ -12,6 +23,10 @@ export const getUser = () => {
   } catch {
     return null;
   }
+};
+
+export const setUser = (user) => {
+  localStorage.setItem("user", JSON.stringify(user));
 };
 export const isAuthenticated = () => {
   const token = getToken();
@@ -34,5 +49,6 @@ export const isAuthenticated = () => {
 };
 export const logoutAndRedirect = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("user");
   window.location.href = "/login";
 };

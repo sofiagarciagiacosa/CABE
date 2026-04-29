@@ -14,6 +14,13 @@ function UsersTable({ refresh }) {
         }
       });
       const data = await res.json();
+
+      if (!res.ok) {
+        console.error(data.error);
+        setUsers([]); //  evitar crash
+        return;
+      }
+
       setUsers(data);
     } catch (err) {
       console.error(err);

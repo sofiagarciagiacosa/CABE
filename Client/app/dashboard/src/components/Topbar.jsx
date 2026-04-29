@@ -1,8 +1,20 @@
 import { getUser, logoutAndRedirect } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 
 function Topbar() {
-  const user = getUser();
+  const [user, setUser] = useState(getUser());
+
+  useEffect(() => {
+    const updateUser = () => {
+      setUser(getUser());
+    };
+
+    window.addEventListener("userUpdated", updateUser);
+
+    return () => window.removeEventListener("userUpdated", updateUser);
+  }, []);
   const navigate = useNavigate();
 
   const initials = user
@@ -14,7 +26,7 @@ function Topbar() {
   };
 
   const goToProfile = () => {
-    navigate("/perfil"); // futura página
+    navigate("/perfil"); 
   };
 
   return (
@@ -27,7 +39,11 @@ function Topbar() {
         <div className="user-menu">
 
           <div className="user-avatar" onClick={goToProfile}>
-            {initials}
+            {user?.avatar ? (
+              <img src={user.avatar} alt="avatar" />
+            ) : (
+              initials
+            )}
           </div>
 
           {/* 👇 DROPDOWN */}
@@ -36,7 +52,13 @@ function Topbar() {
             <span className="dropdown-label">Actualmente en</span>
 
             <div className="dropdown-user" onClick={goToProfile}>
-              <div className="dropdown-avatar">{initials}</div>
+              <div className="dropdown-avatar">
+                {user?.avatar ? (
+                  <img src={user.avatar} alt="avatar" />
+                ) : (
+                  initials
+                )}
+              </div>
 
               <div className="dropdown-info">
                 <span className="name">
