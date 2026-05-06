@@ -52,6 +52,16 @@ const usuarioSchema = new Schema(
       type: String,
       default: "",
     },
+    
+    resetToken: {
+      type: String,
+      default: null,
+    },
+
+    resetTokenExpires: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,

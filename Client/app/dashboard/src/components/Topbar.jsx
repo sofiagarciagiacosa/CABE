@@ -2,43 +2,37 @@ import { getUser, logoutAndRedirect } from "../utils/auth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-
-function Topbar() {
+function Topbar({ setIsOpen }) {
   const [user, setUser] = useState(getUser());
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const updateUser = () => {
-      setUser(getUser());
-    };
-
+    const updateUser = () => setUser(getUser());
     window.addEventListener("userUpdated", updateUser);
-
     return () => window.removeEventListener("userUpdated", updateUser);
   }, []);
-  const navigate = useNavigate();
 
   const initials = user
     ? `${user?.nombre?.[0] || ""}${user?.apellido?.[0] || ""}`.toUpperCase()
     : "";
 
-  const handleLogout = () => {
-    logoutAndRedirect();
-  };
-
-  const goToProfile = () => {
-    navigate("/perfil"); 
-  };
-
   return (
     <div className="topbar">
-      <div className="topbar-right">
 
+      {/* 👈 IZQUIERDA (solo mobile) */}
+      <div className="topbar-left">
+        <i
+          className="bi bi-list"
+          onClick={() => setIsOpen(prev => !prev)}
+        ></i>
+      </div>
+
+      {/* DERECHA */}
+      <div className="topbar-right">
         <i className="bi bi-bell notification-icon"></i>
 
-        {/* 👇 WRAPPER PARA HOVER */}
         <div className="user-menu">
-
-          <div className="user-avatar" onClick={goToProfile}>
+          <div className="user-avatar" onClick={() => navigate("/perfil")}>
             {user?.avatar ? (
               <img src={user.avatar} alt="avatar" />
             ) : (
@@ -46,12 +40,10 @@ function Topbar() {
             )}
           </div>
 
-          {/* 👇 DROPDOWN */}
           <div className="user-dropdown">
-
             <span className="dropdown-label">Actualmente en</span>
 
-            <div className="dropdown-user" onClick={goToProfile}>
+            <div className="dropdown-user" onClick={() => navigate("/perfil")}>
               <div className="dropdown-avatar">
                 {user?.avatar ? (
                   <img src={user.avatar} alt="avatar" />
@@ -70,13 +62,11 @@ function Topbar() {
 
             <div className="dropdown-divider" />
 
-            <div className="dropdown-logout" onClick={handleLogout}>
+            <div className="dropdown-logout" onClick={logoutAndRedirect}>
               Cerrar sesión
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   );

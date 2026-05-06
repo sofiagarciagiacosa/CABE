@@ -12,6 +12,8 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [mode, setMode] = useState("login"); // 🔥 nuevo
+
   const handleLogin = async () => {
     try {
       const res = await fetch("http://localhost:3000/auth/login", {
@@ -30,24 +32,59 @@ function LoginPage() {
       }
 
       localStorage.setItem("token", data.token);
+
       const normalizedUser = {
-        ...data.user, //  ESTO es lo correcto
-        id: data.user._id, // opcional pero recomendable
-        rol: data.user.rol?.nombre || data.user.rol
+        ...data.user,
+        id: data.user._id,
+        rol: data.user.rol?.nombre || data.user.rol,
       };
+
       localStorage.setItem("user", JSON.stringify(normalizedUser));
-      
+
       navigate("/");
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    
-    const handleMouseMove = (e) => {
+  // 🔥 forgot password
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Ingresá tu email");
+      return;
+    }
 
-      
+    try {
+      const res = await fetch(
+        "http://localhost:3000/auth/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.error);
+        return;
+      }
+
+      alert(
+        "Te enviamos un email con un enlace para actualizar tu contraseña"
+      );
+
+      setMode("login");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
       const bg = bgRef.current;
       const card = cardRef.current;
 
@@ -70,9 +107,9 @@ function LoginPage() {
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () =>
+      window.removeEventListener("mousemove", handleMouseMove);
   }, []);
-  
 
   return (
     <div className="login-page">
@@ -85,6 +122,9 @@ function LoginPage() {
         password={password}
         setPassword={setPassword}
         handleLogin={handleLogin}
+        handleForgotPassword={handleForgotPassword} // 🔥 nuevo
+        mode={mode}
+        setMode={setMode}
       />
     </div>
   );

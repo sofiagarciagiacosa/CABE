@@ -135,7 +135,7 @@ export const updateMyProfile = async (id, data) => {
 
     return await Usuario.findByIdAndUpdate(id, updateData, {
       new: true,
-    }).select("-password");
+    }).select("-password").populate("rol");
   } catch (error) {
     throw new Error(error.message);
   }

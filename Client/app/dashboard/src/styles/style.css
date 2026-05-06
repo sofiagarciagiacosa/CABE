@@ -180,58 +180,103 @@ body {
 .dropdown-logout:hover {
     background: #f3f3f3;
 }
-/* ==== SIDEBAR ==== */
+/* ==== SIDEBAR BASE ==== */
 .sidebar {
-    flex: 0 0 230px; /* <== ancho fijo */
-    width: 225px;
-    max-width: 225px;
-    min-width: 225px;
-    background-color: #f9f8f7;  /* o usar #f8fafd */
-    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+
+    width: 230px;
+    background-color: #f9f8f7;
+
     padding: 20px 0;
-    z-index: 1;
-}
-/* LOGO */
-.sidebar-logo {
+    transition: all 0.3s ease;
+    z-index: 1000;
+
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+/* CLOSED */
+.sidebar.closed {
+    width: 80px;
+}
+.sidebar.closed span {
+    display: none;
+}
+/* ==== HEADER ==== */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
     margin-bottom: 40px;
 }
 
-.sidebar-logo img {
-    width: 120px;
+/* LOGO */
+.sidebar-logo {
+    cursor: pointer;
 }
-/* Links generales */
+
+.sidebar-logo img {
+    width: 110px;
+}
+
+/* ocultar logo cuando está cerrado */
+.sidebar.closed .sidebar-logo {
+    display: none;
+}
+
+/* TOGGLE */
+.sidebar-toggle {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #777;
+    cursor: pointer;
+}
+.sidebar-toggle:hover {
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* ==== NAV ==== */
 .sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
     color: #555;
     padding: 14px 20px;
-    margin: 0;
-    border: none;
-    transition: all 0.2s ease;
 
-    /* Bordes redondeados SOLO del lado izquierdo */
+    font-weight: 600;
+    /* 🔥 SIEMPRE NEGRITA */
     border-radius: 12px 0 0 12px;
+
+    transition: all 0.2s ease;
 }
-.sidebar .bi-person-circle{
-    font-size: 40px;
-    color: #555;
+
+/* ICONOS */
+.sidebar .nav-link i {
+    font-size: 18px;
+    transition: all 0.2s;
 }
-/* Hover */
+
+/* HOVER */
 .sidebar .nav-link:hover {
     background-color: #e7e7e7;
+    color: #000;
 }
 
-/* ==== ACTIVE → efecto de fusión + redondeado inverso ==== */
+.sidebar .nav-link:hover i {
+    color: #000;
+}
+
+/* ACTIVE */
 .sidebar .nav-link.active {
     background-color: #ffffff;
     color: #000;
-    font-weight: 600;
-
-    /* Bordes */
-    border-right: 1px solid #ffffff;
-    /* invisible pero evita quiebre */
-
-    /* "Mordida" invertida para fusionar con el main */
     position: relative;
 }
 
@@ -243,15 +288,22 @@ body {
     width: 12px;
     height: 100%;
     background: #ffffff;
-
-    /* Redondeado invertido del lado derecho */
     border-radius: 0 12px 12px 0;
 }
-/* Asegurar que los elementos internos no cambien el ancho del sidebar */
-.sidebar .user-icon,
-.sidebar .nav {
-    width: 100%;
-    display: block;
+
+/* TEXTO OCULTO */
+.sidebar.closed span {
+    display: none;
+}
+
+/* ==== MAIN AJUSTE ==== */
+.main {
+    margin-left: 230px;
+    transition: all 0.3s ease;
+}
+
+.sidebar.closed~.main {
+    margin-left: 80px;
 }
 /* CONTENIDO REAL */
 .page {
@@ -1071,8 +1123,10 @@ body {
 }
 
 
-
-
+/* ocultar botón ☰ en desktop */
+.topbar-left {
+    display: none;
+}
 
 @media (max-width: 900px) {
     .kanban-board {
@@ -1082,10 +1136,9 @@ body {
 
 
 
-
-
 /* responsive: en pantallas chicas mostramos en 1 columna (label encima del valor) */
 @media (max-width: 800px) {
+
     .project-info-container {
         grid-template-columns: 1fr;
     }
@@ -1098,5 +1151,56 @@ body {
 
     .project-info-container .value {
         margin-bottom: 12px;
+    }
+    /* TOPBAR */
+    .topbar {
+        justify-content: space-between;
+    }
+
+    .topbar-left {
+        display: block;
+    }
+
+    /* SIDEBAR OCULTO */
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    /* SIDEBAR CUANDO ABRE */
+    .sidebar.open.mobile {
+        transform: translateX(0);
+        width: 70px;
+        /* 👈 SOLO ICONOS */
+    }
+
+    /* overlay oscuro */
+    .sidebar.open.mobile::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 70px;
+        width: calc(100vw - 70px);
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.2);
+    }
+
+    /* SOLO ICONOS */
+    .sidebar .nav-link {
+        justify-content: center;
+        padding: 14px 0;
+    }
+
+    .sidebar .nav-link span {
+        display: none;
+    }
+
+    /* ocultar header (logo + toggle desktop) */
+    .sidebar-header {
+        display: none;
+    }
+
+    /* contenido ocupa todo */
+    .main {
+        margin-left: 0;
     }
 }

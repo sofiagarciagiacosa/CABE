@@ -7,11 +7,11 @@ function EditProfilePage() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-  if (!user?.id) return;
+  if (!user?._id) return;
 
   const fetchUser = async () => {
     const res = await fetch(
-    `http://localhost:3000/usuario/byId/${user.id}`,
+    `http://localhost:3000/usuario/byId/${user._id}`,
     {
         headers: {
         Authorization: `Bearer ${getToken()}`
@@ -31,7 +31,7 @@ function EditProfilePage() {
   };
 
   fetchUser();
-}, [user?.id]);
+}, [user?._id]);
 
   if (!data) return <p>Cargando...</p>;
 

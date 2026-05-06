@@ -8,6 +8,7 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import PublicRoute from "./routes/PublicRoute.jsx";
 import ProfilePage from "./pages/profile/ProfilePage.jsx";
 import EditProfilePage from "./components/profile/EditProfilePage.jsx";
+import ResetPasswordPage from "./pages/auth/ResetPasswordPage.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -17,7 +18,14 @@ function App() {
         <Route path="/login" element={<PublicRoute>
           <LoginPage />
         </PublicRoute>} />
-
+        <Route
+          path="/reset-password"
+          element={
+            <PublicRoute>
+              <ResetPasswordPage />
+            </PublicRoute>
+          }
+        />
         {/* APP PROTEGIDA */}
         <Route
           path="/"

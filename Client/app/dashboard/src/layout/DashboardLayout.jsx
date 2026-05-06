@@ -1,17 +1,21 @@
+import { useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import Topbar from "../components/Topbar.jsx";
 import { Outlet } from "react-router-dom";
 
 function DashboardLayout() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="layout">
 
-      <Sidebar />
+      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <div className="main">
         <div className="content">
 
-          <Topbar />   {/* dentro */}
+          {/* 👇 le pasamos el toggle al topbar */}
+          <Topbar setIsOpen={setIsOpen} />
 
           <div className="page">
             <Outlet />
@@ -19,7 +23,6 @@ function DashboardLayout() {
 
         </div>
       </div>
-
     </div>
   );
 }

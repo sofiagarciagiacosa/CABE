@@ -200,7 +200,7 @@ function ProfileForm({ user }) {
       {/* ROL */}
       <div className="form-group">
         <label>Rol</label>
-        <input value={form.rol?.nombre} disabled />
+        <input value={form.rol?.nombre || form.rol || ""} disabled />
       </div>
 
       {/* PUESTO */}
