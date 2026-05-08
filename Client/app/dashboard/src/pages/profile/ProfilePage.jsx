@@ -8,7 +8,7 @@ function ProfilePage() {
   const user = getUser();
 
   return (
-    <div className="profile-page">
+    <div className="page profile-page">
       <ProfileHeader />
 
       {/* SOLO ADMIN */}

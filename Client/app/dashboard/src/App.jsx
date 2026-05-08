@@ -9,6 +9,8 @@ import PublicRoute from "./routes/PublicRoute.jsx";
 import ProfilePage from "./pages/profile/ProfilePage.jsx";
 import EditProfilePage from "./components/profile/EditProfilePage.jsx";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage.jsx";
+import ClientesPage from "./pages/clients/ClientsPage.jsx";
+
 function App() {
   return (
     <BrowserRouter>
@@ -38,7 +40,7 @@ function App() {
           <Route index element={<div />} />
           <Route path="proyectos" element={<ProjectsPage />} />
           <Route path="proyectos/:id" element={<ProjectPage />} />
-          <Route path="clientes" element={<div />} />
+          <Route path="clientes" element={<ClientesPage />} />
           <Route path="formularios" element={<div />} />
           <Route path="estadisticas" element={<div />} />
           <Route path="perfil">
