@@ -8,12 +8,12 @@ export const crearCliente = async (data) => {
 
 // Obtener todos
 export const obtenerClientes = async () => {
-  return await Cliente.find();
+  return await Cliente.find().populate("proyectos").sort({ createdAt: -1 });
 };
 
 // Obtener por ID
 export const obtenerClientePorId = async (id) => {
-  return await Cliente.findById(id);
+  return await Cliente.findById(id).populate("proyectos");
 };
 
 // Actualizar

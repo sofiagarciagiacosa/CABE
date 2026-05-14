@@ -1,29 +1,86 @@
+import { useEffect, useState } from "react";
+
 import ClienteRow from "./ClienteRow";
 
-const clientes = [
-  {
-    id: 1,
-    nombre: "Urban Group",
-    estado: "Cliente Activo",
-    rubro: "Inmobiliaria",
-    contacto: "info@urban.com",
-    proyectos: 3,
-    ultimaInteraccion: "Envío de presupuesto",
-    fechaAlta: "05/05/2026",
-  },
-  {
-    id: 2,
-    nombre: "Nova Studio",
-    estado: "Prospecto",
-    rubro: "Marketing",
-    contacto: "hola@nova.com",
-    proyectos: 1,
-    ultimaInteraccion: "Reunión inicial",
-    fechaAlta: "01/05/2026",
-  },
-];
-
 function ClientesTable() {
+
+  const [clientes, setClientes] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+
+    const fetchClientes = async () => {
+
+      try {
+
+        const res = await fetch("http://localhost:3000/cliente");
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Error al obtener clientes");
+        }
+
+        setClientes(data);
+
+      } catch (err) {
+
+        console.error(err);
+
+        setError("No se pudieron cargar los clientes");
+
+      } finally {
+
+        setLoading(false);
+      }
+    };
+
+    fetchClientes();
+
+  }, []);
+
+  // =========================
+  // LOADING
+  // =========================
+
+  if (loading) {
+
+    return (
+      <div className="clientes-empty">
+        Cargando clientes...
+      </div>
+    );
+  }
+
+  // =========================
+  // ERROR
+  // =========================
+
+  if (error) {
+
+    return (
+      <div className="clientes-error">
+        {error}
+      </div>
+    );
+  }
+
+  // =========================
+  // EMPTY
+  // =========================
+
+  if (clientes.length === 0) {
+
+    return (
+      <div className="clientes-empty">
+        Todavía no hay clientes registrados.
+      </div>
+    );
+  }
+
   return (
     <div className="clientes-table">
 
@@ -34,16 +91,17 @@ function ClientesTable() {
         <span>Rubro</span>
         <span>Contacto</span>
         <span>Proyectos</span>
-        <span>Última interacción</span>
         <span>Fecha alta</span>
 
       </div>
 
       {clientes.map((cliente) => (
+
         <ClienteRow
-          key={cliente.id}
+          key={cliente._id}
           cliente={cliente}
         />
+
       ))}
 
     </div>

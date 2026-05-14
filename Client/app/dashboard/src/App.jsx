@@ -10,6 +10,7 @@ import ProfilePage from "./pages/profile/ProfilePage.jsx";
 import EditProfilePage from "./components/profile/EditProfilePage.jsx";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage.jsx";
 import ClientesPage from "./pages/clients/ClientsPage.jsx";
+import ClientPage from "./pages/clients/ClientPage.jsx";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="proyectos" element={<ProjectsPage />} />
           <Route path="proyectos/:id" element={<ProjectPage />} />
           <Route path="clientes" element={<ClientesPage />} />
+          <Route path="clientes/:id" element={<ClientPage />} />
           <Route path="formularios" element={<div />} />
           <Route path="estadisticas" element={<div />} />
           <Route path="perfil">

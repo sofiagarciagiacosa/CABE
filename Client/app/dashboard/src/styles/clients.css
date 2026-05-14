@@ -1,7 +1,10 @@
 .clientes-page {
     width: 100%;
     max-width: 100%;
+
     overflow-x: hidden;
+
+    min-width: 0;
 }
 
 /* HEADER */
@@ -108,61 +111,80 @@
         justify-content: flex-start;
     }
 
-}
+}/* =========================
+   TABLE
+========================= */
+
+/* =========================
+   TABLE
+========================= */
+
 .clientes-table {
     width: 100%;
-    max-width: 100%;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
     margin-top: 18px;
+
+    border-radius: 22px;
 }
 
-.clientes-grid {
-    min-width: 900px;
+/* GRID */
 
+.clientes-grid {
     display: grid;
 
     grid-template-columns:
-        1.8fr 1.2fr 1.2fr 1.8fr 0.8fr 2fr 1fr;
+        2fr 1.1fr 1fr 1.7fr 80px 110px;
 
-    gap: 14px;
-}
-
-.table-header {
-    background: #f5f5f5;
-
-    padding: 12px 10px;
-
-    border-radius: 50px;
-
-    font-family: "DM Sans";
-    font-size: 12px;
-    font-weight: 600;
-
-    color: #888;
-
-    letter-spacing: 0.04em;
-}
-
-.table-row {
-    padding: 12px 10px;
-
-    border-bottom: 1px solid #eee;
-
-    transition: 0.2s;
-
-    font-family: "DM Sans";
-    font-size: 13px;
-    color: #585858;
+    column-gap: 12px;
 
     align-items: center;
 }
 
-.table-row:hover {
-    background: #fafafa;
+/* HEADER */
+
+.table-header {
+    padding: 14px 16px;
+
+    background: #f7f5f2;
+
+    border-radius: 18px;
+
+    margin-bottom: 8px;
+
+    font-family: "DM Sans";
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    color: #8a8a8a;
 }
+
+/* ROW */
+
+.table-row {
+    padding: 14px 16px;
+
+    border-radius: 16px;
+
+    transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #4f4f4f;
+
+    cursor: pointer;
+}
+
+/* HOVER */
+
+.table-row:hover {
+    background: #f8f6f2;
+}
+
+/* CELLS */
 
 .table-row span,
 .table-header span {
@@ -170,8 +192,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    display: flex;
-    align-items: center;
+    min-width: 0;
 }
 
 /* CLIENTE */
@@ -179,7 +200,14 @@
 .cliente-name-cell {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.cliente-name-cell span {
+    font-weight: 600;
+    color: #2f2f2f;
 }
 
 .cliente-logo {
@@ -188,7 +216,139 @@
 
     border-radius: 50%;
 
-    background: #eaeaea;
+    background: linear-gradient(135deg,
+            #ececec,
+            #dcdcdc);
 
     flex-shrink: 0;
+}
+
+/* CLIENTE MODAL */
+
+.cliente-modal {
+    overflow-y: auto;
+    
+}
+
+/* ACCORDION */
+
+.accordion-header {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: none;
+    border: none;
+
+    padding: 4px 0;
+
+    font-family: "Alexandria";
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.accordion-content {
+    margin-top: 18px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* TEXTAREA */
+
+.cliente-textarea {
+    min-height: 90px;
+
+    resize: vertical;
+
+    padding: 12px;
+
+    border-radius: 10px;
+    border: 1px solid #ddd;
+
+    font-family: "DM Sans";
+    font-size: 13px;
+}
+
+/* CONTACTOS */
+
+.add-contact-btn {
+    width: fit-content;
+
+    border: none;
+    background: #f5f5f5;
+
+    padding: 10px 14px;
+
+    border-radius: 50px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: "Alexandria";
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.contact-card {
+    border: 1px solid #eee;
+
+    border-radius: 14px;
+
+    padding: 16px;
+}
+
+.contact-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-contact-btn {
+    border: none;
+    background: none;
+
+    cursor: pointer;
+
+    color: #999;
+}
+.cliente-modal {
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: #d5d5d5 transparent;
+}
+
+/* CHROME */
+
+.cliente-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cliente-modal::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 20px;
+}
+
+.cliente-modal::-webkit-scrollbar-thumb {
+    background: #d5d5d5;
+    border-radius: 20px;
+}
+
+.cliente-modal::-webkit-scrollbar-thumb:hover {
+    background: #bdbdbd;
+}
+.form-error {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 4px;
+    font-family: "DM Sans";
 }

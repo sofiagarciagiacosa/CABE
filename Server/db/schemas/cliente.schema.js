@@ -4,7 +4,6 @@ const contactoSchema = new mongoose.Schema(
   {
     nombre: {
       type: String,
-      required: true,
       trim: true,
     },
 
@@ -81,7 +80,6 @@ const clienteSchema = new mongoose.Schema(
 
     email: {
       type: String,
-      required: true,
       unique: true,
       lowercase: true,
       trim: true,
@@ -161,6 +159,27 @@ const clienteSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    redes: {
+      instagram: {
+        type: String,
+        trim: true,
+      },
+
+      facebook: {
+        type: String,
+        trim: true,
+      },
+
+      linkedin: {
+        type: String,
+        trim: true,
+      },
+
+      tiktok: {
+        type: String,
+        trim: true,
+      },
+    },
 
     contactos: [contactoSchema],
 
@@ -168,7 +187,15 @@ const clienteSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   },
 );
+clienteSchema.virtual("proyectos", {
+  ref: "proyecto",
+  localField: "_id",
+  foreignField: "cliente",
+});
+
 
 export default mongoose.model("Cliente", clienteSchema);
