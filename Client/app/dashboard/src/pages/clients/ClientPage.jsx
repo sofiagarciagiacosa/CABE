@@ -48,11 +48,19 @@ function ClientPage() {
   }, [id]);
 
   if (loading) {
-    return <div>Cargando...</div>;
+    return (
+      <div className="client-loading">
+        Cargando cliente...
+      </div>
+    );
   }
 
   if (!cliente) {
-    return <div>Cliente no encontrado</div>;
+    return (
+      <div className="client-loading">
+        Cliente no encontrado
+      </div>
+    );
   }
 
   return (
@@ -64,9 +72,15 @@ function ClientPage() {
 
         <div className="client-left-column">
 
-          <ClientDetailsCard cliente={cliente} />
+          <ClientDetailsCard
+            cliente={cliente}
+            setCliente={setCliente}
+          />
 
-          <ClientContactsCard cliente={cliente} />
+          <ClientContactsCard
+            cliente={cliente}
+            setCliente={setCliente}
+          />
 
         </div>
 
@@ -78,9 +92,12 @@ function ClientPage() {
           />
 
           {activeTab === "actividad" && (
+
             <ClientActivitySection
               cliente={cliente}
+              setCliente={setCliente}
             />
+
           )}
 
         </div>

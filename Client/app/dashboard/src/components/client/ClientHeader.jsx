@@ -26,7 +26,28 @@ function ClientHeader({ cliente }) {
 
       <div className="client-hero">
 
-        <div className="client-hero-logo" />
+        <div className="client-hero-logo">
+
+          {cliente.logo ? (
+
+            <img
+              src={cliente.logo}
+              alt={cliente.nombre}
+            />
+
+          ) : (
+
+            <span>
+              {cliente.nombre
+                ?.split(" ")
+                .slice(0, 2)
+                .map((word) => word[0])
+                .join("")}
+            </span>
+
+          )}
+
+        </div>
 
         <div className="client-hero-info">
 

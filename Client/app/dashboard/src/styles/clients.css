@@ -210,17 +210,48 @@
     color: #2f2f2f;
 }
 
+/* LOGO */
+
 .cliente-logo {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
 
-    border-radius: 50%;
+    border-radius: 50px;
 
-    background: linear-gradient(135deg,
-            #ececec,
-            #dcdcdc);
+    border: 1px solid #e7e7e7;
+
+    background: #fafafa;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     flex-shrink: 0;
+}
+
+/* IMAGEN */
+
+.cliente-logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* FALLBACK */
+
+.cliente-logo span {
+    font-family: "Alexandria";
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #8c8888;
+
+    letter-spacing: -0.03em;
+
+    text-transform: uppercase;
 }
 
 /* CLIENTE MODAL */

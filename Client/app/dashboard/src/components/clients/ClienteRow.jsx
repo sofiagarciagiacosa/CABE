@@ -21,7 +21,28 @@ function ClienteRow({ cliente }) {
 
       <div className="cliente-name-cell">
 
-        <div className="cliente-logo" />
+        <div className="cliente-logo">
+
+          {cliente.logo ? (
+
+            <img
+              src={cliente.logo}
+              alt={cliente.nombre}
+            />
+
+          ) : (
+
+            <span>
+              {cliente.nombre
+                ?.split(" ")
+                .slice(0, 2)
+                .map((word) => word[0])
+                .join("")}
+            </span>
+
+          )}
+
+        </div>
 
         <span>{cliente.nombre}</span>
 
