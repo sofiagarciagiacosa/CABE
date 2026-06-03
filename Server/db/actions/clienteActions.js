@@ -13,12 +13,22 @@ export const obtenerClientes = async () => {
 
 // Obtener por ID
 export const obtenerClientePorId = async (id) => {
-  return await Cliente.findById(id).populate("proyectos");
+  return await Cliente.findById(id).populate("proyectos").populate({
+    path: "interacciones.usuario",
+    select: "nombre apellido avatar",
+  });
 };
 
 // Actualizar
 export const actualizarCliente = async (id, data) => {
-  return await Cliente.findByIdAndUpdate(id, data, { new: true });
+  return await Cliente.findByIdAndUpdate(id, data, {
+    new: true,
+  })
+    .populate("proyectos")
+    .populate({
+      path: "interacciones.usuario",
+      select: "nombre apellido avatar puesto",
+    });
 };
 
 // Eliminar

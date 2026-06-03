@@ -836,6 +836,361 @@
 .client-logo-row {
     margin-bottom: 15px;
 }
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.client-activity-section {
+    width: 100%;
+}
+
+.client-activity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 26px;
+}
+
+.client-activity-title {
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #423f3f;
+}
+
+/* =========================
+   INTERACTION FORM
+========================= */
+
+.client-interaction-form {
+    background: #fafafa;
+
+    border: 1px solid #e7e7e7;
+
+    border-radius: 24px;
+
+    padding: 22px;
+
+    margin-bottom: 28px;
+}
+
+/* =========================
+   TIMELINE
+========================= */
+
+.client-timeline {
+    position: relative;
+
+    padding-left: 48px;
+}
+
+.client-timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    bottom: 0;
+    left: 15px;
+
+    width: 1.5px;
+
+    background: #e5e5e5;
+}
+
+/* =========================
+   ITEM
+========================= */
+
+.client-interaction-item {
+    position: relative;
+
+    margin-bottom: 24px;
+}
+
+.client-interaction-item:last-child {
+    margin-bottom: 0;
+}
+
+/* ICON */
+
+.client-interaction-icon {
+    position: absolute;
+
+    left: -48px;
+    top: 22px;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 1px solid #dddddd;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2;
+}
+
+.client-interaction-icon i {
+    font-size: 14px;
+    color: #8c8888;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.client-interaction-card {
+    background: #fafafa;
+
+    border: 1px solid #ececec;
+
+    border-radius: 20px;
+
+    padding: 18px 20px;
+
+    transition: 0.18s ease;
+}
+
+.client-interaction-card:hover {
+    background: #f7f7f7;
+}
+
+/* TOP */
+
+.client-interaction-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+.client-interaction-type {
+    font-family: "DM Sans";
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #423f3f;
+}
+
+.client-interaction-date {
+    font-family: "DM Sans";
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #8c8888;
+}
+
+/* USER */
+
+.client-interaction-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.interaction-user-avatar {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #efefef;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.interaction-user-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.interaction-user-avatar span {
+    font-family: "DM Sans";
+    font-size: 11px;
+    font-weight: 700;
+
+    color: #7b7b7b;
+}
+
+.interaction-user-name {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 400;
+
+    color: #423f3f;
+}
+
+/* DESCRIPTION */
+
+.client-interaction-description {
+    font-family: "DM Sans";
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: #5f5f5f;
+
+    margin: 0;
+
+    white-space: pre-wrap;
+}
+/* =========================
+   INTERACTION FORM
+========================= */
+
+.interaction-form {
+    margin-bottom: 26px;
+}
+
+.interaction-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.interaction-form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* =========================
+   USER
+========================= */
+
+.interaction-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 14px;
+}
+
+.interaction-avatar {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: #f3f3f3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.interaction-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.interaction-avatar span {
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-weight: 700;
+
+    color: #7b7b7b;
+}
+
+.interaction-user-name {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 400;
+
+    color: #423F3F;
+}
+
+.interaction-description-label {
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #8C8888;
+
+    margin-bottom: 8px;
+}
+/* =========================
+   INTERACTION ACTIONS
+========================= */
+
+.client-interaction-card {
+    position: relative;
+}
+
+.interaction-card-actions {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    display: flex;
+    gap: 6px;
+
+    opacity: 0;
+
+    transition: 0.18s ease;
+}
+
+.client-interaction-card:hover .interaction-card-actions {
+    opacity: 1;
+}
+
+.interaction-icon-btn {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f5f5f5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+.interaction-icon-btn:hover {
+    background: #ececec;
+}
+
+.interaction-icon-btn i {
+    font-size: 12px;
+    color: #6f6f6f;
+}
+
+.interaction-icon-btn.delete:hover {
+    background: #f8efef;
+}
 /* =========================
    RESPONSIVE
 ========================= */
