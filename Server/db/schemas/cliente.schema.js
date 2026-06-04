@@ -64,6 +64,18 @@ const interaccionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "usuario",
     },
+    proyecto: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "proyecto",
+      default: null,
+    },
+    archivos: [
+      {
+        nombre: String,
+        url: String,
+        tipo: String,
+      },
+    ],
   },
   {
     timestamps: true,

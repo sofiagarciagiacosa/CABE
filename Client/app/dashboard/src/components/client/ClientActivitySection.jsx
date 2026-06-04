@@ -4,6 +4,7 @@ import {
 } from "react";
 
 import ClientTimeline from "./ClientTimeline";
+import ClientInteractionForm from "./ClientInteractionForm";
 
 import { getUser } from "../../utils/auth";
 
@@ -28,12 +29,15 @@ function ClientActivitySection({
     setInteracciones] =
     useState([]);
 
-  const [newInteraction,
-    setNewInteraction] =
-    useState({
-      tipo: "Llamada",
-      descripcion: "",
-    });
+  const [
+    newInteraction,
+    setNewInteraction,
+  ] = useState({
+    tipo: "Llamada",
+    descripcion: "",
+    proyecto: "",
+    archivos: [],
+  });
 
   useEffect(() => {
     setInteracciones(
@@ -45,6 +49,8 @@ function ClientActivitySection({
     setNewInteraction({
       tipo: "Llamada",
       descripcion: "",
+      proyecto: "",
+      archivos: [],
     });
 
     setIsEditing(false);
@@ -52,20 +58,95 @@ function ClientActivitySection({
 
   const handleSave = async () => {
     try {
+
       const user = getUser();
 
-      const nuevaInteraccion = {
-        ...newInteraction,
-        fecha: new Date(),
-        usuario:
-          user?._id || user?.id,
-      };
+      // =========================
+      // SUBIR ARCHIVOS CLOUDINARY
+      // =========================
 
-      const updated =
-        [
-          nuevaInteraccion,
-          ...interacciones,
-        ];
+      const uploadedFiles =
+        await Promise.all(
+
+          (
+            newInteraction
+              .archivos || []
+          ).map(
+            async (
+              archivo
+            ) => {
+
+              // si ya existe url
+              if (
+                archivo.url
+              ) {
+                return archivo;
+              }
+
+              const data =
+                new FormData();
+
+              data.append(
+                "file",
+                archivo.file
+              );
+
+              data.append(
+                "upload_preset",
+                "avatars"
+              );
+
+              const uploadRes =
+                await fetch(
+                  "https://api.cloudinary.com/v1_1/dknuvc4jb/auto/upload",
+                  {
+                    method:
+                      "POST",
+
+                    body: data,
+                  }
+                );
+
+              const uploadData =
+                await uploadRes.json();
+
+              return {
+                nombre:
+                  archivo.nombre,
+
+                url:
+                  uploadData.secure_url,
+
+                tipo:
+                  archivo.tipo,
+              };
+            }
+          )
+        );
+
+      // =========================
+      // NUEVA INTERACCIÓN
+      // =========================
+
+      const nuevaInteraccion =
+        {
+          ...newInteraction,
+
+          archivos:
+            uploadedFiles,
+
+          fecha:
+            new Date(),
+
+          usuario:
+            user?._id ||
+            user?.id,
+        };
+
+      const updated = [
+        nuevaInteraccion,
+        ...interacciones,
+      ];
 
       const res =
         await fetch(
@@ -78,10 +159,13 @@ function ClientActivitySection({
                 "application/json",
             },
 
-            body: JSON.stringify({
-              interacciones:
-                updated,
-            }),
+            body:
+              JSON.stringify(
+                {
+                  interacciones:
+                    updated,
+                }
+              ),
           }
         );
 
@@ -101,7 +185,9 @@ function ClientActivitySection({
       );
 
       handleCancel();
+
     } catch (error) {
+
       console.error(error);
     }
   };
@@ -156,75 +242,15 @@ function ClientActivitySection({
 
       {isEditing && (
 
-        <div className="client-card interaction-form">
+        <div className="client-card interaction-form-card">
 
-          <div className="interaction-form-group">
-
-            <span className="detail-label">
-              Tipo
-            </span>
-
-            <select
-              className="client-detail-input"
-              value={
-                newInteraction.tipo
-              }
-              onChange={(e) =>
-                setNewInteraction(
-                  (
-                    prev
-                  ) => ({
-                    ...prev,
-                    tipo:
-                      e.target
-                        .value,
-                  })
-                )
-              }
-            >
-              {TIPOS_INTERACCION.map(
-                (tipo) => (
-
-                  <option
-                    key={tipo}
-                    value={tipo}
-                  >
-                    {tipo}
-                  </option>
-
-                )
-              )}
-            </select>
-
-          </div>
-
-          <div className="interaction-form-group">
-
-            <span className="detail-label">
-              Descripción
-            </span>
-
-            <textarea
-              className="client-detail-textarea"
-              placeholder="Agregar detalles de la interacción..."
-              value={
-                newInteraction.descripcion
-              }
-              onChange={(e) =>
-                setNewInteraction(
-                  (
-                    prev
-                  ) => ({
-                    ...prev,
-                    descripcion:
-                      e.target
-                        .value,
-                  })
-                )
-              }
-            />
-
-          </div>
+          <ClientInteractionForm
+            form={newInteraction}
+            setForm={
+              setNewInteraction
+            }
+            cliente={cliente}
+          />
 
         </div>
 

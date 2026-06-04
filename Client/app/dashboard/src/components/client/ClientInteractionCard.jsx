@@ -1,14 +1,5 @@
 import { useState } from "react";
-
-const TIPOS_INTERACCION = [
-  "Llamada",
-  "Email",
-  "Reunión",
-  "WhatsApp",
-  "Presupuesto",
-  "Seguimiento",
-  "Otro",
-];
+import ClientInteractionForm from "./ClientInteractionForm";
 
 function ClientInteractionCard({
   interaccion,
@@ -27,6 +18,14 @@ function ClientInteractionCard({
       descripcion:
         interaccion.descripcion ||
         "",
+
+      proyecto:
+        interaccion.proyecto?._id ||
+        interaccion.proyecto ||
+        "",
+
+      archivos:
+        interaccion.archivos || [],
     });
 
   const usuario =
@@ -44,55 +43,144 @@ function ClientInteractionCard({
       : "?";
 
   // =========================
-  // EDIT
+  // SAVE
   // =========================
 
   const handleSave =
-    async () => {
-      try {
-        const updated =
-          cliente.interacciones.map(
-            (item) =>
-              item._id ===
-              interaccion._id
-                ? {
-                    ...item,
-                    ...form,
-                  }
-                : item
-          );
+  async () => {
 
-        const res =
-          await fetch(
-            `http://localhost:3000/cliente/${cliente._id}`,
-            {
-              method: "PUT",
+    try {
 
-              headers: {
-                "Content-Type":
-                  "application/json",
-              },
+      // =========================
+      // UPLOAD FILES
+      // =========================
 
-              body:
-                JSON.stringify(
+      const uploadedFiles =
+        await Promise.all(
+
+          (
+            form.archivos ||
+            []
+          ).map(
+            async (
+              archivo
+            ) => {
+
+              // ya subido
+              if (
+                archivo.url
+              ) {
+                return archivo;
+              }
+
+              const data =
+                new FormData();
+
+              data.append(
+                "file",
+                archivo.file
+              );
+
+              data.append(
+                "upload_preset",
+                "avatars"
+              );
+
+              const uploadRes =
+                await fetch(
+                  "https://api.cloudinary.com/v1_1/dknuvc4jb/auto/upload",
                   {
-                    interacciones:
-                      updated,
+                    method:
+                      "POST",
+
+                    body:
+                      data,
                   }
-                ),
+                );
+
+              const uploadData =
+                await uploadRes.json();
+
+              return {
+                nombre:
+                  archivo.nombre,
+
+                url:
+                  uploadData.secure_url,
+
+                tipo:
+                  archivo.tipo,
+              };
             }
-          );
+          )
+        );
 
-        const data =
-          await res.json();
+      // =========================
+      // UPDATE
+      // =========================
 
-        setCliente(data);
+      const updated =
+        cliente.interacciones.map(
+          (item) =>
+            item._id ===
+            interaccion._id
+              ? {
+                  ...item,
 
-        setIsEditing(false);
-      } catch (error) {
-        console.error(error);
+                  ...form,
+
+                  archivos:
+                    uploadedFiles,
+                }
+              : item
+        );
+
+      const res =
+        await fetch(
+          `http://localhost:3000/cliente/${cliente._id}`,
+          {
+            method:
+              "PUT",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify(
+                {
+                  interacciones:
+                    updated,
+                }
+              ),
+          }
+        );
+
+      const data =
+        await res.json();
+
+      if (!res.ok) {
+        throw new Error(
+          data.error
+        );
       }
-    };
+
+      setCliente(data);
+
+      setIsEditing(
+        false
+      );
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+    }
+  };
 
   // =========================
   // DELETE
@@ -140,6 +228,12 @@ function ClientInteractionCard({
         const data =
           await res.json();
 
+        if (!res.ok) {
+          throw new Error(
+            data.error
+          );
+        }
+
         setCliente(data);
       } catch (error) {
         console.error(error);
@@ -149,35 +243,11 @@ function ClientInteractionCard({
   return (
     <div className="client-interaction-card">
 
-      {!isEditing && (
-
-        <div className="interaction-card-actions">
-
-          <button
-            className="interaction-icon-btn"
-            onClick={() =>
-              setIsEditing(true)
-            }
-          >
-            <i className="bi bi-pencil" />
-          </button>
-
-          <button
-            className="interaction-icon-btn delete"
-            onClick={
-              handleDelete
-            }
-          >
-            <i className="bi bi-trash3" />
-          </button>
-
-        </div>
-
-      )}
-
       {!isEditing ? (
-
         <>
+
+          {/* TOP */}
+
           <div className="client-interaction-top">
 
             <span className="client-interaction-type">
@@ -195,6 +265,8 @@ function ClientInteractionCard({
             </span>
 
           </div>
+
+          {/* USER */}
 
           <div className="interaction-user">
 
@@ -229,6 +301,28 @@ function ClientInteractionCard({
 
           </div>
 
+          {/* PROJECT */}
+
+          {interaccion.proyecto && (
+
+            <div className="interaction-project">
+
+              <i className="bi bi-kanban" />
+
+              <span>
+                {
+                  interaccion
+                    .proyecto
+                    ?.nombre
+                }
+              </span>
+
+            </div>
+
+          )}
+
+          {/* DESCRIPTION */}
+
           <p className="interaction-description-label">
             Descripción de la interacción
           </p>
@@ -238,73 +332,84 @@ function ClientInteractionCard({
               interaccion.descripcion
             }
           </p>
-        </>
 
-      ) : (
+          {/* FILES */}
 
-        <>
-          <div className="interaction-form-group">
+          {interaccion.archivos
+            ?.length > 0 && (
 
-            <span className="detail-label">
-              Tipo
-            </span>
+            <div className="interaction-files-preview">
 
-            <select
-              className="client-detail-input"
-              value={form.tipo}
-              onChange={(e) =>
-                setForm(
-                  (
-                    prev
-                  ) => ({
-                    ...prev,
-                    tipo:
-                      e.target
-                        .value,
-                  })
-                )
-              }
-            >
-              {TIPOS_INTERACCION.map(
-                (tipo) => (
-                  <option
-                    key={tipo}
-                    value={tipo}
+              {interaccion.archivos.map(
+                (
+                  archivo,
+                  index
+                ) => (
+
+                  <a
+                    key={index}
+                    href={
+                      archivo.url
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                    className="interaction-file-chip"
                   >
-                    {tipo}
-                  </option>
+
+                    <div className="interaction-file-left">
+
+                      <i className="bi bi-paperclip" />
+
+                      <span>
+                        {
+                          archivo.nombre
+                        }
+                      </span>
+
+                    </div>
+
+                  </a>
+
                 )
               )}
-            </select>
+
+            </div>
+
+          )}
+
+          {/* ACTIONS */}
+
+          <div className="interaction-card-actions">
+
+            <button
+              className="interaction-icon-btn"
+              onClick={() =>
+                setIsEditing(true)
+              }
+            >
+              <i className="bi bi-pencil" />
+            </button>
+
+            <button
+              className="interaction-icon-btn delete"
+              onClick={
+                handleDelete
+              }
+            >
+              <i className="bi bi-trash3" />
+            </button>
 
           </div>
 
-          <div className="interaction-form-group">
+        </>
+      ) : (
+        <>
 
-            <span className="detail-label">
-              Descripción
-            </span>
-
-            <textarea
-              className="client-detail-textarea"
-              value={
-                form.descripcion
-              }
-              onChange={(e) =>
-                setForm(
-                  (
-                    prev
-                  ) => ({
-                    ...prev,
-                    descripcion:
-                      e.target
-                        .value,
-                  })
-                )
-              }
-            />
-
-          </div>
+          <ClientInteractionForm
+            form={form}
+            setForm={setForm}
+            cliente={cliente}
+          />
 
           <div className="client-actions-group">
 
@@ -329,8 +434,8 @@ function ClientInteractionCard({
             </button>
 
           </div>
-        </>
 
+        </>
       )}
 
     </div>

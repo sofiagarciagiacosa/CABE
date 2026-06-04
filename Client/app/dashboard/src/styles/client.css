@@ -1141,16 +1141,17 @@
 
 .client-interaction-card {
     position: relative;
+    padding: 18px 20px 40px;
 }
 
 .interaction-card-actions {
     position: absolute;
 
-    top: 16px;
-    right: 16px;
+    right: 18px;
+    bottom: 18px;
 
     display: flex;
-    gap: 6px;
+    gap: 8px;
 
     opacity: 0;
 
@@ -1190,6 +1191,163 @@
 
 .interaction-icon-btn.delete:hover {
     background: #f8efef;
+}
+/* =========================
+   INTERACTION FORM UI
+========================= */
+
+.interaction-form-card {
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 24px;
+    padding: 22px;
+    margin-bottom: 26px;
+}
+
+.interaction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.interaction-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* =========================
+   FILE UPLOAD
+========================= */
+
+.interaction-upload {
+    height: 54px;
+
+    border: 1.5px dashed #d8d8d8;
+    border-radius: 18px;
+
+    background: #fcfcfc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+.interaction-upload:hover {
+    background: #f7f7f7;
+    border-color: #cfcfcf;
+}
+
+.interaction-upload i {
+    font-size: 18px;
+    color: #8c8888;
+}
+
+.interaction-upload span {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 500;
+    color: #6d6d6d;
+}
+
+.interaction-upload input {
+    display: none;
+}
+
+/* =========================
+   FILE CHIPS
+========================= */
+
+.interaction-files-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 14px;
+}
+
+.interaction-file-chip {
+    height: 38px;
+    padding: 0 14px;
+
+    border-radius: 999px;
+
+    background: #f3f3f3;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.interaction-file-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.interaction-file-left i {
+    color: #8c8888;
+}
+
+.interaction-file-chip span {
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #555;
+}
+
+.interaction-file-chip button {
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 18px;
+    color: #8c8888;
+}
+
+/* =========================
+   PROJECT TAG
+========================= */
+
+.interaction-project {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    background: #f3f3f3;
+
+    margin-bottom: 16px;
+}
+
+.interaction-project i {
+    color: #7d7d7d;
+}
+
+.interaction-project span {
+    font-family: "DM Sans";
+    font-size: 13px;
+    color: #5a5a5a;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .interaction-grid {
+        grid-template-columns: 1fr;
+    }
+
 }
 /* =========================
    RESPONSIVE
