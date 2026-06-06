@@ -40,6 +40,19 @@ export const findTareaById = async (id) => {
     throw new Error("Error al buscar tarea: " + error.message);
   }
 };
+export const findTareasByProyecto = async (proyectoId) => {
+  try {
+    await connectDB();
+
+    const res = await Tarea.find({
+      idProyecto: proyectoId,
+    }).populate("idEstado");
+
+    return res;
+  } catch (error) {
+    throw new Error("Error al buscar tareas del proyecto: " + error.message);
+  }
+};
 export const updateTarea = async (id, data) => {
   try {
     await connectDB();

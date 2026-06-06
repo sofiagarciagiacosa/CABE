@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import {
+  useParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 import ProjectDescription from "../../components/projects/ProjectDescription";
 import KanbanBoard from "../../components/kanban/KanbanBoard";
@@ -8,6 +12,11 @@ import ProjectModal from "../../components/projects/ProjectModal";
 
 function ProjectPage() {
   const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const clienteId =
+    location.state?.clienteId;
 
   const [project, setProject] = useState(null);
   const [columns, setColumns] = useState([]);
@@ -21,7 +30,7 @@ function ProjectPage() {
   const [showProjectModal, setShowProjectModal] = useState(false);
   const [projectToEdit, setProjectToEdit] = useState(null);
 
-  // ✅ FORM BIEN INICIALIZADO
+  // FORM BIEN INICIALIZADO
   const initialForm = {
     descripcion: "",
     idUsuario: "",
@@ -35,7 +44,16 @@ function ProjectPage() {
   const [estadoSeleccionado, setEstadoSeleccionado] = useState(null);
   const [draggedTaskId, setDraggedTaskId] = useState(null);
 
-  // 🔥 función reutilizable para refrescar kanban
+  const handleBack = () => {
+    if (clienteId) {
+      navigate(`/clientes/${clienteId}`);
+      return;
+    }
+
+    navigate("/proyectos");
+  };
+
+  //  función reutilizable para refrescar kanban
   const reloadKanban = async () => {
     const res = await fetch("http://localhost:3000/tarea/all");
     const tareas = await res.json();
@@ -78,7 +96,7 @@ function ProjectPage() {
     );
   };
 
-  // ✅ cargar datos
+  //  cargar datos
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -120,7 +138,7 @@ function ProjectPage() {
             .join(", ");
 
         setProject({
-            _id: projectData._id, // 🔥 IMPORTANTE
+            _id: projectData._id, //  IMPORTANTE
             nombre: projectData.nombre,
             descripcion: projectData.descripcion,
             cliente: projectData.cliente?.nombre,
@@ -132,7 +150,7 @@ function ProjectPage() {
             responsablesNombres: responsablesNombres
         });
 
-        // 🔥 usar misma lógica de reload
+        //  usar misma lógica de reload
         const tareasProyecto = tareasData.filter(
           (t) => t.idProyecto._id === id
         );
@@ -225,7 +243,7 @@ function ProjectPage() {
 
       let estadoId = form.idEstado;
 
-        // 🔥 SI NO HAY ESTADO → usar estadoSeleccionado (kanban)
+        //  SI NO HAY ESTADO → usar estadoSeleccionado (kanban)
         if (!estadoId && estadoSeleccionado) {
         const estado = estados.find(
             (e) =>
@@ -234,7 +252,7 @@ function ProjectPage() {
         estadoId = estado?._id;
         }
 
-        // 🔥 SI SIGUE SIN HABER → usar el PRIMERO (como hacía el HTML)
+        // SI SIGUE SIN HABER → usar el PRIMERO (como hacía el HTML)
         if (!estadoId && estados.length > 0) {
         estadoId = estados[0]._id;
         }
@@ -271,7 +289,7 @@ function ProjectPage() {
     }
   };
 
-  // ✅ DRAG
+  //  DRAG
   const handleDragStart = (taskId) => {
     setDraggedTaskId(taskId);
   };
@@ -302,7 +320,29 @@ function ProjectPage() {
   if (!project) return <div>Loading...</div>;
 
   return (
-    <main className="page">
+    <main className="project-page">
+      {/* TOP BAR */}
+
+      <div className="client-topbar">
+
+        <button
+          className="client-back-btn"
+          onClick={handleBack}
+        >
+          <i className="bi bi-arrow-left" />
+        </button>
+
+        <span className="client-page-label">
+
+          {clienteId
+            ? "Perfil del Cliente"
+            : "Proyectos"}
+
+        </span>
+
+      </div>
+
+      <div className="client-divider" />
       <div className="project-page-header d-flex justify-content-between align-items-center mb-4">
         <h1 className="projects-title">{project.nombre}</h1>
 
@@ -339,7 +379,7 @@ function ProjectPage() {
 
       <KanbanBoard
         columns={columns}
-        onAddTask={handleAddTask} // 🔥 listo para usar desde columnas
+        onAddTask={handleAddTask} //  listo para usar desde columnas
         onTaskClick={handleTaskClick}
         onDragStart={handleDragStart}
         onDrop={handleDrop}

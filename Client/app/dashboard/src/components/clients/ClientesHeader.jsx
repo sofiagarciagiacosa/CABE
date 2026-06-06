@@ -1,9 +1,13 @@
 import { useState } from "react";
 import AddClienteModal from "./AddClienteModal";
 
-function ClientesHeader() {
+function ClientesHeader({
+  activeTab,
+  setActiveTab,
+}) {
 
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] =
+    useState(false);
 
   return (
     <>
@@ -17,11 +21,29 @@ function ClientesHeader() {
 
           <div className="clientes-tabs">
 
-            <button className="clientes-tab active">
+            <button
+              className={`clientes-tab ${
+                activeTab === "lista"
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() =>
+                setActiveTab("lista")
+              }
+            >
               Lista
             </button>
 
-            <button className="clientes-tab">
+            <button
+              className={`clientes-tab ${
+                activeTab === "tablero"
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() =>
+                setActiveTab("tablero")
+              }
+            >
               Tablero
             </button>
 
@@ -29,7 +51,9 @@ function ClientesHeader() {
 
           <button
             className="save-btn"
-            onClick={() => setOpenModal(true)}
+            onClick={() =>
+              setOpenModal(true)
+            }
           >
             Agregar Cliente
           </button>
@@ -40,7 +64,9 @@ function ClientesHeader() {
 
       {openModal && (
         <AddClienteModal
-          onClose={() => setOpenModal(false)}
+          onClose={() =>
+            setOpenModal(false)
+          }
         />
       )}
     </>

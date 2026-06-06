@@ -6,7 +6,7 @@ import ClientDetailsCard from "../../components/client/ClientDetailsCard";
 import ClientContactsCard from "../../components/client/ClientContactsCard";
 import ClientTabs from "../../components/client/ClientTabs";
 import ClientActivitySection from "../../components/client/ClientActivitySection";
-
+import ClientProjectsSection from "../../components/client/ClientProjectsSection";
 import "../../styles/client.css";
 
 function ClientPage() {
@@ -99,6 +99,14 @@ function ClientPage() {
             />
 
           )}
+          {
+            activeTab ===
+              "proyectos" && (
+                <ClientProjectsSection
+                  cliente={cliente}
+                />
+            )
+          }
 
         </div>
 

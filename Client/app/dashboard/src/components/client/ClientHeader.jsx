@@ -1,23 +1,21 @@
 import { useNavigate } from "react-router-dom";
 
 function ClientHeader({ cliente }) {
-
   const navigate = useNavigate();
 
   return (
     <>
-
       <div className="client-topbar">
 
         <button
           className="client-back-btn"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/clientes")}
         >
           <i className="bi bi-arrow-left" />
         </button>
 
         <span className="client-page-label">
-          Perfil del Cliente
+          Clientes
         </span>
 
       </div>
@@ -27,16 +25,12 @@ function ClientHeader({ cliente }) {
       <div className="client-hero">
 
         <div className="client-hero-logo">
-
           {cliente.logo ? (
-
             <img
               src={cliente.logo}
               alt={cliente.nombre}
             />
-
           ) : (
-
             <span>
               {cliente.nombre
                 ?.split(" ")
@@ -44,19 +38,14 @@ function ClientHeader({ cliente }) {
                 .map((word) => word[0])
                 .join("")}
             </span>
-
           )}
-
         </div>
 
         <div className="client-hero-info">
-
           <h1>{cliente.nombre}</h1>
-
         </div>
 
       </div>
-
     </>
   );
 }

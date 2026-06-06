@@ -572,6 +572,10 @@ body {
     background-color: #ddd;
 }
 /* ==== PÁGINA DE CADA PROYECTO ==== */
+.project-page {
+    display: flex;
+    flex-direction: column;
+}
 .project-page-header {
     margin-top: 10px;
 }

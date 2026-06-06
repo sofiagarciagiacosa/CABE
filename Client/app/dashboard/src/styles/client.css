@@ -1337,7 +1337,455 @@
     font-size: 13px;
     color: #5a5a5a;
 }
+/* =========================
+   CLIENT PROJECTS
+========================= */
 
+.client-projects-section {
+    width: 100%;
+}
+.client-projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 28px;
+}
+
+.client-projects-title {
+    font-family: "DM Sans";
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #423f3f;
+
+    margin: 0 0 4px;
+}
+
+.client-projects-count {
+    font-family: "DM Sans";
+    font-size: 14px;
+
+    color: #8c8888;
+}
+.client-projects-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill,
+            minmax(280px,
+                1fr));
+
+    gap: 18px;
+}
+.client-project-card {
+    background: #fafafa;
+
+    border: 1px solid #ececec;
+
+    border-radius: 24px;
+
+    padding: 22px;
+
+    cursor: pointer;
+
+    transition: 0.18s ease;
+}
+
+.client-project-card:hover {
+    background: #f7f7f7;
+
+    transform: translateY(-2px);
+}
+.client-project-top {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 14px;
+}
+
+.client-project-name {
+    font-family: "Alexandria";
+    font-size: 17px;
+    font-weight: 600;
+
+    color: #cbbb2a;
+
+    margin: 0;
+}
+
+.client-project-top i {
+    color: #8c8888;
+}
+
+.client-project-description {
+    font-family: "DM Sans";
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    color: #5f5f5f;
+
+    margin: 0;
+}
+.client-projects-empty {
+    height: 240px;
+
+    border: 1px dashed #dddddd;
+    border-radius: 24px;
+
+    background: #fafafa;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.client-projects-empty i {
+    font-size: 28px;
+    color: #bdbdbd;
+
+    margin-bottom: 12px;
+}
+
+.client-projects-empty h3 {
+    font-family: "DM Sans";
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #555;
+
+    margin-bottom: 6px;
+}
+
+.client-projects-empty p {
+    font-family: "DM Sans";
+    font-size: 14px;
+
+    color: #8c8888;
+
+    max-width: 280px;
+}
+/* =========================
+   CRM PROJECT CARD
+========================= */
+
+.client-project-card {
+    background: #fafafa;
+
+    border: 1px solid #ececec;
+    border-radius: 26px;
+
+    padding: 22px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    min-height: 230px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.client-project-card:hover {
+    transform: translateY(-3px);
+
+    background: #f7f7f7;
+
+    border-color: #e4e4e4;
+}
+
+/* TOP */
+
+.client-project-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 16px;
+}
+
+.client-project-title {
+    font-family: "Alexandria";
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #cbbb2a;
+
+    margin: 0;
+}
+
+.client-project-subtitle {
+    font-family: "DM Sans";
+    font-size: 13px;
+
+    color: #8c8888;
+
+    margin-top: 4px;
+}
+
+.client-project-arrow {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #f3f3f3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.client-project-arrow i {
+    color: #7a7a7a;
+    font-size: 15px;
+}
+
+/* DESCRIPTION */
+
+.client-project-description {
+    font-family: "DM Sans";
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    color: #5f5f5f;
+
+    margin: 0;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+
+    min-height: 46px;
+}
+
+/* DIVIDER */
+
+.client-project-divider {
+    height: 1px;
+
+    background: #ececec;
+
+    margin: 20px 0;
+}
+
+/* STATS */
+
+.client-project-stats {
+    display: flex;
+    gap: 28px;
+
+    margin-bottom: 22px;
+}
+
+.client-project-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-project-stat-label {
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #9a9a9a;
+
+    margin-bottom: 4px;
+}
+
+.client-project-stat-value {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #423f3f;
+}
+
+/* FOOTER */
+
+.client-project-footer {
+    margin-top: auto;
+}
+
+.client-project-members {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.client-project-members i {
+    color: #8c8888;
+}
+
+.client-project-members span {
+    font-family: "DM Sans";
+    font-size: 13px;
+
+    color: #666;
+}
+/* =========================
+   CLIENT PROJECTS
+========================= */
+
+.client-projects-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fill,
+            minmax(320px, 1fr));
+
+    gap: 20px;
+}
+
+/* CARD */
+
+.client-project-card {
+    background: #fafafa;
+
+    border: 1px solid #ececec;
+
+    border-radius: 28px;
+
+    padding: 22px;
+
+    cursor: pointer;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+}
+
+.client-project-card:hover {
+    transform: translateY(-3px);
+
+    background: #f7f7f7;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .04);
+}
+
+/* TOP */
+
+.client-project-top {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-bottom: 14px;
+}
+
+.client-project-badge {
+    background: #f4f1d3;
+
+    color: #8f8130;
+
+    padding: 7px 14px;
+
+    border-radius: 999px;
+
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* TITLE */
+
+.client-project-title {
+    font-family:
+        "Alexandria",
+        sans-serif;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    color: #2f2f2f;
+
+    margin-bottom: 10px;
+}
+
+/* DESCRIPTION */
+
+.client-project-description {
+    font-family: "DM Sans";
+
+    font-size: 14px;
+
+    color: #666;
+
+    line-height: 1.7;
+
+    margin-bottom: 18px;
+
+    display: -webkit-box;
+    -webkit-box-orient:
+        vertical;
+
+    overflow: hidden;
+}
+
+/* META */
+
+.client-project-meta {
+    margin-bottom: 16px;
+}
+
+.client-project-meta span {
+    font-family: "DM Sans";
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #595959;
+}
+
+/* MEMBERS */
+
+.client-project-members {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+.client-project-members i {
+    color: #8a8a8a;
+}
+
+.client-project-members span {
+    font-family: "DM Sans";
+    font-size: 14px;
+    color: #666;
+}
+
+/* FOOTER */
+
+.client-project-footer {
+    padding-top: 16px;
+
+    border-top:
+        1px solid #ececec;
+
+    display: flex;
+    justify-content:
+        space-between;
+}
+
+.client-project-footer span {
+    font-family: "DM Sans";
+    font-size: 13px;
+
+    color: #8a8a8a;
+}
 /* =========================
    RESPONSIVE
 ========================= */
