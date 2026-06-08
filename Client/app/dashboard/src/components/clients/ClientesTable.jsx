@@ -1,82 +1,18 @@
-import { useEffect, useState } from "react";
+
 
 import ClienteRow from "./ClienteRow";
 
-function ClientesTable() {
+function ClientesTable({
+  clientes,
+}) {
 
-  const [clientes, setClientes] = useState([]);
-
-  const [loading, setLoading] = useState(true);
-
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-
-    const fetchClientes = async () => {
-
-      try {
-
-        const res = await fetch("http://localhost:3000/cliente");
-
-        const data = await res.json();
-
-        if (!res.ok) {
-          throw new Error(data.error || "Error al obtener clientes");
-        }
-
-        setClientes(data);
-
-      } catch (err) {
-
-        console.error(err);
-
-        setError("No se pudieron cargar los clientes");
-
-      } finally {
-
-        setLoading(false);
-      }
-    };
-
-    fetchClientes();
-
-  }, []);
-
-  // =========================
-  // LOADING
-  // =========================
-
-  if (loading) {
-
+  if (
+    clientes.length === 0
+  ) {
     return (
       <div className="clientes-empty">
-        Cargando clientes...
-      </div>
-    );
-  }
-
-  // =========================
-  // ERROR
-  // =========================
-
-  if (error) {
-
-    return (
-      <div className="clientes-error">
-        {error}
-      </div>
-    );
-  }
-
-  // =========================
-  // EMPTY
-  // =========================
-
-  if (clientes.length === 0) {
-
-    return (
-      <div className="clientes-empty">
-        Todavía no hay clientes registrados.
+        No se encontraron
+        clientes.
       </div>
     );
   }
@@ -95,7 +31,8 @@ function ClientesTable() {
 
       </div>
 
-      {clientes.map((cliente) => (
+      {clientes.map(
+        (cliente) => (
 
         <ClienteRow
           key={cliente._id}

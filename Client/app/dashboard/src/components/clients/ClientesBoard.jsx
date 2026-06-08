@@ -1,5 +1,4 @@
 import {
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -7,10 +6,9 @@ import {
 import ClienteBoardCard
 from "./ClienteBoardCard";
 
-function ClientesBoard() {
-
-  const [clientes, setClientes] =
-    useState([]);
+function ClientesBoard({
+  clientes,
+}) {
 
   // =========================
   // DRAG SCROLL
@@ -30,40 +28,6 @@ function ClientesBoard() {
   const [scrollLeft,
     setScrollLeft] =
     useState(0);
-
-  // =========================
-  // FETCH CLIENTES
-  // =========================
-
-  useEffect(() => {
-
-    const fetchClientes =
-      async () => {
-
-      try {
-
-        const res =
-          await fetch(
-            "http://localhost:3000/cliente"
-          );
-
-        const data =
-          await res.json();
-
-        setClientes(data);
-
-      } catch (error) {
-
-        console.error(
-          "Error cargando clientes:",
-          error
-        );
-      }
-    };
-
-    fetchClientes();
-
-  }, []);
 
   // =========================
   // ESTADOS
@@ -105,7 +69,8 @@ function ClientesBoard() {
     e
   ) => {
 
-    if (!isDragging) return;
+    if (!isDragging)
+      return;
 
     e.preventDefault();
 
@@ -128,6 +93,21 @@ function ClientesBoard() {
 
     setIsDragging(false);
   };
+
+  // =========================
+  // EMPTY
+  // =========================
+
+  if (
+    clientes.length === 0
+  ) {
+    return (
+      <div className="clientes-empty">
+        No se encontraron
+        clientes.
+      </div>
+    );
+  }
 
   // =========================
   // RENDER
@@ -158,59 +138,60 @@ function ClientesBoard() {
       {estados.map(
         (estado) => {
 
-        const clientesEstado =
-          clientes.filter(
-            (cliente) =>
-              cliente.estado ===
-              estado
+          const clientesEstado =
+            clientes.filter(
+              (cliente) =>
+                cliente.estado ===
+                estado
+            );
+
+          return (
+            <div
+              key={estado}
+              className="cliente-board-column"
+            >
+
+              {/* HEADER */}
+
+              <div className="cliente-column-header">
+
+                <h3>
+                  {estado}
+                </h3>
+
+                <span>
+                  {
+                    clientesEstado.length
+                  }
+                </span>
+
+              </div>
+
+              {/* CARDS */}
+
+              <div className="cliente-column-cards">
+
+                {clientesEstado.map(
+                  (cliente) => (
+
+                    <ClienteBoardCard
+                      key={
+                        cliente._id
+                      }
+                      cliente={
+                        cliente
+                      }
+                    />
+
+                  )
+                )}
+
+              </div>
+
+            </div>
           );
-
-        return (
-          <div
-            key={estado}
-            className="cliente-board-column"
-          >
-
-            {/* HEADER */}
-
-            <div className="cliente-column-header">
-
-              <h3>
-                {estado}
-              </h3>
-
-              <span>
-                {
-                  clientesEstado.length
-                }
-              </span>
-
-            </div>
-
-            {/* CARDS */}
-
-            <div className="cliente-column-cards">
-
-              {clientesEstado.map(
-                (cliente) => (
-
-                  <ClienteBoardCard
-                    key={
-                      cliente._id
-                    }
-                    cliente={
-                      cliente
-                    }
-                  />
-
-                )
-              )}
-
-            </div>
-
-          </div>
-        );
-      })}
+        }
+      )}
 
     </div>
   );
