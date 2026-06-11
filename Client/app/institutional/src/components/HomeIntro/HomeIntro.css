@@ -1,26 +1,49 @@
 .home-intro {
-    min-height: 90vh;
+    min-height: 70vh;
     background-color: #F7FAF2;
     color: #191516;
     display: flex;
     justify-content: space-between;
-    padding: 180px 8%;
-    gap: 80px;
+    gap: 42px;
+    padding: 130px 8% 110px 8%;
 }
+
 
 /* IZQUIERDA */
 .intro-left {
-    flex: 1;
+    flex: 0.9;
     display: flex;
     align-items: flex-start;
+    padding-top: 20px;
     /* lo sube */
 }
-
+.intro-left-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.intro-label {
+    
+    margin-bottom: 10px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(36, 36, 36, 0.42);
+}
+.intro-label::after {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 1px;
+    margin-top: 8px;
+    background: rgba(36, 36, 36, 0.28);
+}
 .intro-left h1 {
     display: flex;
     flex-direction: column;
     line-height: 0.95;
-    margin-top: 20px;
 }
 
 /* Hola, somos */
@@ -34,15 +57,22 @@
 
 /* CABE */
 .intro-big {
-    font-family: 'Playfair Display', serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: clamp(72px, 9vw, 120px);
-    letter-spacing: -0.04em;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(78px, 9vw, 120px);
+    line-height: 0.9;
+    letter-spacing: 0px;
+    color: #242424;
+}
+.intro-big {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(72px, 8vw, 110px);
+    line-height: 0.9;
+    letter-spacing: 1px;
+    color: #242424;
 }
 /* DERECHA */
 .intro-right {
-    flex: 1;
+    flex: 1.1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,34 +81,66 @@
 .intro-main {
     font-family: 'DM Sans', sans-serif;
     font-weight: 500;
-    font-size: 22px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    max-width: 520px;
+    font-size: 21px;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+
+    color: rgba(36, 36, 36, 0.92);
+
+    max-width: 540px;
+    margin-bottom: 34px;
+}
+.intro-heading {
+    position: relative;
+    display: inline-flex;
+}
+
+.intro-star {
+    position: absolute;
+    color: rgba(36, 36, 36, 0.78);
+    opacity: 1;
+}
+
+.intro-star-1 {
+    left: -20px;
+    top: 14px;
+    font-size: 15px;
+}
+
+.intro-star-2 {
+    right: -16px;
+    bottom: 14px;
+    font-size: 11px;
 }
 
 .intro-line {
     width: 140px;
-    /* antes 60 */
-    height: 2px;
-    background-color: #191516;
+    height: 1px;
     margin-bottom: 30px;
-}
 
+    background-image:
+        radial-gradient(circle,
+            rgba(36, 36, 36, 0.24) 1px,
+            transparent 1px);
+
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+}
 .intro-bottom {
     display: flex;
-    align-items: flex-start;
-    gap: 40px;
-    margin-top: 10px;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 50px;
 }
 
 .intro-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: #6b6767;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(36, 36, 36, 0.62);
     max-width: 360px;
-}@media (max-width: 900px) {
+}
+@media (max-width: 900px) {
     .home-intro {
         flex-direction: column;
         padding: 120px 8%;

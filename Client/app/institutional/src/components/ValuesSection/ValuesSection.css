@@ -1,6 +1,6 @@
 .values {
     background: #F7FAF2;
-    padding: 30px 8% 100px 8%;
+    padding: 110px 8% 110px 8%;
     text-align: center;
 }
 
@@ -8,80 +8,207 @@
 /* TÍTULO */
 .values-title {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(50px, 7vw, 80px);
-    margin-bottom: 90px;
-    text-align: center;
-    letter-spacing: 1.5px;
+    font-size: clamp(49px, 6vw, 72px);
+    margin-bottom: 45px;
+    letter-spacing: 1px;
+    line-height: 0.92;
+    text-transform: none;
+        display: inline-block;
+}
+.values-star {
+    position: absolute;
+
+    right: -18px;
+    top: 30px;
+    /* arriba del título */
+
+    font-size: 15px;
+    color: rgba(36, 36, 36, 0.78);
+
+    transform: rotate(22deg);
 }
 
-
+.values-title-wrap {
+    position: relative;
+    display: inline-block;
+}
+.values-label {
+    margin-bottom: 10px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(36, 36, 36, 0.42);
+}
+.values-heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* izquierda */
+    margin-bottom: 40px;
+}
 /* LISTA */
 .values-list {
+    position: relative;
     width: 100%;
-    max-width: none;
     margin: 0;
     text-align: left;
 }
 
-.value-item {
-    border-bottom: 2px solid #242424;
-    padding: 30px 0;
-    cursor: pointer;
-    overflow: hidden;
+
+.values-list::before {
+    left: -20px;
 }
 
+.values-list::after {
+    right: -20px;
+}
+.value-item {
+    border-bottom: none;
+        position: relative;
+    padding: 26px 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.value-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+
+    background-image:
+        radial-gradient(circle,
+            rgba(36, 36, 36, 0.22) 1px,
+            transparent 1px);
+
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+}
+.value-item:hover .value-number-bg {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+/*
+.value-item:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+
+    background-image:
+        radial-gradient(circle,
+            rgba(36, 36, 36, 0.22) 1px,
+            transparent 1px);
+
+    background-size: 10px 1px;
+    background-repeat: repeat-x;
+}
+    */
+.value-item:hover {
+    padding-left: 18px;
+}
 .value-inner {
     position: relative;
     height: 40px;
     transition: height 0.35s ease;
+    overflow: visible;
 }
-
 .value-name,
 .value-desc {
     position: absolute;
     left: 0;
     width: 100%;
     transition: transform 0.35s ease, opacity 0.3s ease;
+    z-index: 2;
 }
 
 /* Nombre visible */
 .value-name {
+    position: relative;
+    display: flex;
+    align-items: center;
     font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 30px;
+    font-weight: 500;
+    font-size: 22px;
     letter-spacing: -0.02em;
     color: #242424;
+    z-index: 2;
+    overflow: visible;
 }
 
+.value-number-bg {
+    position: absolute;
+    left: -6px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.92);
+
+    font-size: 94px;
+    font-weight: 700;
+    line-height: 1;
+
+    /* naranja más visible */
+    color: rgba(255, 164, 27, 0.29);
+
+    opacity: 0;
+
+    transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+.value-number,
+.value-name-text {
+    position: relative;
+    z-index: 2;
+}
+
+.value-item:hover .value-number-bg {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
 /* Descripción oculta abajo */
 .value-desc {
     font-family: 'DM Sans', sans-serif;
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 30px;
-    color: #FF3231;
-    transform: translateY(100%);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.42;
+    max-width: 850px;
+
+    color: rgba(36, 36, 36, 0.92);
+
+    transform: translateY(2px);
     opacity: 0;
 }
 .value-number {
     display: inline-block;
-    width: 50px;
-    color: #242424;
-    font-weight: 600;
+    width: 42px;
+    font-size: 18px;
+    letter-spacing: 0.03em;
+    color: rgba(36, 36, 36, 0.5);
+    font-weight: 300;
+    transition: color 0.35s ease;
 }
+
 
 /* HOVER ANIMACIÓN */
 .value-item:hover .value-inner {
-    height: 90px;
+    height: 68px;
 }
 
 .value-item:hover .value-name {
-    transform: translateY(-120%);
-    opacity: 0;
+    transform: translateY(-4px);
+    opacity: 0.50;
 }
 
 .value-item:hover .value-desc {
-    transform: translateY(0);
+    transform: translateY(6px);
     opacity: 1;
 }
 

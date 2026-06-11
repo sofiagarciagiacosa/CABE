@@ -1,11 +1,13 @@
 .portfolio-preview {
     position: relative;
 }
-
+.portfolio-content {
+    padding: 0 8% 80px 8%;
+}
 /*  BLOQUE ROJO  */
 .portfolio-hero {
-    background-color: #FF3231;
-    padding: 140px 0 180px 0;
+    background-color: #F23A38;
+    padding: 110px 0 130px 0;
     color: #F4EFEA;
 }
 .portfolio-hero-inner {
@@ -16,14 +18,16 @@
     gap: 40px;
 }
 .portfolio-manifesto {
-    font-family: 'Alexandria', sans-serif;
-    font-size: 18px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-align: justify;
-    line-height: 1.7;
-    max-width: 720px;
-    margin-bottom: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+
+    text-transform: none;
+    color: rgba(244, 239, 234, 0.88);
+
+    max-width: 560px;
+    margin-bottom: 40px;
 }
 
 /* TÍTULO + BOTÓN */
@@ -31,20 +35,42 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 20px;
+    gap: 40px;
 }
+.portfolio-title-block {
+    display: flex;
+    flex-direction: column;
+}
+.portfolio-label {
+    
 
+    color: rgba(244, 239, 234, 0.62);
+    margin-bottom: 10px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+}
 .portfolio-title {
     font-family: "Anton", sans-serif;
-    font-size: clamp(60px, 8vw, 110px);
-    letter-spacing: 1.5px;
+    font-size: clamp(59px, 6vw, 80px);
+    line-height: 0.93;
     color: #F4EFEA;
-
-    text-shadow:
-        0 0 1px rgba(244, 239, 234, 0.4),
-        0 0 6px rgba(244, 239, 234, 0.15);
+    letter-spacing: 1px;
+}
+.portfolio-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
 }
 
+.portfolio-star {
+    color: #F7C65A;
+    font-size: 14px;
+    transform: rotate(-12deg);
+    margin-top: 10px;
+}
 /* BOTÓN */
 .portfolio-btn {
     font-family: 'Alexandria', sans-serif;
@@ -68,7 +94,7 @@
 /*  BLOQUE BLANCO */
 .portfolio-content {
     background: #F7FAF2;
-    padding: 0 10% 140px 10%;
+    padding: 0 10% 120px 10%;
     position: relative;
 }
 
@@ -76,12 +102,12 @@
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 90px 60px;
+    gap: 36px;
 }
 
 /* SUPERPOSICIÓN */
 .projects-grid> :nth-child(-n+2) {
-    margin-top: -140px;
+    margin-top: -90px;
 }
 /* CTA dentro del bloque rojo */
 .portfolio-hero .connect__cta {

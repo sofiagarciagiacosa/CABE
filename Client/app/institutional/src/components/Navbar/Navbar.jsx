@@ -27,6 +27,9 @@ function Navbar() {
 
       <div className={`menu-overlay ${isOpen ? "show" : ""}`}>
         <div className="menu-content">
+          <span className="menu-label">
+            MENU
+          </span>
           <img src={logo} alt="Logo" className="menu-logo" />
           <div className="divider"></div>
 
@@ -37,17 +40,17 @@ function Navbar() {
 
             <li>
               <span className="link-title">Qué hacemos</span>
-              <span className="link-desc">Estrategia, diseño y creatividad en acción</span>
+              <span className="link-desc">Estrategia, identidad y contenido</span>
             </li>
 
             <li>
               <span className="link-title">Portfolio</span>
-              <span className="link-desc">Proyectos que hablan por nosotros</span>
+              <span className="link-desc">Trabajos seleccionados</span>
             </li>
 
             <li>
               <span className="link-title">Nosotros</span>
-              <span className="link-desc">Las mentes detrás de las marcas</span>
+              <span className="link-desc">Quiénes somos</span>
             </li>
 
             <li>

@@ -3,6 +3,7 @@ import ProjectCard from "../ProjectCard/ProjectCard";
 import CTA from "../CTA/CTA";
 import { useEffect } from "react";
 
+
 function PortfolioPreview() {
   useEffect(() => {
     const reveals = document.querySelectorAll(".reveal");
@@ -36,7 +37,20 @@ function PortfolioPreview() {
           </p>
 
           <div className="portfolio-header">
-            <h2 className="portfolio-title">PROYECTOS</h2>
+
+            <div className="portfolio-title-block">
+              <span className="portfolio-label">
+                FEATURED WORK
+              </span>
+
+              <div className="portfolio-heading">
+                <span className="portfolio-star">✦</span>
+                <h2 className="portfolio-title">
+                  Proyectos
+                </h2>
+              </div>
+            </div>
+
             <CTA href="/proyectos">VER MÁS</CTA>
 
           </div>
@@ -47,10 +61,10 @@ function PortfolioPreview() {
       {/* BLOQUE BLANCO */}
       <div className="portfolio-content">
         <div className="projects-grid">
-          <ProjectCard title="MARCA UNO" services="Branding / Producción" />
-          <ProjectCard title="MARCA DOS" services="Redes / Estrategia" />
-          <ProjectCard title="MARCA TRES" services="Identidad / Web" />
-          <ProjectCard title="MARCA CUATRO" services="Contenido / Campaña" />
+          <ProjectCard title="Marca uno" services="Branding / Producción" />
+          <ProjectCard title="Marca x" services="Redes / Estrategia" />
+          <ProjectCard title="Otra marca" services="Identidad / Web" />
+          <ProjectCard title="Última" services="Contenido / Campaña" />
         </div>
       </div>
 

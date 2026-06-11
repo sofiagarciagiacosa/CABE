@@ -40,7 +40,7 @@ function ManifestoTicker() {
           setText(currentPhrase.slice(0, text.length - 1));
         }, 35);
       } else {
-        // 👇 AHORA también espera antes de cambiar frase
+        //  AHORA también espera antes de cambiar frase
         timeout = setTimeout(() => {
           setPhraseIndex((prev) => (prev + 1) % phrases.length);
           setPhase("typing");
@@ -53,6 +53,10 @@ function ManifestoTicker() {
 
   return (
     <section className="manifesto">
+      <span className="manifesto-label">
+        OUR MANIFESTO
+      </span>
+
       <div className="typewriter">
         {text}
         <span className="cursor">|</span>

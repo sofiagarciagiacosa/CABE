@@ -1,11 +1,36 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "./ServicesSection.css";
+
+const services = [
+  {
+    title: "Estrategia y construcción de marca",
+    slug: "estrategia"
+  },
+  {
+    title: "Branding y desarrollo visual",
+    slug: "branding"
+  },
+  {
+    title: "Creación de contenido",
+    slug: "contenido"
+  },
+  {
+    title: "Dirección creativa y producción",
+    slug: "direccion-creativa"
+  },
+  {
+    title: "Acompañamiento y consultoría",
+    slug: "consultoria"
+  }
+];
 
 function ServicesSection() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const elements = sectionRef.current.querySelectorAll(".reveal");
+    const elements =
+      sectionRef.current.querySelectorAll(".reveal");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -18,42 +43,59 @@ function ServicesSection() {
       { threshold: 0.2 }
     );
 
-    elements.forEach((el) => observer.observe(el));
+    elements.forEach((el) =>
+      observer.observe(el)
+    );
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section className="services" ref={sectionRef}>
-      <div className="services-line top"></div>
-
       <div className="services-container">
 
         {/* IZQUIERDA */}
         <div className="services-left reveal">
           <div className="services-left-inner">
-            <h2>Que  Hacemos</h2>
-            <p>
-              Trabajamos desde la estrategia, el concepto y la creatividad,
-              acompañando a marcas, emprendimientos y profesionales en la
-              construcción y evolución de su identidad y comunicación.
-            </p>
+
+            <span className="services-label">
+              WHAT WE DO
+            </span>
+
+            <div className="services-heading">
+              <span className="services-icon icon-1">
+                ✦
+              </span>
+
+              <h2>
+                Qué <br />
+                hacemos
+              </h2>
+
+              <span className="services-icon icon-2">
+                ✦
+              </span>
+            </div>
+
           </div>
         </div>
 
         {/* DERECHA */}
         <div className="services-right">
-          {[
-            "Branding – Estrategia de Marca",
-            "Identidad Visual – Diseño de Marca",
-            "Estrategia de Redes Sociales – Comunicación Digital",
-            "Aplicaciones – Piezas Gráficas Adicionales",
-            "Paquetes / Combos",
-            "Producción + Dirección Creativa",
-            "Creación de Contenido"
-          ].map((service, i) => (
-            <div className="service-item reveal" key={i}>
-              {service}
+          {services.map((service, i) => (
+            <Link
+              to={`/services#${service.slug}`}
+              className="service-item reveal"
+              key={i}
+            >
+              {service.title}
+
               <div className="service-arrow">
-                <svg viewBox="0 0 24 24" fill="none" className="arrow-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="arrow-icon"
+                >
                   <path
                     d="M5 12H19M19 12L13 6M19 12L13 18"
                     stroke="currentColor"
@@ -63,13 +105,11 @@ function ServicesSection() {
                   />
                 </svg>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
       </div>
-
-      <div className="services-line bottom"></div>
     </section>
   );
 }

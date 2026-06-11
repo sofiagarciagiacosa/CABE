@@ -27,12 +27,32 @@ function HomeIntro() {
     <section className="home-intro" ref={sectionRef}>
       
       {/* IZQUIERDA */}
-      <div className="intro-left">
-        <h1>
-          <span className="intro-small">Hola, somos</span>
-          <span className="intro-big">CABE</span>
-        </h1>
+      <div className="intro-left reveal">
+        <div className="intro-left-inner">
 
+          <span className="intro-label">
+            ABOUT US
+          </span>
+
+          <div className="intro-heading">
+            <span className="intro-star intro-star-1">
+              ✦
+            </span>
+
+            <h1>
+              
+
+              <span className="intro-big">
+                Cabe
+              </span>
+            </h1>
+
+            <span className="intro-star intro-star-2">
+              ✦
+            </span>
+          </div>
+
+        </div>
       </div>
 
       {/* DERECHA */}

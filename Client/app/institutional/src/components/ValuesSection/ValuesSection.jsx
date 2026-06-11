@@ -58,15 +58,31 @@ function ValuesSection() {
     );
 
     elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section className="values" ref={sectionRef}>
-      
+      <div className="values-heading reveal">
 
-      <h2 className="values-title reveal">
-        NUESTROS <span> VALORES</span>
-      </h2>
+        <span className="values-label">
+          WHAT WE VALUE
+        </span>
+
+        <div className="values-title-wrap">
+          
+          <h2 className="values-title">
+            Nuestros <span>valores</span>
+          </h2>
+
+          <span className="values-star">
+            ✦
+          </span>
+        </div>
+
+      </div>
+
 
       <div className="values-list">
         {values.map((item, index) => (
@@ -76,18 +92,32 @@ function ValuesSection() {
             key={index}
           >
             <div className="value-inner">
+
+              {/* Número gigante de fondo */}
+              <span className="value-number-bg">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              {/* Nombre */}
               <div className="value-name">
                 <span className="value-number">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                {item.title}
+
+                <span className="value-name-text">
+                  {item.title}
+                </span>
               </div>
-              <div className="value-desc">{item.desc}</div>
+
+              {/* Descripción */}
+              <div className="value-desc">
+                {item.desc}
+              </div>
+
             </div>
           </div>
         ))}
       </div>
-
     </section>
   );
 }
