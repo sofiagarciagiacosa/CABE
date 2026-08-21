@@ -2,7 +2,7 @@ import { connectDB } from "../connection.js";
 import Proyecto from "../schemas/proyecto.schema.js";
 import ProyectoUsuario from "../schemas/proyectoUsuario.schema.js";
 import Tarea from "../schemas/tarea.schema.js";
-
+import Estado from "../schemas/estado.schema.js";
 
 export const createProy = async ({
   nombre,
@@ -11,9 +11,16 @@ export const createProy = async ({
   fechaInicio,
   fechaLimite,
   cliente,
+
+  estado,
+  tipoServicio,
+  prioridad,
+  fechaFinalizacion,
+  progreso,
 }) => {
   try {
     await connectDB();
+
     const res = await Proyecto.create({
       nombre,
       descripcion,
@@ -21,9 +28,15 @@ export const createProy = async ({
       fechaInicio,
       fechaLimite,
       cliente,
+
+      estado,
+      tipoServicio,
+      prioridad,
+      fechaFinalizacion,
+      progreso,
     });
-    console.log(res);
-    return res; // si solo querés devolverlo tal cual
+
+    return res;
   } catch (error) {
     throw new Error("Error al crear el proyecto: " + error.message);
   }
@@ -99,7 +112,50 @@ export const deleteProy = async (id) => {
 };
 
 
-  
+export const actualizarProgresoProyecto = async (proyectoId) => {
+  await connectDB();
+
+  const estadoHecho = await Estado.findOne({
+    nombre: "Hecho",
+  });
+
+  if (!estadoHecho) return;
+
+  const totalTareas = await Tarea.countDocuments({
+    idProyecto: proyectoId,
+  });
+
+  if (totalTareas === 0) {
+    await Proyecto.findByIdAndUpdate(proyectoId, {
+      progreso: 0,
+      estado: "Planificado",
+    });
+
+    return;
+  }
+
+  const tareasHechas = await Tarea.countDocuments({
+    idProyecto: proyectoId,
+    idEstado: estadoHecho._id,
+  });
+
+  const progreso = Math.round((tareasHechas / totalTareas) * 100);
+
+  let estadoProyecto = "En progreso";
+
+  if (progreso === 0) {
+    estadoProyecto = "Planificado";
+  }
+
+  if (progreso === 100) {
+    estadoProyecto = "Finalizado";
+  }
+
+  await Proyecto.findByIdAndUpdate(proyectoId, {
+    progreso,
+    estado: estadoProyecto,
+  });
+};
 /*
 
 export const findByClient = async (client) => {

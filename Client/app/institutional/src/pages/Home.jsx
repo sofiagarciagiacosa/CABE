@@ -6,7 +6,6 @@ import ServicesSection from "../components/ServicesSection/ServicesSection";
 import ValuesSection from "../components/ValuesSection/ValuesSection";
 import ManifestoTicker from "../components/ManifestoTicker/ManifestoTicker";
 import ConnectSection from "../components/ConnectSection/ConnectSection";
-import Footer from "../components/Footer/Footer";
 
 function Home() {
   return (
@@ -19,7 +18,7 @@ function Home() {
       <ValuesSection />
       < ManifestoTicker />
       < ConnectSection />
-      < Footer />
+      
       
     </>
   );

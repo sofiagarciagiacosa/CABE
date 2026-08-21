@@ -11,6 +11,8 @@ import EditProfilePage from "./components/profile/EditProfilePage.jsx";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage.jsx";
 import ClientesPage from "./pages/clients/ClientsPage.jsx";
 import ClientPage from "./pages/clients/ClientPage.jsx";
+import MetricsPage from "./pages/metrics/MetricsDashboardPage.jsx";
+import FormsPage from "./pages/forms/FormsPage.jsx";
 
 function App() {
   return (
@@ -43,8 +45,8 @@ function App() {
           <Route path="proyectos/:id" element={<ProjectPage />} />
           <Route path="clientes" element={<ClientesPage />} />
           <Route path="clientes/:id" element={<ClientPage />} />
-          <Route path="formularios" element={<div />} />
-          <Route path="estadisticas" element={<div />} />
+          <Route path="formularios" element={<FormsPage />} />
+          <Route path="estadisticas" element={<MetricsPage />} />
           <Route path="perfil">
             <Route index element={<ProfilePage />} />
             <Route path="editar" element={<EditProfilePage />} />

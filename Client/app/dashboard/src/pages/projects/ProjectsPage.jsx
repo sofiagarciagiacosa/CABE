@@ -41,7 +41,7 @@ function ProjectsPage() {
           </div>
         </div>
 
-        {/* 🔴 BOTÓN HEADER */}
+        {/*  BOTÓN HEADER */}
         <button
           className=" create-project-btn"
           onClick={() => setShowModal(true)}
@@ -58,7 +58,7 @@ function ProjectsPage() {
             <ProjectCard key={proy._id} project={proy} />
           ))}
 
-          {/* 🔴 CARD "+" */}
+          {/*  CARD "+" */}
           <AddProjectCard onClick={() => setShowModal(true)} />
 
         </div>
@@ -68,7 +68,7 @@ function ProjectsPage() {
       {showModal && (
         <ProjectModal
           onClose={() => setShowModal(false)}
-          onCreated={loadProjects} // 🔥 refresca al crear
+          onCreated={loadProjects} //  refresca al crear
         />
       )}
 

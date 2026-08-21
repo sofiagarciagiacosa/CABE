@@ -246,6 +246,15 @@ body.menu-open::before {
 .menu-links li:nth-child(5) {
     animation-delay: 1s;
 }
+.menu-link {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+
+    text-decoration: none;
+    color: inherit;
+    width: fit-content;
+}
 
 @keyframes fadeIn {
     to {

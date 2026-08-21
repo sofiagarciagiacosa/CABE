@@ -12,6 +12,7 @@ import estadoRouter from "./Server/Routes/estado.routes.js";
 import urgenciaRouter from "./Server/Routes/urgencia.routes.js";
 import tareaRouter from "./Server/Routes/tarea.routes.js";
 import authRouter from "./Server/Routes/auth.routes.js";
+import metricasRouter from "./Server/Routes/metricas.routes.js";
 
 import { connectDB } from "./Server/db/connection.js";
 
@@ -42,7 +43,7 @@ app.use("/estado", estadoRouter);
 app.use("/urgencia", urgenciaRouter);
 app.use("/tarea", tareaRouter);
 app.use("/auth", authRouter);
-
+app.use("/metricas", metricasRouter);
 
 
 // Levantar servidor (siempre al final)

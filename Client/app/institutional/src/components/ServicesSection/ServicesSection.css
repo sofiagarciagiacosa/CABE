@@ -243,11 +243,28 @@
 
 .service-arrow {
     margin-left: auto;
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: opacity 0.18s ease-out, transform 0.18s ease-out;
+
     display: flex;
     align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transform: translateX(-10px);
+
+    transition:
+        opacity .35s ease,
+        transform .45s cubic-bezier(.22, 1, .36, 1),
+        color .35s ease;
+
+    color: #242424;
+
+    /* IMPORTANTE */
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    width: auto;
+    height: auto;
+    min-width: unset;
 }
 
 

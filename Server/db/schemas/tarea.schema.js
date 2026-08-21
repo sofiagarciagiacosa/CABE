@@ -39,10 +39,14 @@ const tareaSchema = new Schema(
       type: Date,
       required: false,
     },
+    fechaFinalizacion: {
+      type: Date,
+      required: false,
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Tarea = models.tarea || model("tarea", tareaSchema);

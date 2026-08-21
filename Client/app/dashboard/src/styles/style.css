@@ -529,7 +529,25 @@ body {
 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
+.accordion-header {
+    width: 100%;
+    background: none;
+    border: none;
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6px 0;
+
+    font-family: "Alexandria";
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #222;
+
+    cursor: pointer;
+}
 /* FORM GRID */
 .project-modal-card form {
     display: flex;
@@ -555,12 +573,31 @@ body {
 }
 
 /* BOTONES */
-.project-modal-card button {
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
+.project-modal-close {
+    all: unset;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #585858;
+
     cursor: pointer;
+    flex-shrink: 0;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    transition: all 0.2s ease;
+}
+.project-modal-close:hover {
+    background: #F8F5EF;
+    transform: translateY(-1px);
 }
 
 .project-modal-card button[type="submit"] {
@@ -568,8 +605,31 @@ body {
     color: white;
 }
 
-.project-modal-card button[type="button"] {
-    background-color: #ddd;
+
+.project-modal-close {
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #fff;
+    color: #555;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    transition: all 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+.project-modal-close:hover {
+    transform: translateY(-1px);
+    background: #f9f7f2;
 }
 /* ==== PÁGINA DE CADA PROYECTO ==== */
 .project-page {
@@ -847,12 +907,304 @@ body {
 }
 
 .project-modal-card {
-    background: #ffffff;
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
     border-radius: 20px;
     padding: 2rem;
     width: 700px;
     max-width: 90%;
         /* responsive para pantallas chicas */
+}
+
+.modal-error {
+    margin: 0 0 1rem;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #fff0f0;
+    color: #d52625;
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.project-create-modal {
+    width: 760px;
+    max-width: 92vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 32px 38px;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.14);
+    scrollbar-width: thin;
+    scrollbar-color: #d5d5d5 transparent;
+}
+
+.project-create-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.project-create-modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.project-create-modal::-webkit-scrollbar-thumb {
+    background: #d5d5d5;
+    border-radius: 999px;
+}
+
+.project-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.project-modal-kicker {
+    display: block;
+    margin-bottom: 5px;
+    font-family: "DM Sans";
+    font-size: 11px;
+    font-weight: 700;
+    color: #8c8888;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.project-modal-header h2 {
+    margin: 0;
+    font-family: "Alexandria";
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: #000;
+}
+
+.project-modal-close {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #ffffff;
+    color: #585858;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+    transition: all 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+.project-modal-close:hover {
+    background: #F8F5EF;
+    transform: translateY(-1px);
+}
+
+.project-modal-divider {
+    height: 1px;
+    background: #f1f1f1;
+    margin: 4px 0;
+}
+
+.project-modal-card .project-create-form {
+    display: block;
+    gap: 0;
+}
+
+.project-create-form .accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    border: none;
+    background: none;
+    font-family: "Alexandria";
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
+    cursor: pointer;
+}
+.project-create-form .accordion-header,
+.project-create-form .accordion-header:focus,
+.project-create-form .accordion-header:active {
+    background: transparent !important;
+    box-shadow: none;
+}
+.accordion-section {
+    background: transparent;
+}
+
+.project-create-form .accordion-header i {
+    color: #8c8888;
+    font-size: 13px;
+}
+
+.project-create-form .accordion-content {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.project-create-form .form-row {
+    display: flex;
+    gap: 18px;
+}
+
+.project-create-form .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-create-form .form-group label {
+    margin-bottom: 5px;
+    font-family: "DM Sans";
+    font-size: 12px;
+    font-weight: 600;
+    color: #3f3f3f;
+}
+
+.project-create-form input,
+.project-create-form select,
+.project-textarea {
+    width: 100%;
+    min-height: 38px;
+    padding: 0 12px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    outline: none;
+    background: #ffffff;
+    color: #585858;
+    font-family: "DM Sans";
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.project-create-form input:hover,
+.project-create-form select:hover,
+.project-textarea:hover {
+    background: #fafafa;
+}
+
+.project-create-form input:focus,
+.project-create-form select:focus,
+.project-textarea:focus {
+    border-color: #cfcfcf;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+}
+
+.project-create-form select {
+    appearance: none;
+    padding-right: 34px;
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%23989898' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+.project-textarea {
+    min-height: 92px;
+    padding: 12px;
+    resize: vertical;
+}
+
+.responsables-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.project-create-form .responsable-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    padding: 8px 12px;
+    border: 1px solid #e5e5e5;
+    border-radius: 999px;
+    background: #fafafa;
+    color: #585858;
+    font-family: "DM Sans";
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.project-create-form .responsable-item input {
+    width: auto;
+    min-height: auto;
+    accent-color: #ff3231;
+}
+
+.project-modal-muted {
+    margin: 0;
+    color: #8c8888;
+    font-family: "DM Sans";
+    font-size: 13px;
+}
+
+.project-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.project-modal-footer button.cancel-btn {
+    height: 36px;
+    margin-top: 0;
+    padding: 0 20px;
+    border: 1px solid #585858;
+    border-radius: 50px;
+    background: #ffffff;
+    color: #585858;
+    font-family: "Alexandria";
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.project-modal-footer button.save-btn {
+    height: 36px;
+    margin-top: 0;
+    padding: 0 20px;
+    border: none;
+    border-radius: 50px;
+    background: #ff3231;
+    color: #ffffff;
+    font-family: "Alexandria";
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.project-modal-footer button.cancel-btn:hover {
+    background: #f3f3f3;
+    transform: translateY(-2px);
+}
+
+.project-modal-footer button.save-btn:hover {
+    background: #e12b2a;
+    transform: translateY(-2px);
+}
+
+.project-modal-footer button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .modal-title {
@@ -942,6 +1294,19 @@ body {
     padding: 6px 12px;
     font-size: 13px;
     color: #585858;
+}
+.responsable-pill {
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.responsable-pill.active {
+    background: #F8F5EF;
+    border-color: #CBBB2A;
 }
 
 .responsable-item input[type="checkbox"] {

@@ -30,10 +30,12 @@ function PortfolioPreview() {
         <div className="portfolio-hero-inner">
 
           <p className="portfolio-manifesto">
-            ASPIRAMOS A CONSTRUIR UN ESPACIO CREATIVO QUE EVOLUCIONE JUNTO A LAS
-            PERSONAS QUE LO INTEGRAN, Y A TRABAJAR CON CLIENTES QUE VALOREN LA
-            PROFUNDIDAD DEL PROCESO, LA CLARIDAD ESTRATÉGICA Y LA BÚSQUEDA
-            CONSTANTE DE SENTIDO.
+             <span className="portfolio-intro">
+              Cada proyecto plantea desafíos, contextos y objetivos diferentes.
+             </span>
+            
+            Esta selección reúne algunas de las marcas y personas que confiaron en nosotros para acompañar procesos de construcción, crecimiento y comunicación. Distintas historias, distintas necesidades y una misma forma de trabajar: con compromiso, criterio y atención a los detalles.
+
           </p>
 
           <div className="portfolio-header">
@@ -51,7 +53,7 @@ function PortfolioPreview() {
               </div>
             </div>
 
-            <CTA href="/proyectos">VER MÁS</CTA>
+            <CTA href="/portfolio">VER MÁS</CTA>
 
           </div>
 

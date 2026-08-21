@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import "./Services.css";
-import Footer from "../../components/Footer/Footer";
 
 // imágenes (después las reemplazás)
 import placeholderImg from "../../assets/placeholder.webp";
@@ -175,17 +174,22 @@ function Services() {
 
           <div className="closing-title-wrap">
 
-            <p className="closing-main reveal-line ">
-              No trabajamos en serie.
-            </p>
+            <div className="closing-line first-line">
+              No trabajamos
+            </div>
 
-            <span className="closing-star">
-              ✦
-            </span>
+            <div className="closing-line second-line">
+              en serie.
+            </div>
+
+            <div className="closing-stars">
+              <span className="star-one">✦</span>
+              <span className="star-two">✦</span>
+            </div>
 
           </div>
 
-          <p>
+          <p className="closing-secondary">
             Cada proyecto es distinto,
             y por eso cada proceso también lo es.
           </p>
@@ -199,7 +203,6 @@ function Services() {
 
       </section>
 
-      <Footer />
 
     </main>
   );

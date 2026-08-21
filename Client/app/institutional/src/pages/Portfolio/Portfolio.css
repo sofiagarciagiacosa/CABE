@@ -1,0 +1,94 @@
+.portfolio-page{
+    background:#F7FAF2;
+    min-height:100vh;
+}
+
+.portfolio-page-hero{
+
+    padding:
+
+    180px
+    10%
+    90px;
+
+}
+
+.portfolio-page-label{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    font-family:'DM Sans',sans-serif;
+
+    font-size:12px;
+
+    letter-spacing:.18em;
+
+    font-weight:500;
+
+    color:rgba(36,36,36,.45);
+
+}
+
+.portfolio-page-heading{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+}
+
+.portfolio-page-star{
+
+    color:#CBBB2A;
+
+    margin-top:12px;
+
+    font-size:14px;
+
+}
+
+.portfolio-page h1{
+
+    font-family:"Anton",sans-serif;
+
+    font-size:clamp(72px,9vw,120px);
+
+    line-height:.9;
+
+    letter-spacing:1px;
+
+    color:#242424;
+
+    margin:0;
+
+}
+.large .portfolio-project-image {
+    aspect-ratio: 16 / 9;
+}
+
+.medium .portfolio-project-image {
+    aspect-ratio: 4 / 3;
+}
+
+.wide .portfolio-project-image {
+    aspect-ratio: 21 / 9;
+}
+.portfolio-projects{
+
+    width:min(1300px,80%);
+
+    margin:auto;
+
+    padding-bottom:120px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:42px;
+
+}
